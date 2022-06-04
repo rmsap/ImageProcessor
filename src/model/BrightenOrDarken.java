@@ -8,6 +8,8 @@ public class BrightenOrDarken implements Operation {
 
   /**
    * Construct a new BrightenOrDarken Operation with the given scale.
+   * If the integer is negative, then the image should darken.
+   * If the integer is positive, then the image should brigthen.
    * @param scale the scale of this BrightenOrDarken
    */
   public BrightenOrDarken(int scale) {
