@@ -27,6 +27,6 @@ public class AbstractImageProcessorModel implements ImageProcessorModel {
 
   @Override
   public void doOperation(Operation op) {
-
+    op.execute(this);
   }
 }

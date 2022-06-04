@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.image.BufferedImage;
+
 /**
  * This interface represents a basic ImageProcessorModel and lays out all methods that any
  * image processor must be able to execute.
@@ -32,6 +34,13 @@ public interface ImageProcessorModel {
    * @param fileName the name of the file to save
    */
   void saveImage(String fileName);
+
+  /**
+   * Get the image with the given name and return it.
+   * @param name the name of the image we want to get
+   * @return the image with the given name
+   */
+  BufferedImage getImage(String name);
 
   /**
    * Execute the given operation on this ImageProcessorModel.
