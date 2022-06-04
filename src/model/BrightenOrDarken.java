@@ -17,5 +17,6 @@ public class BrightenOrDarken implements Operation {
   @Override
   public void execute(ImageProcessorModel model) {
 
+
   }
 }
