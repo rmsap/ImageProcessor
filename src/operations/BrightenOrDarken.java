@@ -1,4 +1,7 @@
-package model;
+package operations;
+
+import model.ImageProcessorModel;
+import operations.Operation;
 
 /**
  * This class represents an Operation that brightens or darkens an image by its scale.

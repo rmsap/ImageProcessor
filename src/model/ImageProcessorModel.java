@@ -1,7 +1,6 @@
 package model;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import operations.Operation;
 
 /**
  * This interface represents a basic ImageProcessorModel and lays out all methods that any
