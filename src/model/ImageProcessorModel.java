@@ -18,16 +18,18 @@ public interface ImageProcessorModel {
   /**
    * Produce an image that visualizes the individual RGB
    * components of the image in this ImageProcessorModel.
+   * @param name the name of the image whose rgb we are visualizing
    * @param dest the name of the new image that is being produced
    */
-  void visualizeRGB(String dest);
+  void visualizeRGB(String name, String dest);
 
   /**
    * Produce an image that visualizes the brightness
    * of the image in this ImageProcessorModel.
+   * @param name the name of the image whose rgb we are visualizing
    * @param dest the name of the new image that is being produced
    */
-  void visualizeBrightness(String dest);
+  void visualizeBrightness(String name, String dest);
 
   /**
    * Save the image with the given file name.

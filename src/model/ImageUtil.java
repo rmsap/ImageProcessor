@@ -47,7 +47,12 @@ public class ImageUtil {
       System.out.println("Maximum value of a color in this file (usually 255): "+maxValue);
 
       int[][] arr = new int[width * height][3];
-      int count = -1;
+
+      arr[0][0] = width;
+      arr[0][1] = height;
+      arr[0][2] = maxValue;
+
+      int count = 0;
 
       for (int i = 0; i < height * width; i++) {
         count += 1;
@@ -67,67 +72,6 @@ public class ImageUtil {
     }
     catch (FileNotFoundException e) {
         throw new IllegalArgumentException("File " + filename + " does not exist!");
-    }
-  }
-
-  public static int getPPMWidth(String fileName) {
-    Scanner sc;
-
-    try {
-      sc = new Scanner(new FileInputStream(fileName));
-      StringBuilder builder = new StringBuilder();
-      //read the file line by line, and populate a string. This will throw away any comment lines
-      while (sc.hasNextLine()) {
-        String s = sc.nextLine();
-        if (s.charAt(0) != '#') {
-          builder.append(s + System.lineSeparator());
-        }
-      }
-
-      //now set up the scanner to read from the string we just built
-      sc = new Scanner(builder.toString());
-
-      String token;
-
-      token = sc.next();
-      if (!token.equals("P3")) {
-        System.out.println("Invalid PPM file: plain RAW file should begin with P3");
-      }
-      return sc.nextInt();
-    }
-    catch (FileNotFoundException e) {
-      throw new IllegalArgumentException("File " + fileName + " does not exist!");
-    }
-  }
-
-  public static int getPPMHeight(String fileName) {
-    Scanner sc;
-
-    try {
-      sc = new Scanner(new FileInputStream(fileName));
-      StringBuilder builder = new StringBuilder();
-      //read the file line by line, and populate a string. This will throw away any comment lines
-      while (sc.hasNextLine()) {
-        String s = sc.nextLine();
-        if (s.charAt(0) != '#') {
-          builder.append(s + System.lineSeparator());
-        }
-      }
-
-      //now set up the scanner to read from the string we just built
-      sc = new Scanner(builder.toString());
-
-      String token;
-
-      token = sc.next();
-      if (!token.equals("P3")) {
-        System.out.println("Invalid PPM file: plain RAW file should begin with P3");
-      }
-      int width = sc.nextInt();
-      return sc.nextInt();
-    }
-    catch (FileNotFoundException e) {
-      throw new IllegalArgumentException("File " + fileName + " does not exist!");
     }
   }
 
