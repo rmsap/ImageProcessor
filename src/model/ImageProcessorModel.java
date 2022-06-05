@@ -42,7 +42,7 @@ public interface ImageProcessorModel {
    * @param name the name of the image we want to get
    * @return the image with the given name
    */
-  Image getImage(String name);
+  int[][] getImage(String name);
 
   /**
    * Execute the given operation on the Image with the given name in this ImageProcessorModel.

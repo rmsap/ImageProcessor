@@ -2,6 +2,9 @@ package model;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferInt;
+import java.awt.image.Raster;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +16,7 @@ public class AbstractImageProcessorModel implements ImageProcessorModel {
 
   // each image has an attached String name
   // the hashmap contains images that can be accessed via their names
-  HashMap<String, Image> directory;
+  HashMap<String, int[][]> directory;
 
   // contains all the pixels of an image
   // each array has a size of 3 to hold the rgb value for a single pixel
@@ -21,7 +24,7 @@ public class AbstractImageProcessorModel implements ImageProcessorModel {
 
   @Override
   public void loadImage(String path, String name) {
-
+    int[][] image = ImageUtil.readPPM(path);
   }
 
   @Override
@@ -40,7 +43,7 @@ public class AbstractImageProcessorModel implements ImageProcessorModel {
   }
 
   @Override
-  public Image getImage(String name) {
+  public int[][] getImage(String name) {
     if (this.directory.get(name) == null) {
       throw new IllegalArgumentException();
     }
