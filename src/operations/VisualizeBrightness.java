@@ -1,4 +1,7 @@
-package model;
+package operations;
+
+import model.ImageProcessorModel;
+import operations.Operation;
 
 public class VisualizeBrightness implements Operation {
   @Override

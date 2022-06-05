@@ -1,4 +1,6 @@
-package model;
+package operations;
+
+import model.ImageProcessorModel;
 
 /**
  * This interface represents an operation that can be executed on an ImageProcessorModel.

@@ -1,4 +1,7 @@
-package model;
+package operations;
+
+import model.ImageProcessorModel;
+import operations.Operation;
 
 /**
  * The class represents the operation that allows a user to flip an image vertically.

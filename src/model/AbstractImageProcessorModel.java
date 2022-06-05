@@ -2,6 +2,8 @@ package model;
 
 import java.util.HashMap;
 
+import operations.Operation;
+
 /**
  * Represents an abstract class of an ImageProcessorModel.
  * The class possesses methods that are to be used by current and future model implementations.
