@@ -5,7 +5,7 @@ package model;
  */
 public class FlipVertical implements Operation {
   @Override
-  public void execute(ImageProcessorModel model) {
+  public void execute(ImageProcessorModel model, String name) {
 
   }
 }

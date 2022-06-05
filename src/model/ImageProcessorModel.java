@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -9,42 +10,45 @@ import java.awt.image.BufferedImage;
 public interface ImageProcessorModel {
   /**
    * Load an image with the given file name.
-   * @param fileName the name of the file to load
+   * @param path the path of the image that is being loading
+   * @param name the name that this image will henceforth be referred to as
    */
-  void loadImage(String fileName);
+  void loadImage(String path, String name);
 
   /**
    * Produce an image that visualizes the individual RGB
    * components of the image in this ImageProcessorModel.
-   * @return a 2-Dimensional array of floats representing all RGB values in the image representing
-   *         the individual RGB components of this image
+   * @param dest the name of the new image that is being produced
    */
-  float[][] visualizeRGB();
+  void visualizeRGB(String dest);
 
   /**
    * Produce an image that visualizes the brightness
    * of the image in this ImageProcessorModel.
-   * @return a 2-Dimensional array of floats representing all pixels in the image visualizing the
-   *         brightness of the image in this ImageProcessorModel
+   * @param dest the name of the new image that is being produced
    */
-  float[][] visualizeBrightness();
+  void visualizeBrightness(String dest);
 
   /**
    * Save the image with the given file name.
-   * @param fileName the name of the file to save
+   * @param path the path that the image should be saved to,
+   *             which should include the name of the file
+   * @param imageName the name of the image to save
    */
-  void saveImage(String fileName);
+  void saveImage(String path, String imageName);
 
   /**
    * Get the image with the given name and return it.
    * @param name the name of the image we want to get
    * @return the image with the given name
    */
-  BufferedImage getImage(String name);
+  Image getImage(String name);
 
   /**
-   * Execute the given operation on this ImageProcessorModel.
+   * Execute the given operation on the Image with the given name in this ImageProcessorModel.
    * @param op operation to execute
+   * @param name the name of the image that we are executing the operation on
+   * @param dest the name of the new image that is being produced
    */
-  void doOperation(Operation op);
+  void doOperation(Operation op, String name, String dest);
 }

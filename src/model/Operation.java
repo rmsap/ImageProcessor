@@ -8,6 +8,7 @@ public interface Operation {
    * Execute this Operation on the given ImageProcessorModel by modifying the image that the model
    * contains.
    * @param model the model on which we are executing this Operation
+   * @param name the name of the image in the model on which we are executing this operation
    */
-  void execute(ImageProcessorModel model);
+  void execute(ImageProcessorModel model, String name);
 }
