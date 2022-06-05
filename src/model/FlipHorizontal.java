@@ -5,7 +5,7 @@ package model;
  */
 public class FlipHorizontal implements Operation {
   @Override
-  public void execute(ImageProcessorModel model, String name) {
-
+  public int[][] execute(ImageProcessorModel model, String name) {
+    return null;
   }
 }

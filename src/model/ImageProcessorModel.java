@@ -16,22 +16,6 @@ public interface ImageProcessorModel {
   void loadImage(String path, String name);
 
   /**
-   * Produce an image that visualizes the individual RGB
-   * components of the image in this ImageProcessorModel.
-   * @param name the name of the image whose rgb we are visualizing
-   * @param dest the name of the new image that is being produced
-   */
-  void visualizeRGB(String name, String dest);
-
-  /**
-   * Produce an image that visualizes the brightness
-   * of the image in this ImageProcessorModel.
-   * @param name the name of the image whose rgb we are visualizing
-   * @param dest the name of the new image that is being produced
-   */
-  void visualizeBrightness(String name, String dest);
-
-  /**
    * Save the image with the given file name.
    * @param path the path that the image should be saved to,
    *             which should include the name of the file

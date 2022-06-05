@@ -10,5 +10,5 @@ public interface Operation {
    * @param model the model on which we are executing this Operation
    * @param name the name of the image in the model on which we are executing this operation
    */
-  void execute(ImageProcessorModel model, String name);
+  int[][] execute(ImageProcessorModel model, String name);
 }
