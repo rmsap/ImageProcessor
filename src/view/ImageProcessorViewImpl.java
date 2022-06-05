@@ -5,6 +5,8 @@ import model.ImageProcessorModel;
 /**
  * An implementation of a view for Image Processor.
  * This implementation uses a text-based view.
+ * Only the texts that show you which commands to use are displayed.
+ * The ppm image is not displayed, only saved to the directory and as a ppm file.
  */
 public class ImageProcessorViewImpl extends AbstractImageProcessorView{
 
@@ -44,6 +46,8 @@ public class ImageProcessorViewImpl extends AbstractImageProcessorView{
    */
   @Override
   public void renderImage() {
+    // use BufferedImage and Image I/O
+    // call on the write() method
 
   }
 }
