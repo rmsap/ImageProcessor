@@ -10,7 +10,7 @@ import imageFormat.ImageFormat;
  * This class represents an ImageProcessorModel that works with PPM files.
  */
 public class PPMImageProcessorModel extends AbstractImageProcessorModel {
-  PPMImageProcessorModel() {
+  public PPMImageProcessorModel() {
     super();
   }
 
