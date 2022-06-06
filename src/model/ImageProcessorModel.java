@@ -1,5 +1,7 @@
 package model;
 
+import java.io.FileNotFoundException;
+
 import imageFormat.ImageFormat;
 import operations.Operation;
 
@@ -14,7 +16,7 @@ public interface ImageProcessorModel {
    * @param name the name that this image will henceforth be referred to as
    * @param format the format of the image we are loading
    */
-  void loadImage(String path, String name, ImageFormat format);
+  void loadImage(String path, String name, ImageFormat format) throws FileNotFoundException;
 
   /**
    * Save the image with the given file name.

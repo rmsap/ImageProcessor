@@ -1,5 +1,6 @@
 package model;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import imageFormat.ImageFormat;
@@ -20,7 +21,7 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
   }
 
   @Override
-  public abstract void loadImage(String path, String name, ImageFormat format);
+  public abstract void loadImage(String path, String name, ImageFormat format) throws FileNotFoundException;
 
   @Override
   public abstract void saveImage(String path, String imageName, ImageFormat format);

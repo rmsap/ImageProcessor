@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ public class PPMImageProcessorModel extends AbstractImageProcessorModel {
   }
 
   @Override
-  public void loadImage(String path, String name, ImageFormat format) {
+  public void loadImage(String path, String name, ImageFormat format) throws FileNotFoundException {
     directory.put(name, format.read(path));
   }
 
