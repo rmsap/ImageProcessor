@@ -39,5 +39,5 @@ public class ImageProcessorTextView extends AbstractImageProcessorView{
     this.model = model;
     this.appendable = appendable;
   }
-  
+
 }
