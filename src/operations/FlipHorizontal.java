@@ -53,6 +53,7 @@ public class FlipHorizontal implements Operation {
     return flippedDeepCopy;
   }
 
+
   private int[][] reversedColumns(int[][] stub) {
     for(int i = 0; i < stub.length / 2; i++) {
       int[] temp = stub[i];

@@ -33,7 +33,6 @@ public class VisualizeRGB implements Operation {
         }
       }
     }
-
     return copy;
   }
 }
