@@ -44,6 +44,9 @@ public class BrightenOrDarken implements Operation {
           if(deepCopy[i][j] + scale > 255) {
             deepCopy[i][j] = 255;
           }
+          else {
+            deepCopy[i][j] = deepCopy[i][j] + scale;
+          }
         }
       }
     }
