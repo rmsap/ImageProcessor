@@ -14,16 +14,6 @@ public abstract class AbstractImageProcessorView implements ImageProcessorView {
 
 
   @Override
-  public String toString() {
-    return "";
-  }
-
-
-
-  @Override
-  public abstract void renderImage() throws IOException;
-
-  @Override
   public void renderMessage(String message) throws IOException {
     this.appendable.append(message);
 
