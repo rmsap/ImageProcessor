@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashMap;
 
+import imageFormat.ImageFormat;
 import operations.Operation;
 
 /**
@@ -19,10 +20,10 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
   }
 
   @Override
-  public abstract void loadImage(String path, String name);
+  public abstract void loadImage(String path, String name, ImageFormat format);
 
   @Override
-  public abstract void saveImage(String path, String imageName);
+  public abstract void saveImage(String path, String imageName, ImageFormat format);
 
   @Override
   public int[][] getImage(String name) {

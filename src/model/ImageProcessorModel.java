@@ -1,5 +1,6 @@
 package model;
 
+import imageFormat.ImageFormat;
 import operations.Operation;
 
 /**
@@ -8,19 +9,21 @@ import operations.Operation;
  */
 public interface ImageProcessorModel {
   /**
-   * Load an image with the given file name.
+   * Load an image with the given file path.
    * @param path the path of the image that is being loading
    * @param name the name that this image will henceforth be referred to as
+   * @param format the format of the image we are loading
    */
-  void loadImage(String path, String name);
+  void loadImage(String path, String name, ImageFormat format);
 
   /**
    * Save the image with the given file name.
    * @param path the path that the image should be saved to,
    *             which should include the name of the file
    * @param imageName the name of the image to save
+   * @param format the format that we want to save this image as
    */
-  void saveImage(String path, String imageName);
+  void saveImage(String path, String imageName, ImageFormat format);
 
   /**
    * Get the image with the given name and return it.
