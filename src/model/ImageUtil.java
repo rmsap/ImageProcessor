@@ -46,13 +46,13 @@ public class ImageUtil {
         System.out.println("Invalid PPM file: plain RAW file should begin with P3");
       }
       int width = sc.nextInt();
-      System.out.println("Width of image: "+width);
+//      System.out.println("Width of image: "+width);
       int height = sc.nextInt();
-      System.out.println("Height of image: "+height);
+//      System.out.println("Height of image: "+height);
       int maxValue = sc.nextInt();
-      System.out.println("Maximum value of a color in this file (usually 255): "+maxValue);
+//      System.out.println("Maximum value of a color in this file (usually 255): "+maxValue);
 
-      int[][] arr = new int[width * height][3];
+      int[][] arr = new int[width * height + 1][3];
 
       arr[0][0] = width;
       arr[0][1] = height;
@@ -60,7 +60,7 @@ public class ImageUtil {
 
       int count = 0;
 
-      for (int i = 1; i < height * width; i++) {
+      for (int i = 1; i < height * width + 1; i++) {
 //        count += 1;
 
         int r = sc.nextInt();
@@ -87,8 +87,8 @@ public class ImageUtil {
 
       AbstractImageProcessorModel model = new PPMImageProcessorModel();
       model.loadImage("Koala.ppm", "Koala");
-      System.out.println(model.getImage("Koala")[0][0]);
-      System.out.println(model.getImage("Koala")[0][1]);
+//      System.out.println(model.getImage("Koala")[0][0]);
+//      System.out.println(model.getImage("Koala")[0][1]);
       System.out.println(model.getImage("Koala").length);
 //      System.out.println(model.getImage("Koala"));
 //      model.doOperation(new FlipVertical(), "Koala", "Koala vertical");
