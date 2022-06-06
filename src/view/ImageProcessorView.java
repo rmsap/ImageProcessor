@@ -8,14 +8,7 @@ import java.io.IOException;
  */
 public interface ImageProcessorView {
 
-  public String toString();
 
-
-  /**
-   * Renders the image.
-   * The method calls on the overridden toString() method to render the image.
-   */
-  public void renderImage() throws IOException;
 
   /**
    * Renders a given message to the view.

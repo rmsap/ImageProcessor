@@ -8,7 +8,7 @@ import model.ImageProcessorModel;
  * Only the texts that show you which commands to use are displayed.
  * The ppm image is not displayed, only saved to the directory and as a ppm file.
  */
-public class ImageProcessorViewImpl extends AbstractImageProcessorView{
+public class ImageProcessorTextView extends AbstractImageProcessorView{
 
 
   /**
@@ -16,7 +16,7 @@ public class ImageProcessorViewImpl extends AbstractImageProcessorView{
    * @param model representing the ImageProcessorModel.
    * @throws IllegalArgumentException if the argument is null.
    */
-  public ImageProcessorViewImpl(ImageProcessorModel model) throws IllegalArgumentException {
+  public ImageProcessorTextView(ImageProcessorModel model) throws IllegalArgumentException {
     if(model == null) {
       throw new IllegalArgumentException("Parameter cannot be null");
     }
@@ -31,7 +31,7 @@ public class ImageProcessorViewImpl extends AbstractImageProcessorView{
    * @param appendable representing an Appendable object.
    * @throws IllegalArgumentException if any of the arguments are null
    */
-  public ImageProcessorViewImpl(ImageProcessorModel model, Appendable appendable)
+  public ImageProcessorTextView(ImageProcessorModel model, Appendable appendable)
           throws IllegalArgumentException {
     if(model == null || appendable == null) {
       throw new IllegalArgumentException("Parameters cannot be null");
@@ -39,15 +39,5 @@ public class ImageProcessorViewImpl extends AbstractImageProcessorView{
     this.model = model;
     this.appendable = appendable;
   }
-
-
-  /**
-   * The overridden version of the method uses a text-based view.
-   */
-  @Override
-  public void renderImage() {
-    // use BufferedImage and Image I/O
-    // call on the write() method
-
-  }
+  
 }
