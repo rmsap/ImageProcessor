@@ -88,6 +88,8 @@ public class ImageUtil {
       AbstractImageProcessorModel model = new PPMImageProcessorModel();
       model.loadImage("Koala.ppm", "Koala");
       System.out.println(model.getImage("Koala")[0][0]);
+      System.out.println(model.getImage("Koala")[0][1]);
+      System.out.println(model.getImage("Koala").length);
 //      System.out.println(model.getImage("Koala"));
 //      model.doOperation(new FlipVertical(), "Koala", "Koala vertical");
 //      model.saveImage("KoalaVertical.ppm", "Koala vertical");

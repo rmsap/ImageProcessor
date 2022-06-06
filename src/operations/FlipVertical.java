@@ -12,23 +12,21 @@ public class FlipVertical implements Operation {
     // need to reverse the array contents vertically
     // make a 3d arraylist and then convert that array list back to a 2d arraylist
     // [row] [column] [contents in rc that is an array of 3]
-    int rowCounter = 0;
-    int columnCounter = 0;
-    int height = model.getImage(name)[0][2];
-    int width = model.getImage(name)[0][1];
+    int width = model.getImage(name)[0][0];
+    int height = model.getImage(name)[0][1];
     int totalCount = 1;
     int [][][] board = new int[height][width][3];
-    for(int i = 1; i < model.getImage(name).length; i++) {
-        board[rowCounter][columnCounter] = model.getImage(name)[i];
-        columnCounter++;
-      if(totalCount % width  == 0) {
-        rowCounter++;
-        columnCounter = 0; // resetting it
+    for(int i = 0; i < height; i++) {
+      for(int j = 0; j < width; j++) {
+        board[i][j] = model.getImage(name)[((i * width) + j + 1)];
       }
+
+//      if(totalCount % width  == 0) {
+//        rowCounter++;
+//        columnCounter = 0; // resetting it
+//      }
     }
 
-    // re-arrange things in the 3d board
-//    int [][][] flippedBoard = new int[board.length][board[0].length][3];
     this.flippedRows(board);
 
 
