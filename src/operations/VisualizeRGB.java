@@ -4,9 +4,9 @@ import model.ImageProcessorModel;
 import operations.Operation;
 
 public class VisualizeRGB implements Operation {
-  String colorToVisualize;
+  private final String colorToVisualize;
 
-  VisualizeRGB(String colorToVisualize) {
+  public VisualizeRGB(String colorToVisualize) {
     this.colorToVisualize = colorToVisualize;
   }
 

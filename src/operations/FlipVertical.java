@@ -14,19 +14,16 @@ public class FlipVertical implements Operation {
     // [row] [column] [contents in rc that is an array of 3]
     int rowCounter = 0;
     int columnCounter = 0;
-    int height = model.getImage(name)[0][1];
-    int width = model.getImage(name)[0][2];
+    int height = model.getImage(name)[0][2];
+    int width = model.getImage(name)[0][1];
+    int totalCount = 1;
     int [][][] board = new int[height][width][3];
     for(int i = 1; i < model.getImage(name).length; i++) {
-      for(int j = 0; j < model.getImage(name)[0].length; j++) {
-        board[rowCounter - 1][columnCounter][j] = model.getImage(name)[i][j];
+        board[rowCounter][columnCounter] = model.getImage(name)[i];
         columnCounter++;
-
-      }
-      if(i % 3 == 0) {
+      if(totalCount % width  == 0) {
         rowCounter++;
         columnCounter = 0; // resetting it
-
       }
     }
 
@@ -36,7 +33,7 @@ public class FlipVertical implements Operation {
 
 
     // convert 3d board back to 2d board
-    int [][] flippedDeepCopy = new int[model.getImage(name).length][model.getImage(name)[0].length];
+    int [][] flippedDeepCopy = new int [model.getImage(name).length][model.getImage(name)[0].length];
     flippedDeepCopy[0] = model.getImage(name)[0];
     int anotherCounter = 1;
     for(int row = 0; row < board.length; row++) {

@@ -36,6 +36,6 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
 
   @Override
   public void doOperation(Operation op, String name, String dest) {
-    this.directory.put(name, op.execute(this, name));
+    this.directory.put(dest, op.execute(this, name));
   }
 }

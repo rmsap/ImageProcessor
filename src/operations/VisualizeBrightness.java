@@ -4,9 +4,9 @@ import model.ImageProcessorModel;
 import operations.Operation;
 
 public class VisualizeBrightness implements Operation {
-  String channelToVisualize;
+  private final String channelToVisualize;
 
-  VisualizeBrightness(String channelToVisualize) {
+  public VisualizeBrightness(String channelToVisualize) {
     this.channelToVisualize = channelToVisualize;
   }
 

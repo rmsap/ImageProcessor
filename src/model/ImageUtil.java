@@ -4,6 +4,12 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 
+import operations.BrightenOrDarken;
+import operations.FlipHorizontal;
+import operations.FlipVertical;
+import operations.VisualizeBrightness;
+import operations.VisualizeRGB;
+
 /**
  * This class contains utility methods to read a PPM image from file and simply print its contents.
  * Feel free to change this method
@@ -54,8 +60,8 @@ public class ImageUtil {
 
       int count = 0;
 
-      for (int i = 0; i < height * width; i++) {
-        count += 1;
+      for (int i = 1; i < height * width; i++) {
+//        count += 1;
 
         int r = sc.nextInt();
         int g = sc.nextInt();
@@ -65,7 +71,7 @@ public class ImageUtil {
         arr[i][1] = g;
         arr[i][2] = b;
 
-        System.out.println("Color of pixel " + i + ": "+ arr[i][0] + "," + arr[i][1] + "," + arr[i][2]);
+//        System.out.println("Color of pixel " + i + ": "+ arr[i][0] + "," + arr[i][1] + "," + arr[i][2]);
       }
 
       return arr;
@@ -78,15 +84,25 @@ public class ImageUtil {
   //demo main
   public static void main(String []args) {
       String filename;
+
+      AbstractImageProcessorModel model = new PPMImageProcessorModel();
+      model.loadImage("Koala.ppm", "Koala");
+      System.out.println(model.getImage("Koala")[0][0]);
+//      System.out.println(model.getImage("Koala"));
+//      model.doOperation(new FlipVertical(), "Koala", "Koala vertical");
+//      model.saveImage("KoalaVertical.ppm", "Koala vertical");
+//      System.out.println(model.getImage("Koala brighten"));
+//      model.saveImage("KoalaVersion2.ppm", "Koala");
+
       
-      if (args.length>0) {
-          filename = args[0];
-      }
-      else {
-          filename = "sample.ppm";
-      }
-      
-      ImageUtil.readPPM("koala.ppm");
+//      if (args.length>0) {
+//          filename = args[0];
+//      }
+//      else {
+//          filename = "sample.ppm";
+//      }
+//
+//      ImageUtil.readPPM("koala.ppm");
   }
 }
 
