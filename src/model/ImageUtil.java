@@ -91,8 +91,8 @@ public class ImageUtil {
 //      System.out.println(model.getImage("Koala")[0][1]);
       System.out.println(model.getImage("Koala").length);
 //      System.out.println(model.getImage("Koala"));
-//      model.doOperation(new FlipVertical(), "Koala", "Koala vertical");
-//      model.saveImage("KoalaVertical.ppm", "Koala vertical");
+      model.doOperation(new BrightenOrDarken(-1000), "Koala", "Koala black");
+      model.saveImage("KoalaBlack.ppm", "Koala black");
 //      System.out.println(model.getImage("Koala brighten"));
 //      model.saveImage("KoalaVersion2.ppm", "Koala");
 
