@@ -14,7 +14,9 @@ public class FlipVertical implements Operation {
     // [row] [column] [contents in rc that is an array of 3]
     int rowCounter = 0;
     int columnCounter = 0;
-    int [][][] board = new int[model.getImage(name)[0][1]][model.getImage(name)[0][2]][3];
+    int height = model.getImage(name)[0][1];
+    int width = model.getImage(name)[0][2];
+    int [][][] board = new int[height][width][3];
     for(int i = 1; i < model.getImage(name).length; i++) {
       for(int j = 0; j < model.getImage(name)[0].length; j++) {
         board[rowCounter - 1][columnCounter][j] = model.getImage(name)[i][j];
