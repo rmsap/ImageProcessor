@@ -115,7 +115,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
 
 
           }
-          catch(FileNotFoundException f) { // file isn't found
+          catch(IllegalArgumentException iae) { // file isn't found
             this.view.renderMessage("File doesn't exist, re-enter a valid command");
           }
 
@@ -123,20 +123,26 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         }
         // need to check if the user saves
         else if (strInput.equalsIgnoreCase("save")) {
-          String imagePath = scan.next();
-          String imageName = scan.next();
+          try{
+            String imagePath = scan.next();
+            String imageName = scan.next();
 
-          String fileType = imagePath.substring(imagePath.length() - 3); // last 3 letters
-          if(fileType.equals("ppm")) { // if it's to be saved as a ppm file
-            if(model.getImage(imageName) == null) { // then make the user reinput a valid command
-              this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-            }
-            else { // you are able to successfully save an image
-              this.model.saveImage(imagePath, imageName, new PPMImageFormat());
-              this.view.renderMessage("Image has been saved\n");
-            }
+            String fileType = imagePath.substring(imagePath.length() - 3); // last 3 letters
+            if(fileType.equals("ppm")) { // if it's to be saved as a ppm file
+              if(model.getImage(imageName) == null) { // then make the user reinput a valid command
+                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
+              }
+              else { // you are able to successfully save an image
+                this.model.saveImage(imagePath, imageName, new PPMImageFormat());
+                this.view.renderMessage("Image has been saved\n");
+              }
 
+            }
           }
+          catch (IllegalArgumentException iae) {
+            this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
+          }
+
 
         }
 
@@ -160,17 +166,23 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
             }
           }
           else {
-            String imageName = scan.next();
-            String newImageName = scan.next();
-            if(this.model.getImage(imageName) == null) { // image doesn't exist in the directory
-              this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-            }
-            else {
+            try{
+              String imageName = scan.next();
+              String newImageName = scan.next();
+              if(this.model.getImage(imageName) == null) { // image doesn't exist in the directory
+                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
+              }
+              else {
 
-              // image does exist, so do the operation
-              this.model.doOperation(this.operationDirectory.get(strInput),imageName, newImageName);
-              this.view.renderMessage("Operation has been performed\n");
+                // image does exist, so do the operation
+                this.model.doOperation(this.operationDirectory.get(strInput),imageName, newImageName);
+                this.view.renderMessage("Operation has been performed\n");
+              }
             }
+            catch(IllegalArgumentException iae) {
+              this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
+            }
+
           }
 
 
