@@ -21,32 +21,17 @@ public class BrightenOrDarken implements Operation {
 
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
-    int [][] deepCopy = new int [model.getImage(name).length][model.getImage(name)[0].length];
-
-    for(int r = 0; r < deepCopy.length; r++) {
-      for(int c = 0; c < deepCopy[r].length; c++) {
-        deepCopy[r][c] = model.getImage(name)[r][c];
-      }
-    }
+    int [][] deepCopy = OperationUtils.copy(model.getImage(name));
 
     // starting at index 1 since the 0th index contains the header information
     for(int i = 1; i < deepCopy.length; i++) {
       for(int j = 0; j < deepCopy[i].length; j++) {
-        if(scale < 0) { // if its negative we darken
-          if(deepCopy[i][j] + scale < 0) {
-            deepCopy[i][j] = 0;
-          }
-          else {
-            deepCopy[i][j] = deepCopy[i][j] + scale;
-          }
+        deepCopy[i][j] += scale;
+        if (deepCopy[i][j] < 0) {
+          deepCopy[i][j] = 0;
         }
-        else { // if its positive then we brighten
-          if(deepCopy[i][j] + scale > 255) {
-            deepCopy[i][j] = 255;
-          }
-          else {
-            deepCopy[i][j] = deepCopy[i][j] + scale;
-          }
+        else if (deepCopy[i][j] > deepCopy[0][3]) {
+          deepCopy[i][j] = deepCopy[0][3];
         }
       }
     }
