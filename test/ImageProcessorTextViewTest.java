@@ -4,7 +4,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import model.ImageProcessorModel;
-import model.PPMImageProcessorModel;
+import model.ImageProcessorModelImpl;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
 
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class ImageProcessorTextViewTest {
-  private ImageProcessorModel model = new PPMImageProcessorModel();
+  private ImageProcessorModel model = new ImageProcessorModelImpl();
 
 
   /**
@@ -74,7 +74,7 @@ public class ImageProcessorTextViewTest {
   public void renderMessageSuccessful() {
     try {
       Appendable appendable = new StringBuilder();
-      ImageProcessorModel model = new PPMImageProcessorModel();
+      ImageProcessorModel model = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(model, appendable);
       view.renderMessage("howdy");
       assertEquals("howdy", appendable.toString());
@@ -90,7 +90,7 @@ public class ImageProcessorTextViewTest {
   public void renderMessageThrowException() {
     try {
       Appendable faulty = new MockAppendable();
-      ImageProcessorModel model = new PPMImageProcessorModel();
+      ImageProcessorModel model = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(model, faulty);
       view.renderMessage("howdy");
       fail("An exception should have been thrown but was not");

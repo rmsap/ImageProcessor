@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import controller.ImageProcessorController;
 import controller.ImageProcessorControllerImpl;
 import model.ImageProcessorModel;
-import model.PPMImageProcessorModel;
+import model.ImageProcessorModelImpl;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
 
@@ -16,7 +16,7 @@ public class ImageProcessor {
    * @param args any command-line arguments necessary to run the image processor
    */
   public static void main(String[] args) throws IllegalStateException {
-    ImageProcessorModel model = new PPMImageProcessorModel();
+    ImageProcessorModel model = new ImageProcessorModelImpl();
 
     ImageProcessorView view = new ImageProcessorTextView(model, System.out);
     ImageProcessorController controller =

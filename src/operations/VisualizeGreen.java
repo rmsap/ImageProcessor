@@ -13,7 +13,7 @@ public class VisualizeGreen implements Operation {
     int [][] copy = OperationUtils.copy(model.getImage(name));
 
     for (int i = 1; i < copy.length; i++) {
-      for (int j = 1; j < copy[i].length; j++) {
+      for (int j = 0; j < copy[i].length; j++) {
         copy[i][j] = copy[i][1];
       }
     }

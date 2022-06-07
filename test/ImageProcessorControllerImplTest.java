@@ -8,7 +8,7 @@ import controller.ImageProcessorController;
 import controller.ImageProcessorControllerImpl;
 import imageFormat.ImageFormat;
 import model.ImageProcessorModel;
-import model.PPMImageProcessorModel;
+import model.ImageProcessorModelImpl;
 import operations.Operation;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
@@ -27,7 +27,7 @@ public class ImageProcessorControllerImplTest {
     }
 
     @Override
-    public void loadImage(String path, String name, ImageFormat format) throws FileNotFoundException {
+    public void loadImage(String path, String name, ImageFormat format) {
       log.append(String.format("Path = %s, Name = %s\n", path, name));
 
     }
@@ -136,7 +136,7 @@ public class ImageProcessorControllerImplTest {
     try { // test that the quit message is being sent
       Readable readable = new StringReader("q"); // valid move
       Appendable appendable = new StringBuilder();
-      ImageProcessorModel mockModel = new PPMImageProcessorModel();
+      ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
@@ -152,7 +152,7 @@ public class ImageProcessorControllerImplTest {
     try { // test that the load image is sent
       Readable readable = new StringReader("load Koala.ppm Koala q"); // valid move
       Appendable appendable = new StringBuilder();
-      ImageProcessorModel mockModel = new PPMImageProcessorModel();
+      ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
@@ -166,7 +166,7 @@ public class ImageProcessorControllerImplTest {
     try { // test that the save is being sent
       Readable readable = new StringReader("load Koala.ppm Koala save Kool.ppm Koala q");
       Appendable appendable = new StringBuilder();
-      ImageProcessorModel mockModel = new PPMImageProcessorModel();
+      ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
@@ -180,7 +180,7 @@ public class ImageProcessorControllerImplTest {
     try { // test that the file doesn't exist message is being sent
       Readable readable = new StringReader("load Bruh.ppm Bruh q");
       Appendable appendable = new StringBuilder();
-      ImageProcessorModel mockModel = new PPMImageProcessorModel();
+      ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
@@ -195,7 +195,7 @@ public class ImageProcessorControllerImplTest {
       Readable readable = new StringReader("load Koala.ppm Koala flip-horizontal " +
               "Koala KoalaHor q");
       Appendable appendable = new StringBuilder();
-      ImageProcessorModel mockModel = new PPMImageProcessorModel();
+      ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
@@ -210,7 +210,7 @@ public class ImageProcessorControllerImplTest {
       Readable readable = new StringReader("load Koala.ppm Koala flip-horizontal " +
               "Koolaid KoalaHor q");
       Appendable appendable = new StringBuilder();
-      ImageProcessorModel mockModel = new PPMImageProcessorModel();
+      ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
@@ -230,7 +230,7 @@ public class ImageProcessorControllerImplTest {
   public void testExecuteImmediateException() throws IllegalStateException {
     try {
       Readable readable = new StringReader("load Koala.ppm Koala");
-      ImageProcessorModel model = new PPMImageProcessorModel();
+      ImageProcessorModel model = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(model,
               new ImageProcessorTextViewTest.MockAppendable());
       ImageProcessorController controller = new ImageProcessorControllerImpl(model, view, readable);

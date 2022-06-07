@@ -30,8 +30,8 @@ public class BrightenOrDarken implements Operation {
         if (deepCopy[i][j] < 0) {
           deepCopy[i][j] = 0;
         }
-        else if (deepCopy[i][j] > deepCopy[0][3]) {
-          deepCopy[i][j] = deepCopy[0][3];
+        else if (deepCopy[i][j] > deepCopy[0][2]) {
+          deepCopy[i][j] = deepCopy[0][2];
         }
       }
     }

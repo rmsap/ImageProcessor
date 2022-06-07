@@ -16,7 +16,7 @@ public interface ImageProcessorModel {
    * @param name the name that this image will henceforth be referred to as
    * @param format the format of the image we are loading
    */
-  void loadImage(String path, String name, ImageFormat format) throws FileNotFoundException;
+  void loadImage(String path, String name, ImageFormat format);
 
   /**
    * Save the image with the given file name.
