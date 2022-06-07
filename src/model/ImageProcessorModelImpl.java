@@ -8,15 +8,15 @@ import java.io.IOException;
 import imageFormat.ImageFormat;
 
 /**
- * This class represents an ImageProcessorModel that works with PPM files.
+ * This class represents an ImageProcessorModel implementation.
  */
-public class PPMImageProcessorModel extends AbstractImageProcessorModel {
-  public PPMImageProcessorModel() {
+public class ImageProcessorModelImpl extends AbstractImageProcessorModel {
+  public ImageProcessorModelImpl() {
     super();
   }
 
   @Override
-  public void loadImage(String path, String name, ImageFormat format) throws FileNotFoundException {
+  public void loadImage(String path, String name, ImageFormat format) {
     directory.put(name, format.read(path));
   }
 

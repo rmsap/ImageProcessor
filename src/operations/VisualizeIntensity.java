@@ -12,8 +12,8 @@ public class VisualizeIntensity implements Operation {
     int [][] copy = OperationUtils.copy(model.getImage(name));
 
     for (int i = 1; i < copy.length; i++) {
-      for (int j = 1; j < copy[i].length; j++) {
-        int intensity = (copy[i][0] + copy[i][1] + copy[i][2]) / 3;
+      int intensity = (copy[i][0] + copy[i][1] + copy[i][2]) / 3;
+      for (int j = 0; j < copy[i].length; j++) {
         copy[i][j] = intensity;
       }
     }

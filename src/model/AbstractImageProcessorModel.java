@@ -21,7 +21,7 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
   }
 
   @Override
-  public abstract void loadImage(String path, String name, ImageFormat format) throws FileNotFoundException;
+  public abstract void loadImage(String path, String name, ImageFormat format);
 
   @Override
   public abstract void saveImage(String path, String imageName, ImageFormat format);
@@ -29,7 +29,7 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
   @Override
   public int[][] getImage(String name) {
     if (this.directory.get(name) == null) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Image does not exist in the directory.");
     }
     else {
       return this.directory.get(name);
