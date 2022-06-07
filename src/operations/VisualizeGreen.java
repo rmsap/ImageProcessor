@@ -10,13 +10,7 @@ public class VisualizeGreen implements Operation {
 
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
-    int [][] copy = new int [model.getImage(name).length][model.getImage(name)[0].length];
-
-    for(int r = 0; r < copy.length; r++) {
-      for(int c = 0; c < copy[r].length; c++) {
-        copy[r][c] = model.getImage(name)[r][c];
-      }
-    }
+    int [][] copy = OperationUtils.copy(model.getImage(name));
 
     for (int i = 1; i < copy.length; i++) {
       for (int j = 1; j < copy[i].length; j++) {
