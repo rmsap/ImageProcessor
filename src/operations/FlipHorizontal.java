@@ -68,10 +68,18 @@ public class FlipHorizontal implements Operation {
   // Alternate attempt at execute
   private int[][] executeAlt(ImageProcessorModel model, String name) {
     int [][] copy = OperationUtils.copy(model.getImage(name));
+    int totalCols = copy.length / copy[0][1];
 
     for (int i = 1; i < copy.length; i++) {
       int row = i / copy[0][0] + 1;
-      this.swap(copy, i, (copy[0][0] * row) - (i - copy[0][0] * (row - 1)));
+      int col = i % totalCols;
+      this.swap(copy, i, (copy[0][0] * row) - (col - 1));
+
+      // row = 1
+      // totalCols = 4
+      // col = 1
+      // 4 - 1
+      // 3
 
       if (i % (copy[0][0] / 2) == 0) {
         i += copy[0][0] / 2;
