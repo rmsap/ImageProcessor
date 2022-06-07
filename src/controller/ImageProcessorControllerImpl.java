@@ -57,15 +57,12 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory.put("change-brightness", new BrightenOrDarken(0));
 
 
-
-
-
   }
 
 
   @Override
   public void execute() throws IllegalStateException {
-    try{
+    try {
       this.view.renderMessage("Welcome to Image Processor!\n");
       this.view.renderMessage("The available commands are listed below:\n");
       this.view.renderMessage("To load an image: load images/fileName.ppm nameToCall\n");
@@ -93,11 +90,11 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
       String strInput = "";
       Scanner scan = new Scanner(this.input);
 
-      while(!quit) {
+      while (!quit) {
         strInput = scan.next();
 
         // need to check if the user quits
-        if(strInput.equalsIgnoreCase("q")) {
+        if (strInput.equalsIgnoreCase("q")) {
           quit = true;
         }
         // if the user wants to load an image
@@ -106,16 +103,15 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
           String fileName = scan.next();
 //          String fileFormat = scan.next();
           String fileFormat = dest.substring(dest.length() - 3); // last 3 letters
-          try{
+          try {
             // checks that the format is a ppm
-            if(fileFormat.equals("ppm")) {
+            if (fileFormat.equals("ppm")) {
               this.model.loadImage(dest, fileName, new PPMImageFormat());
               this.view.renderMessage("Image has been loaded\n");
             }
 
 
-          }
-          catch(IllegalArgumentException iae) { // file isn't found
+          } catch (IllegalArgumentException iae) { // file isn't found
             this.view.renderMessage("File doesn't exist, re-enter a valid command");
           }
 
@@ -123,23 +119,21 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         }
         // need to check if the user saves
         else if (strInput.equalsIgnoreCase("save")) {
-          try{
+          try {
             String imagePath = scan.next();
             String imageName = scan.next();
 
             String fileType = imagePath.substring(imagePath.length() - 3); // last 3 letters
-            if(fileType.equals("ppm")) { // if it's to be saved as a ppm file
-              if(model.getImage(imageName) == null) { // then make the user reinput a valid command
+            if (fileType.equals("ppm")) { // if it's to be saved as a ppm file
+              if (model.getImage(imageName) == null) { // then make the user reinput a valid command
                 this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-              }
-              else { // you are able to successfully save an image
+              } else { // you are able to successfully save an image
                 this.model.saveImage(imagePath, imageName, new PPMImageFormat());
                 this.view.renderMessage("Image has been saved\n");
               }
 
             }
-          }
-          catch (IllegalArgumentException iae) {
+          } catch (IllegalArgumentException iae) {
             this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
           }
 
@@ -147,54 +141,44 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         }
 
         // need to check if a user calls on an operation
-        else if(this.operationDirectory.get(strInput) != null) {
+        else if (this.operationDirectory.get(strInput) != null) {
           // need to deal with additional stuff if they are using change-brightness
           // that takes in an additional parameter that is an integer
 
           // need to deal with exception handling if it's not in the hashmap
-          if(strInput.equals("change-brightness")) {
-            try{
+          if (strInput.equals("change-brightness")) {
+            try {
               int scale = Integer.parseInt(scan.next());
               String imageName = scan.next();
               String newImageName = scan.next();
               this.model.doOperation(new BrightenOrDarken(scale), imageName, newImageName);
               this.view.renderMessage("An operation has been done");
 
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
               this.view.renderMessage("Invalid input, re-enter a valid command");
             }
-          }
-          else {
-            try{
+          } else { // it's an operation that doesn't take in an additional parameter
+            try {
               String imageName = scan.next();
               String newImageName = scan.next();
-              if(this.model.getImage(imageName) == null) { // image doesn't exist in the directory
+              if (this.model.getImage(imageName) == null) { // image doesn't exist in the directory
                 this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-              }
-              else {
+              } else {
 
                 // image does exist, so do the operation
-                this.model.doOperation(this.operationDirectory.get(strInput),imageName, newImageName);
+                this.model.doOperation(this.operationDirectory.get(strInput), imageName, newImageName);
                 this.view.renderMessage("Operation has been performed\n");
               }
-            }
-            catch(IllegalArgumentException iae) {
+            } catch (IllegalArgumentException iae) {
               this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
             }
 
           }
 
 
-        }
-
-        else { // the input was invalid, so the user has to reinput
+        } else { // the input was invalid, so the user has to reinput
           this.view.renderMessage("Invalid input, re-enter a valid command\n");
         }
-
-
-
-
 
 
       }
@@ -203,14 +187,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
       this.view.renderMessage("Image processor has quit.");
 
 
-
-
-
-
-
-
-    }
-    catch(IOException io) {
+    } catch (IOException io) {
       throw new IllegalStateException("Failed to transmit to Appendable or read from Readable");
     }
 
