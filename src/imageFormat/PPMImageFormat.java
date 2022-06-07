@@ -66,6 +66,9 @@ public class PPMImageFormat implements ImageFormat {
   @Override
   public void save(String path, int[][] image) throws IllegalArgumentException {
     try {
+      if(image == null) {
+        throw new IllegalArgumentException("Failed to write to file.");
+      }
       FileWriter writer = new FileWriter(path);
 
       // Write the PPM header into this file

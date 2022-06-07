@@ -122,5 +122,12 @@ public class ImageFormatTest {
     catch (IllegalArgumentException e) {
       // Exception was thrown successfully, let this test pass
     }
+    try { // fail to save because array is null
+      ppm.save("/res/Bruh.ppm", null);
+      fail("save did not throw an exception when given a null for the array.");
+    }
+    catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
   }
 }

@@ -21,13 +21,15 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
   }
 
   @Override
-  public abstract void loadImage(String path, String name, ImageFormat format);
+  public abstract void loadImage(String path, String name, ImageFormat format)
+          throws IllegalArgumentException;
 
   @Override
-  public abstract void saveImage(String path, String imageName, ImageFormat format);
+  public abstract void saveImage(String path, String imageName, ImageFormat format)
+          throws IllegalArgumentException;
 
   @Override
-  public int[][] getImage(String name) {
+  public int[][] getImage(String name) throws IllegalArgumentException {
     if (this.directory.get(name) == null) {
       throw new IllegalArgumentException("Image does not exist in the directory.");
     }
@@ -37,7 +39,10 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
   }
 
   @Override
-  public void doOperation(Operation op, String name, String dest) {
+  public void doOperation(Operation op, String name, String dest) throws IllegalArgumentException{
+    if(op == null || name == null || dest == null) {
+      throw new IllegalArgumentException("None of the parameters can be null");
+    }
     this.directory.put(dest, op.execute(this, name));
   }
 }
