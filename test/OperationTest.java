@@ -20,7 +20,7 @@ import static org.junit.Assert.fail;
 /**
  * This class contains tests for all types of Operations (e.g. anything in the operation package).
  */
-public class TestOperations {
+public class OperationTest {
   ImageProcessorModel model;
 
   @Before
@@ -138,13 +138,6 @@ public class TestOperations {
 
   @Test
   public void testFlipVertical() {
-    int[][] originalImage = {
-            {4, 4, 255},
-            {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0},
-            {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0},
-            {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255},
-            {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255}};
-
     int[][] flippedImage = {
             {4, 4, 255},
             {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255},
