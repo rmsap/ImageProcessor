@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,26 +65,32 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     try {
       this.view.renderMessage("Welcome to Image Processor!\n");
       this.view.renderMessage("The available commands are listed below:\n");
-      this.view.renderMessage("To load an image: load images/fileName.ppm nameToCall\n");
+      this.view.renderMessage("To load an image: load fileName nameToCall\n");
       this.view.renderMessage("fileName represents the name of the file to load\n");
       this.view.renderMessage("nameToCall representing the name to load the image as in the model");
-      this.view.renderMessage("To change the brightness of an image: change-brightness scale fileName nameToCall\n");
+      this.view.renderMessage("To change the brightness of an image: change-brightness scale" +
+              " fileName nameToCall\n");
       this.view.renderMessage("Scale represents an integer to increase or decrease brightness by\n");
       this.view.renderMessage("fileName representing the name of the file to modify\n");
       this.view.renderMessage("nameToCall representing the name to be of the modified image\n");
-      this.view.renderMessage("To flip an image horizontally: horizontal-flip fileName nameToCall\n");
+      this.view.renderMessage("To flip an image horizontally: flip-horizontal fileName nameToCall\n");
       this.view.renderMessage("fileName represents the name of the file to modify\n");
       this.view.renderMessage("nameToCall represents the name to call the modified file\n");
-      this.view.renderMessage("To flip an image vertically: vertical-flip fileName nameToCall\n");
+      this.view.renderMessage("To flip an image vertically: flip-vertical fileName nameToCall\n");
       this.view.renderMessage("fileName represents the name of the file to modify\n");
       this.view.renderMessage("nameToCall represents the name to call the modified file\n");
-      this.view.renderMessage("To greyscale an image: value-component fileName nameToCall\n");
-      this.view.renderMessage("value-component represents the letter i, l, or g\n");
-      this.view.renderMessage("To color an image: value-component fileName nameToCall\n");
-      this.view.renderMessage("value-component represents the letter r, g, or b\n");
+      this.view.renderMessage("To visualize green component: visualize-green " +
+              "fileName nameToCall\n");
+      this.view.renderMessage("To visualize blue component: visualize-blue fileName nameToCall\n");
+      this.view.renderMessage("To visualize red component: visualize-red fileName nameToCall\n");
+      this.view.renderMessage("To visualize intensity: visualize-intensity fileName nameToCall\n");
+      this.view.renderMessage("To visualize luma: visualize-luma fileName nameToCall\n");
+      this.view.renderMessage("To visualize value: visualize-value fileName nameToCall\n");
       this.view.renderMessage("To save an image: save images/fileName.ppm nameToSaveAs\n");
       this.view.renderMessage("fileName represents the name of the file to save as\n");
       this.view.renderMessage("nameToSaveAs represents the name of the image to be saved\n");
+      // 25
+
 
       boolean quit = false;
       String strInput = "";
@@ -112,7 +118,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
 
 
           } catch (IllegalArgumentException iae) { // file isn't found
-            this.view.renderMessage("File doesn't exist, re-enter a valid command");
+            this.view.renderMessage("File doesn't exist, re-enter a valid command\n");
           }
 
 
@@ -151,11 +157,14 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
               int scale = Integer.parseInt(scan.next());
               String imageName = scan.next();
               String newImageName = scan.next();
-              this.model.doOperation(new BrightenOrDarken(scale), imageName, newImageName);
-              this.view.renderMessage("An operation has been done");
-
+              if (this.model.getImage(imageName) == null) {
+                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
+              } else {
+                this.model.doOperation(new BrightenOrDarken(scale), imageName, newImageName);
+                this.view.renderMessage("Operation has been performed\n");
+              }
             } catch (NumberFormatException e) {
-              this.view.renderMessage("Invalid input, re-enter a valid command");
+              this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
             }
           } else { // it's an operation that doesn't take in an additional parameter
             try {
@@ -166,7 +175,8 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
               } else {
 
                 // image does exist, so do the operation
-                this.model.doOperation(this.operationDirectory.get(strInput), imageName, newImageName);
+                this.model.doOperation(this.operationDirectory.get(strInput),
+                        imageName, newImageName);
                 this.view.renderMessage("Operation has been performed\n");
               }
             } catch (IllegalArgumentException iae) {
@@ -184,7 +194,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
       }
 
       // assuming that the user has quit
-      this.view.renderMessage("Image processor has quit.");
+      this.view.renderMessage("Image Processor has quit.");
 
 
     } catch (IOException io) {
