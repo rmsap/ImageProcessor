@@ -75,56 +75,6 @@ public class ImageProcessorModelImplTest {
 
   }
 
-  @Test
-  public void saveImageValid() { // testing than an image is successfully saved
-    ImageProcessorModel model = new ImageProcessorModelImpl();
-    ImageFormat ppm = new PPMImageFormat();
-    model.loadImage("originalPic", ppm.read("res/4x4ppmOriginal.ppm"));
-    File somePPMFile = new File("res/Onion.ppm");
-    // for the test below, it will run correctly if it's the first time running
-    // as it doesn't exist in the res folder
-    // if the file is already in the folder, comment this test out to run the other tests
-    assertFalse(somePPMFile.exists());
-    model.saveImage("res/Onion.ppm", "originalPic", ppm);
-    assertTrue(somePPMFile.exists());
-
-
-    // test that the contents in the saved file are what they are supposed to be
-    int[][] savedFile = ppm.read("res/Onion.ppm");
-
-    for (int i = 0; i < savedFile.length; i++) {
-      for (int j = 0; j < savedFile[i].length; j++) {
-        assertEquals(savedFile[i][j], savedFile[i][j]);
-      }
-    }
-
-
-  }
-
-
-  @Test
-  public void saveImageInvalid() throws IllegalArgumentException {
-    try{ // the image in the directory does not exist
-      ImageProcessorModel model = new ImageProcessorModelImpl();
-      model.saveImage("res/Bruh.ppm", "Bruhtonium", new PPMImageFormat());
-      fail("An exception was supposed to be caught because the image does not exist");
-
-
-    }
-    catch(IllegalArgumentException ie) {
-      // exception successfully caught
-    }
-    try{ // the path does not exist
-      ImageProcessorModel model = new ImageProcessorModelImpl();
-      model.loadImage("og", new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
-      model.saveImage("oogabooga/Bruh.ppm", "og", new PPMImageFormat());
-      fail("An exception was supposed to be caught because the image does not exist");
-    }
-    catch(IllegalArgumentException ie) {
-      // exception successfully caught
-    }
-  }
-
 
   @Test
   public void getImageInvalid() throws IllegalArgumentException {

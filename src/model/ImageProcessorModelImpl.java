@@ -26,13 +26,4 @@ public class ImageProcessorModelImpl extends AbstractImageProcessorModel {
     }
     directory.put(name, image);
   }
-
-  @Override
-  public void saveImage(String path, String imageName, ImageFormat format)
-          throws IllegalArgumentException {
-    if(path == null || imageName == null || format == null) {
-      throw new IllegalArgumentException("None of the parameters can be null");
-    }
-    format.save(path, this.directory.get(imageName));
-  }
 }

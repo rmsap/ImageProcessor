@@ -32,13 +32,6 @@ public class ImageProcessorControllerImplTest {
     }
 
     @Override
-    public void saveImage(String path, String imageName, ImageFormat format) {
-      log.append(String.format("Path = %s, Name = %s\n", path, imageName));
-
-
-    }
-
-    @Override
     public int[][] getImage(String name) {
       log.append(String.format("Name = %s\n", name));
       return new int[0][0];

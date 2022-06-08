@@ -25,10 +25,6 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
           throws IllegalArgumentException;
 
   @Override
-  public abstract void saveImage(String path, String imageName, ImageFormat format)
-          throws IllegalArgumentException;
-
-  @Override
   public int[][] getImage(String name) throws IllegalArgumentException {
     if (this.directory.get(name) == null) {
       throw new IllegalArgumentException("Image does not exist in the directory.");

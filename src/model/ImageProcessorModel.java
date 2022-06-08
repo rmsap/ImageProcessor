@@ -19,15 +19,6 @@ public interface ImageProcessorModel {
   void loadImage(String name, int[][] image);
 
   /**
-   * Save the image with the given file name.
-   * @param path the path that the image should be saved to,
-   *             which should include the name of the file
-   * @param imageName the name of the image to save
-   * @param format the format that we want to save this image as
-   */
-  void saveImage(String path, String imageName, ImageFormat format);
-
-  /**
    * Get the image with the given name and return it.
    * @param name the name of the image we want to get
    * @return the image with the given name
