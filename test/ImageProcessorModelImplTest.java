@@ -1,9 +1,15 @@
 import org.junit.Test;
 
+import java.io.File;
+
+import imageFormat.ImageFormat;
 import imageFormat.PPMImageFormat;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 
@@ -13,7 +19,26 @@ import static org.junit.Assert.fail;
 public class ImageProcessorModelImplTest {
 
   @Test
-  public void loadImage() {
+  public void loadImageValid() {
+    ImageProcessorModel model = new ImageProcessorModelImpl();
+    ImageFormat ppm = new PPMImageFormat();
+    int[][] originalImage = ppm.read("res/4x4ppmOriginal.ppm");
+
+    int[][] expected = {
+            {4, 4, 255},
+            {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0},
+            {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0},
+            {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255},
+            {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255}};
+
+    model.loadImage("res/4x4ppmOriginal.ppm", "originalPic", ppm);
+
+
+    for (int i = 0; i < expected.length; i++) {
+      for (int j = 0; j < expected[i].length; j++) {
+        assertEquals(expected[i][j], model.getImage("originalPic")[i][j]);
+      }
+    }
 
   }
 
@@ -51,7 +76,25 @@ public class ImageProcessorModelImplTest {
   }
 
   @Test
-  public void saveImage() {
+  public void saveImageValid() { // testing than an image is successfully saved
+    ImageProcessorModel model = new ImageProcessorModelImpl();
+    ImageFormat ppm = new PPMImageFormat();
+    model.loadImage("res/4x4ppmOriginal.ppm", "originalPic", ppm);
+    File somePPMFile = new File("res/Onion.ppm");
+    assertFalse(somePPMFile.exists()); // will only be true when it's not in res folder
+    model.saveImage("res/Onion.ppm", "originalPic", ppm);
+    assertTrue(somePPMFile.exists());
+
+
+    // test that the contents in the saved file are what they are supposed to be
+    int[][] savedFile = ppm.read("res/Onion.ppm");
+
+    for (int i = 0; i < savedFile.length; i++) {
+      for (int j = 0; j < savedFile[i].length; j++) {
+        assertEquals(savedFile[i][j], savedFile[i][j]);
+      }
+    }
+
 
   }
 

@@ -1,7 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.StringReader;
 
 import controller.ImageProcessorController;
@@ -218,6 +217,24 @@ public class ImageProcessorControllerImplTest {
       String[] messages = appendable.toString().split("\n");
       String operationMessage = messages[24];
       assertEquals("Something doesn't exist, re-enter a valid command", operationMessage);
+    } catch (IllegalStateException is) {
+      fail("An exception was not supposed to be caught");
+    }
+    try { // test that the controller goes through multiple commands
+      Readable readable = new StringReader("load Koala.ppm Koala flip-horizontal " +
+              "Koala KoalaHor visualize-red KoalaHor KoalaHorRed save " +
+              "res/KoalaHorRed.ppm KoalaHorRed q");
+      Appendable appendable = new StringBuilder();
+      ImageProcessorModel mockModel = new ImageProcessorModelImpl();
+      ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
+      ImageProcessorController controller =
+              new ImageProcessorControllerImpl(mockModel, view, readable);
+      controller.execute();
+      String[] messages = appendable.toString().split("\n");
+      String operationMessage1 = messages[24];
+      String operationMessage2 = messages[25];
+      assertEquals("Operation has been performed", operationMessage1);
+      assertEquals("Operation has been performed", operationMessage2);
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");
     }

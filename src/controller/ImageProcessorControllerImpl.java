@@ -108,7 +108,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
           String dest = scan.next();
           String fileName = scan.next();
 //          String fileFormat = scan.next();
-          String fileFormat = dest.substring(dest.length() - 3); // last 3 letters
+          String fileFormat = dest.substring(dest.lastIndexOf('.') + 1); // last 3 letters
           try {
             // checks that the format is a ppm
             if (fileFormat.equals("ppm")) {
@@ -129,7 +129,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
             String imagePath = scan.next();
             String imageName = scan.next();
 
-            String fileType = imagePath.substring(imagePath.length() - 3); // last 3 letters
+            String fileType = imagePath.substring(imagePath.lastIndexOf('.') + 1);
             if (fileType.equals("ppm")) { // if it's to be saved as a ppm file
               if (model.getImage(imageName) == null) { // then make the user reinput a valid command
                 this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
