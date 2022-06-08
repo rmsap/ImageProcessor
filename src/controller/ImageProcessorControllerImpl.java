@@ -137,7 +137,8 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
               if (model.getImage(imageName) == null) { // then make the user reinput a valid command
                 this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
               } else { // you are able to successfully save an image
-                this.model.saveImage(imagePath, imageName, new PPMImageFormat());
+                new PPMImageFormat().save(imagePath, model.getImage(imageName));
+//                this.model.saveImage(imagePath, imageName, new PPMImageFormat());
                 this.view.renderMessage("Image has been saved\n");
               }
 

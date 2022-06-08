@@ -86,7 +86,7 @@ public class ImageProcessorControllerImplTest {
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
       controller.execute();
-      assertEquals("Name = Bruh\nPath = Bruh.ppm, Name = Bruh\n", log.toString());
+      assertEquals("Name = Bruh\nName = Bruh\n", log.toString());
 
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");
