@@ -12,11 +12,11 @@ import operations.Operation;
 public interface ImageProcessorModel {
   /**
    * Load an image with the given file path.
-   * @param path the path of the image that is being loading
    * @param name the name that this image will henceforth be referred to as
-   * @param format the format of the image we are loading
+   * @param image the image we are going to load into this model, represented as an array of
+   *              pixels (which are 3 integers representing red, green, and blue)
    */
-  void loadImage(String path, String name, ImageFormat format);
+  void loadImage(String name, int[][] image);
 
   /**
    * Save the image with the given file name.

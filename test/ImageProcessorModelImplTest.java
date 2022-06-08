@@ -31,7 +31,7 @@ public class ImageProcessorModelImplTest {
             {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255},
             {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255}};
 
-    model.loadImage("res/4x4ppmOriginal.ppm", "originalPic", ppm);
+    model.loadImage("originalPic", ppm.read("res/4x4ppmOriginal.ppm"));
 
 
     for (int i = 0; i < expected.length; i++) {
@@ -47,7 +47,7 @@ public class ImageProcessorModelImplTest {
   public void loadImageInvalid() throws IllegalArgumentException{
     try{ // trying to get from a path that doesn't exist
       ImageProcessorModel model = new ImageProcessorModelImpl();
-      model.loadImage("orangejustice","wowzers", new PPMImageFormat());
+      model.loadImage("wowzers", new PPMImageFormat().read("orangejustice"));
       fail("An exception was supposed to be caught since orangejustice is not an existing path");
 
     }
@@ -56,8 +56,8 @@ public class ImageProcessorModelImplTest {
     }
     try{ // the imageFormat object is null
       ImageProcessorModel model = new ImageProcessorModelImpl();
-      model.loadImage("res/4x4ppmOriginal.ppm","wowzers", null);
-      fail("An exception was supposed to be caught since orangejustice is not an existing path");
+      model.loadImage("wowzers", null);
+      fail("An exception was supposed to be caught since no image was provided");
 
     }
     catch(IllegalArgumentException ie) {
@@ -65,7 +65,7 @@ public class ImageProcessorModelImplTest {
     }
     try{ // the name is null
       ImageProcessorModel model = new ImageProcessorModelImpl();
-      model.loadImage("res/4x4ppmOriginal.ppm",null, new PPMImageFormat());
+      model.loadImage(null, new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
       fail("An exception was supposed to be caught since the name is null");
 
     }
@@ -79,7 +79,7 @@ public class ImageProcessorModelImplTest {
   public void saveImageValid() { // testing than an image is successfully saved
     ImageProcessorModel model = new ImageProcessorModelImpl();
     ImageFormat ppm = new PPMImageFormat();
-    model.loadImage("res/4x4ppmOriginal.ppm", "originalPic", ppm);
+    model.loadImage("originalPic", ppm.read("res/4x4ppmOriginal.ppm"));
     File somePPMFile = new File("res/Onion.ppm");
     // for the test below, it will run correctly if it's the first time running
     // as it doesn't exist in the res folder
@@ -116,7 +116,7 @@ public class ImageProcessorModelImplTest {
     }
     try{ // the path does not exist
       ImageProcessorModel model = new ImageProcessorModelImpl();
-      model.loadImage("res/4x4ppmOriginal.ppm","og", new PPMImageFormat());
+      model.loadImage("og", new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
       model.saveImage("oogabooga/Bruh.ppm", "og", new PPMImageFormat());
       fail("An exception was supposed to be caught because the image does not exist");
     }
@@ -143,7 +143,7 @@ public class ImageProcessorModelImplTest {
   @Test
   public void getImageValid() throws IllegalArgumentException {
     ImageProcessorModel model = new ImageProcessorModelImpl();
-    model.loadImage("res/4x4ppmOriginal.ppm", "originalPic", new PPMImageFormat());
+    model.loadImage("originalPic", new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
     assertEquals(255, model.getImage("originalPic")[0][2]);
     assertEquals(4, model.getImage("originalPic")[0][0]);
     assertEquals(4, model.getImage("originalPic")[0][1]);

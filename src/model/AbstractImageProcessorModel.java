@@ -21,7 +21,7 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
   }
 
   @Override
-  public abstract void loadImage(String path, String name, ImageFormat format)
+  public abstract void loadImage(String name, int[][] image)
           throws IllegalArgumentException;
 
   @Override

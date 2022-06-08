@@ -112,7 +112,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
           try {
             // checks that the format is a ppm
             if (fileFormat.equals("ppm")) {
-              this.model.loadImage(dest, fileName, new PPMImageFormat());
+              this.model.loadImage(fileName, new PPMImageFormat().read(dest));
               this.view.renderMessage("Image has been loaded\n");
             }
             else {

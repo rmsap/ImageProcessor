@@ -26,8 +26,8 @@ public class ImageProcessorControllerImplTest {
     }
 
     @Override
-    public void loadImage(String path, String name, ImageFormat format) {
-      log.append(String.format("Path = %s, Name = %s\n", path, name));
+    public void loadImage(String name, int[][] image) {
+      log.append(String.format("Name = %s\n", name));
 
     }
 
@@ -67,7 +67,7 @@ public class ImageProcessorControllerImplTest {
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
       controller.execute();
-      assertEquals("Path = Koala.ppm, Name = Koala\n", log.toString());
+      assertEquals("Name = Koala\n", log.toString());
 
 
     } catch (IllegalStateException ie) {

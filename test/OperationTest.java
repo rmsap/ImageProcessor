@@ -27,8 +27,8 @@ public class OperationTest {
   public void init() {
     model = new ImageProcessorModelImpl();
 
-    model.loadImage("koala.ppm", "koala", new PPMImageFormat());
-    model.loadImage("res/4x4ppmOriginal.ppm", "4x4", new PPMImageFormat());
+    model.loadImage("koala", new PPMImageFormat().read("koala.ppm"));
+    model.loadImage("4x4", new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
   }
   @Test
   public void testBrighten() {
