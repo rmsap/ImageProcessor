@@ -32,6 +32,13 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
   private Map<String, Operation> operationDirectory;
 
 
+  /**
+   * Default constructor for the controller of Image Processor.
+   * @param model representing an ImageProcessorModel.
+   * @param view representing an ImageProcessorView.
+   * @param input representing a Readable object.
+   * @throws IllegalArgumentException if any parameters are null
+   */
   public ImageProcessorControllerImpl
           (ImageProcessorModel model, ImageProcessorView view, Readable input)
           throws IllegalArgumentException {

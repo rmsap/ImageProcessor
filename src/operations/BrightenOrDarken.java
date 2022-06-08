@@ -5,6 +5,8 @@ import operations.Operation;
 
 /**
  * This class represents an Operation that brightens or darkens an image by its scale.
+ * Passing in a negative integer will darken the image.
+ * Passing in a positive integer will brighten the image.
  */
 public class BrightenOrDarken implements Operation {
   int scale;
@@ -12,7 +14,7 @@ public class BrightenOrDarken implements Operation {
   /**
    * Construct a new BrightenOrDarken Operation with the given scale.
    * If the integer is negative, then the image should darken.
-   * If the integer is positive, then the image should brigthen.
+   * If the integer is positive, then the image should brighten.
    * @param scale the scale of this BrightenOrDarken
    */
   public BrightenOrDarken(int scale) {

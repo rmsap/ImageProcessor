@@ -4,7 +4,8 @@ import model.ImageProcessorModel;
 import operations.Operation;
 
 /**
- * This class represents an Operation that flips the given ImageProcessorModel.
+ * This class represents an Operation that flips the given image of an
+ * ImageProcessorModel horizontally.
  */
 public class FlipHorizontal implements Operation {
   @Override
