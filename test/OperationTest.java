@@ -42,18 +42,20 @@ public class OperationTest {
       fail("Brightened image was not added to the directory of the model properly.");
     }
 
+    int[][] brightenedImage = model.getImage("koala-brighten");
+
 
     // Test that the header row of the new image is equal to the header row of the original image
-    assertEquals(model.getImage("koala-brighten")[0][0], originalKoalaColors[0][0]);
-    assertEquals(model.getImage("koala-brighten")[0][1], originalKoalaColors[0][1]);
-    assertEquals(model.getImage("koala-brighten")[0][2], originalKoalaColors[0][2]);
+    assertEquals(brightenedImage[0][0], originalKoalaColors[0][0]);
+    assertEquals(brightenedImage[0][1], originalKoalaColors[0][1]);
+    assertEquals(brightenedImage[0][2], originalKoalaColors[0][2]);
 
     // Test that each pixel in the new image is brightened by a scale of 50
     // (because the BrightenOrDarken was constructed with 50 as its scale)
-    for (int i = 1; i < model.getImage("koala-brighten").length; i++) {
-      for (int j = 0; j < model.getImage("koala-brighten")[i].length; j++) {
+    for (int i = 1; i < brightenedImage.length; i++) {
+      for (int j = 0; j < brightenedImage[i].length; j++) {
         assertEquals(Math.min(originalKoalaColors[i][j] + 50, 255),
-                model.getImage("koala-brighten")[i][j]);
+                brightenedImage[i][j]);
       }
     }
   }
@@ -70,17 +72,19 @@ public class OperationTest {
       fail("Darkened image was not added to the directory of the model properly.");
     }
 
+    int[][] darkenedImage = model.getImage("koala-darkened");
+
     // Test that the header row of the new image is equal to the header row of the original image
-    assertEquals(model.getImage("koala-darkened")[0][0], originalKoalaColors[0][0]);
-    assertEquals(model.getImage("koala-darkened")[0][1], originalKoalaColors[0][1]);
-    assertEquals(model.getImage("koala-darkened")[0][2], originalKoalaColors[0][2]);
+    assertEquals(darkenedImage[0][0], originalKoalaColors[0][0]);
+    assertEquals(darkenedImage[0][1], originalKoalaColors[0][1]);
+    assertEquals(darkenedImage[0][2], originalKoalaColors[0][2]);
 
     // Test that each pixel in the new image is darkened by a scale of 50
     // (because the BrightenOrDarken was constructed with -50 as its scale)
-    for (int i = 1; i < model.getImage("koala-darkened").length; i++) {
-      for (int j = 0; j < model.getImage("koala-darkened")[i].length; j++) {
+    for (int i = 1; i < darkenedImage.length; i++) {
+      for (int j = 0; j < darkenedImage[i].length; j++) {
         assertEquals(Math.max(0, originalKoalaColors[i][j] - 50),
-                model.getImage("koala-darkened")[i][j]);
+                darkenedImage[i][j]);
       }
     }
   }
@@ -97,21 +101,23 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] imageCopy = model.getImage("koala-copy");
+
     // Test that each pixel in the new image is the same as the old image
     // (brightening/darkening by 0 should have no effect)
-    for (int i = 0; i < model.getImage("koala-copy").length; i++) {
-      assertEquals(model.getImage("koala-copy")[i][0],
+    for (int i = 0; i < imageCopy.length; i++) {
+      assertEquals(imageCopy[i][0],
               originalKoalaColors[i][0]);
-      assertEquals(model.getImage("koala-copy")[i][1],
+      assertEquals(imageCopy[i][1],
               originalKoalaColors[i][1]);
-      assertEquals(model.getImage("koala-copy")[i][2],
+      assertEquals(imageCopy[i][2],
               originalKoalaColors[i][2]);
     }
   }
 
   @Test
   public void testFlipHorizontal() {
-    int[][] flippedImage = {
+    int[][] flippedImageExpected = {
             {4, 4, 255},
             {0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {100, 0, 0},
             {0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {100, 0, 0},
@@ -127,18 +133,20 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] flippedImage = model.getImage("4x4-flipped");
+
     // Test that each pixel in the new image was swapped with the corresponding pixel further down
     // in the same row
-    for (int i = 0; i < model.getImage("4x4-flipped").length; i++) {
-      for (int j = 0; j < model.getImage("4x4-flipped")[i].length; j++) {
-        assertEquals(flippedImage[i][j], model.getImage("4x4-flipped")[i][j]);
+    for (int i = 0; i < flippedImage.length; i++) {
+      for (int j = 0; j < flippedImage[i].length; j++) {
+        assertEquals(flippedImageExpected[i][j], flippedImage[i][j]);
       }
     }
   }
 
   @Test
   public void testFlipVertical() {
-    int[][] flippedImage = {
+    int[][] flippedImageExpected = {
             {4, 4, 255},
             {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255},
             {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255},
@@ -154,11 +162,13 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] flippedImage = model.getImage("4x4-flipped");
+
     // Test that each pixel in the new image was swapped with the corresponding pixel further down
     // in the same column
-    for (int i = 0; i < model.getImage("4x4-flipped").length; i++) {
-      for (int j = 0; j < model.getImage("4x4-flipped")[i].length; j++) {
-        assertEquals(flippedImage[i][j], model.getImage("4x4-flipped")[i][j]);
+    for (int i = 0; i < flippedImage.length; i++) {
+      for (int j = 0; j < flippedImage[i].length; j++) {
+        assertEquals(flippedImageExpected[i][j], flippedImage[i][j]);
       }
     }
   }
@@ -175,19 +185,21 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] koalaRed = model.getImage("koala-red");
+
     // Test that the header row of the new image is equal to the header row of the original image
-    assertEquals(model.getImage("koala-red")[0][0], originalKoalaColors[0][0]);
-    assertEquals(model.getImage("koala-red")[0][1], originalKoalaColors[0][1]);
-    assertEquals(model.getImage("koala-red")[0][2], originalKoalaColors[0][2]);
+    assertEquals(koalaRed[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaRed[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaRed[0][2], originalKoalaColors[0][2]);
 
     // Test that each pixel in the new image has all 3 of its RGB values
     // set to the red value of the corresponding pixel in the original image
-    for (int i = 1; i < model.getImage("koala-red").length; i++) {
-      assertEquals(model.getImage("koala-red")[i][0],
+    for (int i = 1; i < koalaRed.length; i++) {
+      assertEquals(koalaRed[i][0],
               originalKoalaColors[i][0]);
-      assertEquals(model.getImage("koala-red")[i][1],
+      assertEquals(koalaRed[i][1],
               originalKoalaColors[i][0]);
-      assertEquals(model.getImage("koala-red")[i][2],
+      assertEquals(koalaRed[i][2],
               originalKoalaColors[i][0]);
     }
   }
@@ -204,19 +216,21 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] koalaGreen = model.getImage("koala-green");
+
     // Test that the header row of the new image is equal to the header row of the original image
-    assertEquals(model.getImage("koala-green")[0][0], originalKoalaColors[0][0]);
-    assertEquals(model.getImage("koala-green")[0][1], originalKoalaColors[0][1]);
-    assertEquals(model.getImage("koala-green")[0][2], originalKoalaColors[0][2]);
+    assertEquals(koalaGreen[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaGreen[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaGreen[0][2], originalKoalaColors[0][2]);
 
     // Test that each pixel in the new image has all 3 of its RGB values
     // set to the green value of the corresponding pixel in the original image
-    for (int i = 1; i < model.getImage("koala-green").length; i++) {
-      assertEquals(model.getImage("koala-green")[i][0],
+    for (int i = 1; i < koalaGreen.length; i++) {
+      assertEquals(koalaGreen[i][0],
               originalKoalaColors[i][1]);
-      assertEquals(model.getImage("koala-green")[i][1],
+      assertEquals(koalaGreen[i][1],
               originalKoalaColors[i][1]);
-      assertEquals(model.getImage("koala-green")[i][2],
+      assertEquals(koalaGreen[i][2],
               originalKoalaColors[i][1]);
     }
   }
@@ -233,19 +247,21 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] koalaBlue = model.getImage("koala-blue");
+
     // Test that the header row of the new image is equal to the header row of the original image
-    assertEquals(model.getImage("koala-blue")[0][0], originalKoalaColors[0][0]);
-    assertEquals(model.getImage("koala-blue")[0][1], originalKoalaColors[0][1]);
-    assertEquals(model.getImage("koala-blue")[0][2], originalKoalaColors[0][2]);
+    assertEquals(koalaBlue[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaBlue[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaBlue[0][2], originalKoalaColors[0][2]);
 
     // Test that each pixel in the new image has all 3 of its RGB values
     // set to the green value of the corresponding pixel in the original image
-    for (int i = 1; i < model.getImage("koala-blue").length; i++) {
-      assertEquals(model.getImage("koala-blue")[i][0],
+    for (int i = 1; i < koalaBlue.length; i++) {
+      assertEquals(koalaBlue[i][0],
               originalKoalaColors[i][2]);
-      assertEquals(model.getImage("koala-blue")[i][1],
+      assertEquals(koalaBlue[i][1],
               originalKoalaColors[i][2]);
-      assertEquals(model.getImage("koala-blue")[i][2],
+      assertEquals(koalaBlue[i][2],
               originalKoalaColors[i][2]);
     }
   }
@@ -262,19 +278,21 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] koalaValue = model.getImage("koala-value");
+
     // Test that the header row of the new image is equal to the header row of the original image
-    assertEquals(model.getImage("koala-value")[0][0], originalKoalaColors[0][0]);
-    assertEquals(model.getImage("koala-value")[0][1], originalKoalaColors[0][1]);
-    assertEquals(model.getImage("koala-value")[0][2], originalKoalaColors[0][2]);
+    assertEquals(koalaValue[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaValue[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaValue[0][2], originalKoalaColors[0][2]);
 
     // Test that each pixel in the new image has all 3 of its RGB values
     // set to the green value of the corresponding pixel in the original image
-    for (int i = 1; i < model.getImage("koala-value").length; i++) {
+    for (int i = 1; i < koalaValue.length; i++) {
       int value = Math.max(originalKoalaColors[i][0],
               Math.max(originalKoalaColors[i][1], originalKoalaColors[i][2]));
-      assertEquals(model.getImage("koala-value")[i][0], value);
-      assertEquals(model.getImage("koala-value")[i][1], value);
-      assertEquals(model.getImage("koala-value")[i][2], value);
+      assertEquals(koalaValue[i][0], value);
+      assertEquals(koalaValue[i][1], value);
+      assertEquals(koalaValue[i][2], value);
     }
   }
 
@@ -290,19 +308,21 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] koalaIntensity = model.getImage("koala-intensity");
+
     // Test that the header row of the new image is equal to the header row of the original image
-    assertEquals(model.getImage("koala-intensity")[0][0], originalKoalaColors[0][0]);
-    assertEquals(model.getImage("koala-intensity")[0][1], originalKoalaColors[0][1]);
-    assertEquals(model.getImage("koala-intensity")[0][2], originalKoalaColors[0][2]);
+    assertEquals(koalaIntensity[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaIntensity[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaIntensity[0][2], originalKoalaColors[0][2]);
 
     // Test that each pixel in the new image has all 3 of its RGB values
     // set to the green value of the corresponding pixel in the original image
-    for (int i = 1; i < model.getImage("koala-intensity").length; i++) {
+    for (int i = 1; i < koalaIntensity.length; i++) {
       int intensity = (originalKoalaColors[i][0] + originalKoalaColors[i][1]
               + originalKoalaColors[i][2]) / 3;
-      assertEquals(model.getImage("koala-intensity")[i][0], intensity);
-      assertEquals(model.getImage("koala-intensity")[i][1], intensity);
-      assertEquals(model.getImage("koala-intensity")[i][2], intensity);
+      assertEquals(koalaIntensity[i][0], intensity);
+      assertEquals(koalaIntensity[i][1], intensity);
+      assertEquals(koalaIntensity[i][2], intensity);
     }
   }
 
@@ -318,19 +338,21 @@ public class OperationTest {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
+    int[][] koalaLuma = model.getImage("koala-luma");
+
     // Test that the header row of the new image is equal to the header row of the original image
-    assertEquals(model.getImage("koala-luma")[0][0], originalKoalaColors[0][0]);
-    assertEquals(model.getImage("koala-luma")[0][1], originalKoalaColors[0][1]);
-    assertEquals(model.getImage("koala-luma")[0][2], originalKoalaColors[0][2]);
+    assertEquals(koalaLuma[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaLuma[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaLuma[0][2], originalKoalaColors[0][2]);
 
     // Test that each pixel in the new image has all 3 of its RGB values
     // set to the green value of the corresponding pixel in the original image
-    for (int i = 1; i < model.getImage("koala-luma").length; i++) {
+    for (int i = 1; i < koalaLuma.length; i++) {
       double luma = 0.2126 * originalKoalaColors[i][0] + 0.7152 * originalKoalaColors[i][1]
               + 0.0722 * originalKoalaColors[i][2];
-      assertEquals(model.getImage("koala-luma")[i][0], (int) luma);
-      assertEquals(model.getImage("koala-luma")[i][1], (int) luma);
-      assertEquals(model.getImage("koala-luma")[i][2], (int) luma);
+      assertEquals(koalaLuma[i][0], (int) luma);
+      assertEquals(koalaLuma[i][1], (int) luma);
+      assertEquals(koalaLuma[i][2], (int) luma);
     }
   }
 }

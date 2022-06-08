@@ -30,7 +30,15 @@ public abstract class AbstractImageProcessorModel implements ImageProcessorModel
       throw new IllegalArgumentException("Image does not exist in the directory.");
     }
     else {
-      return this.directory.get(name);
+      int[][] image = this.directory.get(name);
+      int[][] copy = new int[image.length][image[0].length];
+
+      for (int i = 0; i < image.length; i++) {
+        for (int j = 0; j < image[i].length; j++) {
+          copy[i][j] = image[i][j];
+        }
+      }
+      return copy;
     }
   }
 

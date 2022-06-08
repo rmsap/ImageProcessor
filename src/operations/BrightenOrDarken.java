@@ -21,7 +21,7 @@ public class BrightenOrDarken implements Operation {
 
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
-    int [][] deepCopy = OperationUtils.copy(model.getImage(name));
+    int [][] deepCopy = model.getImage(name);
 
     // starting at index 1 since the 0th index contains the header information
     for(int i = 1; i < deepCopy.length; i++) {

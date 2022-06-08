@@ -9,7 +9,7 @@ import model.ImageProcessorModel;
 public class VisualizeIntensity implements Operation {
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
-    int [][] copy = OperationUtils.copy(model.getImage(name));
+    int [][] copy = model.getImage(name);
 
     for (int i = 1; i < copy.length; i++) {
       int intensity = (copy[i][0] + copy[i][1] + copy[i][2]) / 3;

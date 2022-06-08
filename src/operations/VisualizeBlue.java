@@ -9,7 +9,7 @@ import model.ImageProcessorModel;
 public class VisualizeBlue implements Operation {
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
-    int [][] copy = OperationUtils.copy(model.getImage(name));
+    int [][] copy = model.getImage(name);
 
     for (int i = 1; i < copy.length; i++) {
       for (int j = 0; j < copy[i].length; j++) {
