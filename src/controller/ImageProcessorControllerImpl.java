@@ -12,11 +12,9 @@ import operations.BrightenOrDarken;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
 import operations.Operation;
-import operations.VisualizeBlue;
-import operations.VisualizeGreen;
 import operations.VisualizeIntensity;
 import operations.VisualizeLuma;
-import operations.VisualizeRed;
+import operations.VisualizeRGB;
 import operations.VisualizeValue;
 import view.ImageProcessorView;
 
@@ -47,9 +45,9 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory = new HashMap<String, Operation>();
     operationDirectory.put("flip-horizontal", new FlipHorizontal());
     operationDirectory.put("flip-vertical", new FlipVertical());
-    operationDirectory.put("visualize-green", new VisualizeGreen());
-    operationDirectory.put("visualize-blue", new VisualizeBlue());
-    operationDirectory.put("visualize-red", new VisualizeRed());
+    operationDirectory.put("visualize-green", new VisualizeRGB(VisualizeRGB.Color.Green));
+    operationDirectory.put("visualize-blue", new VisualizeRGB(VisualizeRGB.Color.Blue));
+    operationDirectory.put("visualize-red", new VisualizeRGB(VisualizeRGB.Color.Red));
     operationDirectory.put("visualize-intensity", new VisualizeIntensity());
     operationDirectory.put("visualize-luma", new VisualizeLuma());
     operationDirectory.put("visualize-value", new VisualizeValue());

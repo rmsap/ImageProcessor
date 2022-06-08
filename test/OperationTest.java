@@ -7,11 +7,10 @@ import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
-import operations.VisualizeBlue;
-import operations.VisualizeGreen;
 import operations.VisualizeIntensity;
 import operations.VisualizeLuma;
-import operations.VisualizeRed;
+import operations.VisualizeRGB;
+import operations.VisualizeRGB.Color;
 import operations.VisualizeValue;
 
 import static org.junit.Assert.assertEquals;
@@ -176,7 +175,7 @@ public class OperationTest {
   @Test
   public void testVisualizeRed() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeRed(), "koala", "koala-red");
+    model.doOperation(new VisualizeRGB(Color.Red), "koala", "koala-red");
 
     try {
       model.getImage("koala-red");
@@ -207,7 +206,7 @@ public class OperationTest {
   @Test
   public void testVisualizeGreen() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeGreen(), "koala", "koala-green");
+    model.doOperation(new VisualizeRGB(Color.Green), "koala", "koala-green");
 
     try {
       model.getImage("koala-green");
@@ -238,7 +237,7 @@ public class OperationTest {
   @Test
   public void testVisualizeBlue() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeBlue(), "koala", "koala-blue");
+    model.doOperation(new VisualizeRGB(Color.Blue), "koala", "koala-blue");
 
     try {
       model.getImage("koala-blue");
