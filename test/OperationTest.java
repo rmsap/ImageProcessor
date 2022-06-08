@@ -28,6 +28,7 @@ public class OperationTest {
 
     model.loadImage("koala", new PPMImageFormat().read("koala.ppm"));
     model.loadImage("4x4", new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
+    model.loadImage("4x3", new PPMImageFormat().read("res/4x3ppmOriginal.ppm"));
   }
   @Test
   public void testBrighten() {
@@ -141,6 +142,32 @@ public class OperationTest {
         assertEquals(flippedImageExpected[i][j], flippedImage[i][j]);
       }
     }
+
+    int [][] flippedImageExpected2 = {
+            {4,3, 255},
+            {0,0,0},  {0,0,0},  {100,0,0},  {100,0,0},
+            {100,0,0},  {100,0,0},  {0,100,0},  {0,100,0},
+            {0,100,0},  {0,100,0},  {255,255,255},  {255,255,255} };
+
+    model.doOperation(new FlipHorizontal(), "4x3", "4x3-flipped-hor");
+    try{
+      model.getImage("4x3-flipped-hor");
+    }
+    catch(IllegalArgumentException e) {
+      fail("An exception was not supposed to be caught");
+    }
+    int [][] flippedImage2 = model.getImage("4x3-flipped-hor");
+    // Test that each pixel in the new image was swapped with the corresponding pixel further down
+    // in the same row
+    for (int i = 0; i < flippedImage2.length; i++) {
+      for (int j = 0; j < flippedImage2[i].length; j++) {
+        assertEquals(flippedImageExpected2[i][j], flippedImage2[i][j]);
+      }
+    }
+
+
+
+
   }
 
   @Test
@@ -170,6 +197,29 @@ public class OperationTest {
         assertEquals(flippedImageExpected[i][j], flippedImage[i][j]);
       }
     }
+
+    int[][] flippedImageExpected2 = {
+            {4, 3, 255},
+            {255, 255, 255}, {255, 255, 255}, {0, 100, 0}, {0, 100, 0},
+            {0, 100, 0}, {0, 100, 0}, {100, 0, 0}, {100, 0, 0},
+            {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0},
+            };
+    model.doOperation(new FlipVertical(), "4x3", "4x3-vertical");
+    try{
+      model.getImage("4x3-vertical");
+    }
+    catch(IllegalArgumentException e) {
+      fail("An exception was not supposed to be caught");
+    }
+    int [][] flippedImage2 = model.getImage("4x3-vertical");
+    // Test that each pixel in the new image was swapped with the corresponding pixel further down
+    // in the same column
+    for (int i = 0; i < flippedImage2.length; i++) {
+      for (int j = 0; j < flippedImage2[i].length; j++) {
+        assertEquals(flippedImageExpected2[i][j], flippedImage2[i][j]);
+      }
+    }
+
   }
 
   @Test
