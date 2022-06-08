@@ -170,7 +170,7 @@ public class ImageProcessorControllerImplTest {
       fail("An exception was not supposed to be caught");
     }
     try { // test that the file doesn't exist message is being sent
-      Readable readable = new StringReader("load Bruh.ppm Bruh q");
+      Readable readable = new StringReader("load Bruhlick.ppm Bruh q");
       Appendable appendable = new StringBuilder();
       ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
