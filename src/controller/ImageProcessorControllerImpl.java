@@ -115,6 +115,9 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
               this.model.loadImage(dest, fileName, new PPMImageFormat());
               this.view.renderMessage("Image has been loaded\n");
             }
+            else {
+              this.view.renderMessage("The file-type is not supported, re-input a valid command");
+            }
 
 
           } catch (IllegalArgumentException iae) { // file isn't found
@@ -138,6 +141,9 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
                 this.view.renderMessage("Image has been saved\n");
               }
 
+            }
+            else {
+              this.view.renderMessage("The file-type is not supported, re-input a valid command");
             }
           } catch (IllegalArgumentException iae) {
             this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");

@@ -81,7 +81,10 @@ public class ImageProcessorModelImplTest {
     ImageFormat ppm = new PPMImageFormat();
     model.loadImage("res/4x4ppmOriginal.ppm", "originalPic", ppm);
     File somePPMFile = new File("res/Onion.ppm");
-    assertFalse(somePPMFile.exists()); // will only be true when it's not in res folder
+    // for the test below, it will run correctly if it's the first time running
+    // as it doesn't exist in the res folder
+    // if the file is already in the folder, comment this test out to run the other tests
+    assertFalse(somePPMFile.exists());
     model.saveImage("res/Onion.ppm", "originalPic", ppm);
     assertTrue(somePPMFile.exists());
 
@@ -136,4 +139,18 @@ public class ImageProcessorModelImplTest {
     }
 
   }
+
+  @Test
+  public void getImageValid() throws IllegalArgumentException {
+    ImageProcessorModel model = new ImageProcessorModelImpl();
+    model.loadImage("res/4x4ppmOriginal.ppm", "originalPic", new PPMImageFormat());
+    assertEquals(255, model.getImage("originalPic")[0][2]);
+    assertEquals(4, model.getImage("originalPic")[0][0]);
+    assertEquals(4, model.getImage("originalPic")[0][1]);
+    assertEquals(0, model.getImage("originalPic")[1][1]);
+  }
+
+
+
+
 }
