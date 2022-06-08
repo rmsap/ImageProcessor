@@ -7,11 +7,10 @@ import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
-import operations.VisualizeIntensity;
-import operations.VisualizeLuma;
+import operations.VisualizeBrightness;
+import operations.VisualizeBrightness.BrightnessMeasure;
 import operations.VisualizeRGB;
 import operations.VisualizeRGB.Color;
-import operations.VisualizeValue;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -268,7 +267,8 @@ public class OperationTest {
   @Test
   public void testVisualizeValue() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeValue(), "koala", "koala-value");
+    model.doOperation(new VisualizeBrightness(BrightnessMeasure.Value),
+            "koala", "koala-value");
 
     try {
       model.getImage("koala-value");
@@ -298,7 +298,8 @@ public class OperationTest {
   @Test
   public void testVisualizeIntensity() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeIntensity(), "koala", "koala-intensity");
+    model.doOperation(new VisualizeBrightness(BrightnessMeasure.Intensity),
+            "koala", "koala-intensity");
 
     try {
       model.getImage("koala-intensity");
@@ -328,7 +329,8 @@ public class OperationTest {
   @Test
   public void testVisualizeLuma() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeLuma(), "koala", "koala-luma");
+    model.doOperation(new VisualizeBrightness(BrightnessMeasure.Luma),
+            "koala", "koala-luma");
 
     try {
       model.getImage("koala-luma");
