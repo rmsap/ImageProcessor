@@ -7,21 +7,20 @@ import java.util.Map;
 import model.ImageProcessorModel;
 
 /**
- * This class represents a function object that converts an image to greyscale based on its blue
- * component.
+ * This class represents a function object that converts an image to greyscale based on its one of
+ * its color components.
  */
 public class VisualizeRGB implements Operation {
 
   /**
-   * This enum represents possible colors that we could greyscale the image based on.
+   * This enum represents possible colors that we use to greyscale an image.
    */
   public enum Color {Red, Green, Blue};
 
   // A map of Colors to Integers so that we can get the index of red, green, or blue
   // based on the Color that we are visualizing
-  Map<Color, Integer> colorToNumber = new HashMap<Color, Integer>();
-
-  Color color;
+  private Map<Color, Integer> colorToNumber = new HashMap<Color, Integer>();
+  private final Color color;
 
   /**
    * Construct a new VisualizeRGB object with the given color to visualize.
