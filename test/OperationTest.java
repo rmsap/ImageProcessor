@@ -23,7 +23,7 @@ public class OperationTest {
   public void init() {
     model = new ImageProcessorModelImpl();
 
-    model.loadImage("koala", new PPMImageFormat().read("koala.ppm"));
+    model.loadImage("koala", new PPMImageFormat().read("res/Koala.ppm"));
     model.loadImage("4x4", new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
     model.loadImage("4x3", new PPMImageFormat().read("res/4x3ppmOriginal.ppm"));
   }
