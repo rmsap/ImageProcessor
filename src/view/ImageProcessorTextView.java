@@ -1,6 +1,7 @@
 package view;
 
 import model.ImageProcessorModel;
+import model.ImageProcessorViewModel;
 
 /**
  * An implementation of a view for Image Processor.
@@ -31,7 +32,7 @@ public class ImageProcessorTextView extends AbstractImageProcessorView{
    * @param appendable representing an Appendable object.
    * @throws IllegalArgumentException if any of the arguments are null
    */
-  public ImageProcessorTextView(ImageProcessorModel model, Appendable appendable)
+  public ImageProcessorTextView(ImageProcessorViewModel model, Appendable appendable)
           throws IllegalArgumentException {
     if(model == null || appendable == null) {
       throw new IllegalArgumentException("Parameters cannot be null");

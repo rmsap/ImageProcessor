@@ -9,7 +9,7 @@ import operations.Operation;
  * This interface represents a basic ImageProcessorModel and lays out all methods that any
  * image processor must be able to execute.
  */
-public interface ImageProcessorModel {
+public interface ImageProcessorModel extends ImageProcessorViewModel {
   /**
    * Load an image with the given file path.
    * @param name the name that this image will henceforth be referred to as
@@ -18,12 +18,6 @@ public interface ImageProcessorModel {
    */
   void loadImage(String name, int[][] image);
 
-  /**
-   * Get the image with the given name and return it.
-   * @param name the name of the image we want to get
-   * @return the image with the given name
-   */
-  int[][] getImage(String name);
 
   /**
    * Execute the given operation on the Image with the given name in this ImageProcessorModel.

@@ -31,6 +31,13 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
   private Map<String, Operation> operationDirectory;
 
 
+  /**
+   * Default constructor for the controller of Image Processor.
+   * @param model representing an ImageProcessorModel.
+   * @param view representing an ImageProcessorView.
+   * @param input representing a Readable object.
+   * @throws IllegalArgumentException if any parameters are null
+   */
   public ImageProcessorControllerImpl
           (ImageProcessorModel model, ImageProcessorView view, Readable input)
           throws IllegalArgumentException {
@@ -63,29 +70,32 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
       this.view.renderMessage("Welcome to Image Processor!\n");
       this.view.renderMessage("The available commands are listed below:\n");
       this.view.renderMessage("To load an image: load fileName nameToCall\n");
-      this.view.renderMessage("fileName represents the name of the file to load\n");
+      this.view.renderMessage("fileName represents the name of the file to " +
+              "load with the path information\n");
       this.view.renderMessage("nameToCall representing the name to load the image as in the model");
       this.view.renderMessage("To change the brightness of an image: change-brightness scale" +
-              " fileName nameToCall\n");
+              " imageName nameToCall\n");
       this.view.renderMessage("Scale represents an integer to increase or decrease brightness by\n");
-      this.view.renderMessage("fileName representing the name of the file to modify\n");
+      this.view.renderMessage("imageName representing the name of the image to modify\n");
       this.view.renderMessage("nameToCall representing the name to be of the modified image\n");
-      this.view.renderMessage("To flip an image horizontally: flip-horizontal fileName nameToCall\n");
-      this.view.renderMessage("fileName represents the name of the file to modify\n");
-      this.view.renderMessage("nameToCall represents the name to call the modified file\n");
-      this.view.renderMessage("To flip an image vertically: flip-vertical fileName nameToCall\n");
-      this.view.renderMessage("fileName represents the name of the file to modify\n");
-      this.view.renderMessage("nameToCall represents the name to call the modified file\n");
+      this.view.renderMessage("To flip an image horizontally: flip-horizontal imageName nameToCall\n");
+      this.view.renderMessage("imageName represents the name of the image to modify\n");
+      this.view.renderMessage("nameToCall represents the name to call the modified image\n");
+      this.view.renderMessage("To flip an image vertically: flip-vertical imageName nameToCall\n");
+      this.view.renderMessage("imageName represents the name of the image to modify\n");
+      this.view.renderMessage("nameToCall represents the name to call the modified image\n");
       this.view.renderMessage("To visualize green component: visualize-green " +
-              "fileName nameToCall\n");
-      this.view.renderMessage("To visualize blue component: visualize-blue fileName nameToCall\n");
-      this.view.renderMessage("To visualize red component: visualize-red fileName nameToCall\n");
-      this.view.renderMessage("To visualize intensity: visualize-intensity fileName nameToCall\n");
-      this.view.renderMessage("To visualize luma: visualize-luma fileName nameToCall\n");
-      this.view.renderMessage("To visualize value: visualize-value fileName nameToCall\n");
-      this.view.renderMessage("To save an image: save images/fileName.ppm nameToSaveAs\n");
-      this.view.renderMessage("fileName represents the name of the file to save as\n");
-      this.view.renderMessage("nameToSaveAs represents the name of the image to be saved\n");
+              "imageName nameToCall\n");
+      this.view.renderMessage("To visualize blue component: visualize-blue imageName nameToCall\n");
+      this.view.renderMessage("To visualize red component: visualize-red imageName nameToCall\n");
+      this.view.renderMessage("To visualize intensity: visualize-intensity imageName nameToCall\n");
+      this.view.renderMessage("To visualize luma: visualize-luma imageName nameToCall\n");
+      this.view.renderMessage("To visualize value: visualize-value imageName nameToCall\n");
+      this.view.renderMessage("To save an image: save filePath nameToSaveAs\n");
+      this.view.renderMessage("filePath represents the name of the file to save as" +
+              " along with it's specified path\n");
+      this.view.renderMessage("nameToSaveAs represents the name of the image to be saved " +
+              "as a file\n");
       // 25
 
 

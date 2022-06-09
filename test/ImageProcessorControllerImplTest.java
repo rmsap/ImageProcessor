@@ -5,7 +5,6 @@ import java.io.StringReader;
 
 import controller.ImageProcessorController;
 import controller.ImageProcessorControllerImpl;
-import imageFormat.ImageFormat;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import operations.Operation;
@@ -71,6 +70,10 @@ public class ImageProcessorControllerImplTest {
   @Test
   public void inputsToSaveImage() throws IllegalStateException {
     try { // getImage() is also indirectly tested in this test
+      // NOTE:
+      // Running this test will cause a blank ppm file to be saved that has nothing in it
+      // and trying to load this created file while using the image processor via the console
+      // will result in a NoSuchElement Exception, so do not load the file created from the test
       Readable readable = new StringReader("save Bruh.ppm Bruh q"); // valid move
       Appendable appendable = new StringBuilder();
       StringBuilder log = new StringBuilder();
@@ -142,7 +145,7 @@ public class ImageProcessorControllerImplTest {
       fail("An exception was not supposed to be caught");
     }
     try { // test that the load image is sent
-      Readable readable = new StringReader("load Koala.ppm Koala q"); // valid move
+      Readable readable = new StringReader("load res/4x4ppmOriginal.ppm Koala q"); // valid move
       Appendable appendable = new StringBuilder();
       ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
@@ -156,7 +159,8 @@ public class ImageProcessorControllerImplTest {
       fail("An exception was not supposed to be caught");
     }
     try { // test that the save is being sent
-      Readable readable = new StringReader("load Koala.ppm Koala save Kool.ppm Koala q");
+      Readable readable = new StringReader("load res/4x4ppmOriginal.ppm " +
+              "Koala save Kool.ppm Koala q");
       Appendable appendable = new StringBuilder();
       ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
@@ -170,7 +174,7 @@ public class ImageProcessorControllerImplTest {
       fail("An exception was not supposed to be caught");
     }
     try { // test that the file doesn't exist message is being sent
-      Readable readable = new StringReader("load Bruh.ppm Bruh q");
+      Readable readable = new StringReader("load Bruhlick.ppm Bruh q");
       Appendable appendable = new StringBuilder();
       ImageProcessorModel mockModel = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
@@ -184,7 +188,7 @@ public class ImageProcessorControllerImplTest {
       fail("An exception was not supposed to be caught");
     }
     try { // test that the operation performed message is sent
-      Readable readable = new StringReader("load Koala.ppm Koala flip-horizontal " +
+      Readable readable = new StringReader("load res/4x4ppmOriginal.ppm Koala flip-horizontal " +
               "Koala KoalaHor q");
       Appendable appendable = new StringBuilder();
       ImageProcessorModel mockModel = new ImageProcessorModelImpl();
@@ -199,7 +203,7 @@ public class ImageProcessorControllerImplTest {
       fail("An exception was not supposed to be caught");
     }
     try { // test that the image exist method is sent
-      Readable readable = new StringReader("load Koala.ppm Koala flip-horizontal " +
+      Readable readable = new StringReader("load res/4x4ppmOriginal.ppm Koala flip-horizontal " +
               "Koolaid KoalaHor q");
       Appendable appendable = new StringBuilder();
       ImageProcessorModel mockModel = new ImageProcessorModelImpl();
@@ -214,7 +218,7 @@ public class ImageProcessorControllerImplTest {
       fail("An exception was not supposed to be caught");
     }
     try { // test that the controller goes through multiple commands
-      Readable readable = new StringReader("load Koala.ppm Koala flip-horizontal " +
+      Readable readable = new StringReader("load res/4x4ppmOriginal.ppm Koala flip-horizontal " +
               "Koala KoalaHor visualize-red KoalaHor KoalaHorRed save " +
               "res/KoalaHorRed.ppm KoalaHorRed q");
       Appendable appendable = new StringBuilder();
@@ -239,7 +243,7 @@ public class ImageProcessorControllerImplTest {
   @Test
   public void testExecuteImmediateException() throws IllegalStateException {
     try {
-      Readable readable = new StringReader("load Koala.ppm Koala");
+      Readable readable = new StringReader("load res/4x4ppmOriginal.ppm Koala");
       ImageProcessorModel model = new ImageProcessorModelImpl();
       ImageProcessorView view = new ImageProcessorTextView(model,
               new ImageProcessorTextViewTest.MockAppendable());
