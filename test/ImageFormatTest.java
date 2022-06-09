@@ -3,8 +3,8 @@ import org.junit.Test;
 
 import java.io.File;
 
-import imageFormat.ImageFormat;
-import imageFormat.PPMImageFormat;
+import imageformat.ImageFormat;
+import imageformat.PPMImageFormat;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

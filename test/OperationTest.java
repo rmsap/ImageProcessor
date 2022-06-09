@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import imageFormat.PPMImageFormat;
+import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;

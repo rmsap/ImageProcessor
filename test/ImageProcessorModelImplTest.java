@@ -1,9 +1,7 @@
 import org.junit.Test;
 
-import java.io.File;
-
-import imageFormat.ImageFormat;
-import imageFormat.PPMImageFormat;
+import imageformat.ImageFormat;
+import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 

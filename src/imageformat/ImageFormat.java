@@ -1,4 +1,4 @@
-package imageFormat;
+package imageformat;
 
 /**
  * This interface represents the methods needed to read and write to specific image formats
