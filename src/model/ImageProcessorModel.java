@@ -1,8 +1,5 @@
 package model;
 
-import java.io.FileNotFoundException;
-
-import imageFormat.ImageFormat;
 import operations.Operation;
 
 /**

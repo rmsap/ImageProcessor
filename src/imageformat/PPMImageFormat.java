@@ -1,4 +1,9 @@
+<<<<<<< HEAD:src/imageFormat/PPMImageFormat.java
 package imageFormat;
+=======
+package imageformat;
+
+>>>>>>> 61b598cf63823eb2b253b57c6e1e21bb95e6eb14:src/imageformat/PPMImageFormat.java
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

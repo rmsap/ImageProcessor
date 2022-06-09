@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import imageFormat.PPMImageFormat;
+import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import operations.BrightenOrDarken;
 import operations.FlipHorizontal;
