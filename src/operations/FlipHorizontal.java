@@ -19,7 +19,12 @@ public class FlipHorizontal implements Operation {
       // If we are halfway through this row, skip to the beginning of the next row so that we don't
       // "double swap" the first half of the row and the second half.
       if (i % (copy[0][0] / 2) == 0) {
-        i += copy[0][0] / 2;
+        if (totalCols % 2 == 0) {
+          i += copy[0][0] / 2;
+        }
+        else if (totalCols % 2 == 1) {
+          i += copy[0][0] / 2 + 1;
+        }
       }
     }
 

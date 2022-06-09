@@ -158,7 +158,22 @@ public class OperationTest {
       }
     }
 
+    int[][] flippedImageExpected3 = {
+            {3, 2, 255},
+            {100, 100, 100}, {255, 255, 255}, {0, 0, 0},
+            {25, 25, 25}, {0, 0, 0}, {255, 255, 255}};
 
+    model.loadImage("3x2", new PPMImageFormat().read("res/3x2.ppm"));
+    model.doOperation(new FlipHorizontal(), "3x2", "3x2flippedHorizontal");
+
+    int[][] flippedImage3 = model.getImage("3x2flippedHorizontal");
+    // Test that each pixel in the new image was swapped with the corresponding pixel further down
+    // in the same row
+    for (int i = 0; i < flippedImage3.length; i++) {
+      for (int j = 0; j < flippedImage3[i].length; j++) {
+        assertEquals(flippedImageExpected3[i][j], flippedImage3[i][j]);
+      }
+    }
   }
 
   @Test
