@@ -14,17 +14,11 @@ public class FlipVertical implements Operation {
     // [row] [column] [contents in rc that is an array of 3]
     int width = model.getImage(name)[0][0];
     int height = model.getImage(name)[0][1];
-    int totalCount = 1;
     int [][][] board = new int[height][width][3];
     for(int i = 0; i < height; i++) {
       for(int j = 0; j < width; j++) {
         board[i][j] = model.getImage(name)[((i * width) + j + 1)];
       }
-
-//      if(totalCount % width  == 0) {
-//        rowCounter++;
-//        columnCounter = 0; // resetting it
-//      }
     }
 
     this.flippedRows(board);

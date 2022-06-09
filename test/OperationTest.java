@@ -7,10 +7,8 @@ import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
-import operations.VisualizeBrightness;
-import operations.VisualizeBrightness.BrightnessMeasure;
-import operations.VisualizeRGB;
-import operations.VisualizeRGB.Color;
+import operations.Greyscale;
+import operations.Greyscale.GreyscaleFactor;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -224,7 +222,7 @@ public class OperationTest {
   @Test
   public void testVisualizeRed() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeRGB(Color.Red), "koala", "koala-red");
+    model.doOperation(new Greyscale(GreyscaleFactor.Red), "koala", "koala-red");
 
     try {
       model.getImage("koala-red");
@@ -255,7 +253,7 @@ public class OperationTest {
   @Test
   public void testVisualizeGreen() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeRGB(Color.Green), "koala", "koala-green");
+    model.doOperation(new Greyscale(GreyscaleFactor.Green), "koala", "koala-green");
 
     try {
       model.getImage("koala-green");
@@ -286,7 +284,7 @@ public class OperationTest {
   @Test
   public void testVisualizeBlue() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeRGB(Color.Blue), "koala", "koala-blue");
+    model.doOperation(new Greyscale(GreyscaleFactor.Blue), "koala", "koala-blue");
 
     try {
       model.getImage("koala-blue");
@@ -317,7 +315,7 @@ public class OperationTest {
   @Test
   public void testVisualizeValue() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeBrightness(BrightnessMeasure.Value),
+    model.doOperation(new Greyscale(GreyscaleFactor.Value),
             "koala", "koala-value");
 
     try {
@@ -348,7 +346,7 @@ public class OperationTest {
   @Test
   public void testVisualizeIntensity() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeBrightness(BrightnessMeasure.Intensity),
+    model.doOperation(new Greyscale(GreyscaleFactor.Intensity),
             "koala", "koala-intensity");
 
     try {
@@ -379,7 +377,7 @@ public class OperationTest {
   @Test
   public void testVisualizeLuma() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new VisualizeBrightness(BrightnessMeasure.Luma),
+    model.doOperation(new Greyscale(GreyscaleFactor.Luma),
             "koala", "koala-luma");
 
     try {

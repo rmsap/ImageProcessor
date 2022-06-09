@@ -12,9 +12,8 @@ import operations.BrightenOrDarken;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
 import operations.Operation;
-import operations.VisualizeBrightness;
-import operations.VisualizeBrightness.BrightnessMeasure;
-import operations.VisualizeRGB;
+import operations.Greyscale;
+import operations.Greyscale.GreyscaleFactor;
 import view.ImageProcessorView;
 
 /**
@@ -44,13 +43,13 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory = new HashMap<String, Operation>();
     operationDirectory.put("flip-horizontal", new FlipHorizontal());
     operationDirectory.put("flip-vertical", new FlipVertical());
-    operationDirectory.put("visualize-green", new VisualizeRGB(VisualizeRGB.Color.Green));
-    operationDirectory.put("visualize-blue", new VisualizeRGB(VisualizeRGB.Color.Blue));
-    operationDirectory.put("visualize-red", new VisualizeRGB(VisualizeRGB.Color.Red));
+    operationDirectory.put("visualize-green", new Greyscale(GreyscaleFactor.Green));
+    operationDirectory.put("visualize-blue", new Greyscale(GreyscaleFactor.Blue));
+    operationDirectory.put("visualize-red", new Greyscale(GreyscaleFactor.Red));
     operationDirectory.put("visualize-intensity",
-            new VisualizeBrightness(BrightnessMeasure.Intensity));
-    operationDirectory.put("visualize-luma", new VisualizeBrightness(BrightnessMeasure.Luma));
-    operationDirectory.put("visualize-value", new VisualizeBrightness(BrightnessMeasure.Value));
+            new Greyscale(GreyscaleFactor.Intensity));
+    operationDirectory.put("visualize-luma", new Greyscale(GreyscaleFactor.Luma));
+    operationDirectory.put("visualize-value", new Greyscale(GreyscaleFactor.Value));
     // need to add the change-brightness method
     operationDirectory.put("change-brightness", new BrightenOrDarken(0));
 
