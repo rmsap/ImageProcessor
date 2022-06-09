@@ -22,7 +22,7 @@ public class PPMImageFormat implements ImageFormat {
     }
 
     StringBuilder builder = new StringBuilder();
-    //read the file line by line, and populate a string. This will throw away any comment lines
+    // read the file line by line, and populate a string. This will throw away any comment lines
     while (sc.hasNextLine()) {
       String s = sc.nextLine();
       if (s.charAt(0) != '#') {
@@ -64,10 +64,15 @@ public class PPMImageFormat implements ImageFormat {
 
   @Override
   public void save(String path, int[][] image) throws IllegalArgumentException {
+    if (image == null || path == null) {
+      throw new IllegalArgumentException("Failed to write to file.");
+    }
+    else if (!(path.substring(path.lastIndexOf('.') + 1).equalsIgnoreCase("ppm"))) {
+      throw new IllegalArgumentException("Image is trying to be saved as something "
+              + "other than ppm.");
+    }
+
     try {
-      if (image == null) {
-        throw new IllegalArgumentException("Failed to write to file.");
-      }
       FileWriter writer = new FileWriter(path);
 
       // Write the PPM header into this file

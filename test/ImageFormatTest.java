@@ -76,7 +76,6 @@ public class ImageFormatTest {
     // Now that we know the file was created properly, test that it was saved with the correct
     // values (i.e. ensure that the save method does not modify the image).
     // Note that we must use the read method to get the int values out of the file we saved.
-
     int[][] savedFile = ppm.read("res/somePPM.ppm");
 
     for (int i = 0; i < somePPM.length; i++) {
@@ -113,15 +112,23 @@ public class ImageFormatTest {
   @Test
   public void testSaveInvalid() {
     int[][] arr = {{1, 1, 255}, {255, 0, 100}};
-    try {
-      ppm.save("/res/this path is invalid and will not be able to save.ppm", arr);
-      fail("save did not throw an exception when given an invalid path.");
+    try { // fail to save because array is null
+      ppm.save("res/Bruh.ppm", null);
+      fail("save did not throw an exception when given a null for the array.");
     } catch (IllegalArgumentException e) {
       // Exception was thrown successfully, let this test pass
     }
-    try { // fail to save because array is null
-      ppm.save("/res/Bruh.ppm", null);
-      fail("save did not throw an exception when given a null for the array.");
+
+    try { // fail to save because path is null
+      ppm.save(null, arr);
+      fail("save did not throw an exception when given a null for the path.");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
+
+    try { // fail to save because we are trying to save the file as something other than a ppm
+      ppm.save("res/notAPPM.jpg", arr);
+      fail("save did not throw an exception when attempting to save as something other than a ppm");
     } catch (IllegalArgumentException e) {
       // Exception was thrown successfully, let this test pass
     }

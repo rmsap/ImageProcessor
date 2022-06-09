@@ -23,7 +23,7 @@ public interface ImageFormat {
    * @param path  the path that the image should be saved to,
    *              which should include the name of the file
    * @param image the image to save represented as a 2-dimensional array of integers
-   * @throws IllegalArgumentException if it fails to write to the file
+   * @throws IllegalArgumentException if it either the image or path are null
    */
   void save(String path, int[][] image) throws IllegalArgumentException;
 }
