@@ -14,6 +14,9 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
   // Images are represented by the 2-dimensional array of integers in the map. Each row
   // represents a single pixel and the singular column contains every pixel.
   // The Map points the name of an image (as input by the user) to each image.
+  // INVARIANT: All pixels follow the same format (RGB, RGBA, etc.)
+  // INVARIANT: The row at the 0th index of each value in the directory is a "header row" that
+  // contains metadata about the image (namely width, height, and max value in that order)
   private final Map<String, int[][]> directory;
 
   /**
