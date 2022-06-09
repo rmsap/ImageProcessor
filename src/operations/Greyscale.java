@@ -16,7 +16,9 @@ public class Greyscale implements Operation {
   /**
    * This enum represents possible colors that we could use to greyscale an image.
    */
-  public enum GreyscaleFactor {Red, Green, Blue, Value, Intensity, Luma};
+  public enum GreyscaleFactor {Red, Green, Blue, Value, Intensity, Luma}
+
+  ;
 
   // A map of Colors to Integers so that we can get the index of red, green, or blue
   // based on the Color that we are visualizing
@@ -28,6 +30,7 @@ public class Greyscale implements Operation {
 
   /**
    * Construct a new VisualizeRGB object with the given color to visualize.
+   *
    * @param gf the factor by which we will be converting to greyscale
    */
   public Greyscale(GreyscaleFactor gf) {
@@ -48,9 +51,10 @@ public class Greyscale implements Operation {
 
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
-    int [][] copy = model.getImage(name);
+    int[][] copy = model.getImage(name);
 
-    for (int i = 1; i < copy.length; i++) {;
+    for (int i = 1; i < copy.length; i++) {
+      ;
       Arrays.fill(copy[i], this.greyscaleFactors.get(this.gf).apply(copy[i]));
     }
     return copy;

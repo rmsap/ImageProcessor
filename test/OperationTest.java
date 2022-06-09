@@ -27,6 +27,7 @@ public class OperationTest {
     model.loadImage("4x4", new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
     model.loadImage("4x3", new PPMImageFormat().read("res/4x3ppmOriginal.ppm"));
   }
+
   @Test
   public void testBrighten() {
     int[][] originalKoalaColors = model.getImage("koala");
@@ -34,8 +35,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-brighten");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Brightened image was not added to the directory of the model properly.");
     }
 
@@ -64,8 +64,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-darkened");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Darkened image was not added to the directory of the model properly.");
     }
 
@@ -93,8 +92,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-copy");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
@@ -125,8 +123,7 @@ public class OperationTest {
 
     try {
       model.getImage("4x4-flipped");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
@@ -140,20 +137,19 @@ public class OperationTest {
       }
     }
 
-    int [][] flippedImageExpected2 = {
-            {4,3, 255},
-            {0,0,0},  {0,0,0},  {100,0,0},  {100,0,0},
-            {100,0,0},  {100,0,0},  {0,100,0},  {0,100,0},
-            {0,100,0},  {0,100,0},  {255,255,255},  {255,255,255} };
+    int[][] flippedImageExpected2 = {
+            {4, 3, 255},
+            {0, 0, 0}, {0, 0, 0}, {100, 0, 0}, {100, 0, 0},
+            {100, 0, 0}, {100, 0, 0}, {0, 100, 0}, {0, 100, 0},
+            {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255}};
 
     model.doOperation(new FlipHorizontal(), "4x3", "4x3-flipped-hor");
-    try{
+    try {
       model.getImage("4x3-flipped-hor");
-    }
-    catch(IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("An exception was not supposed to be caught");
     }
-    int [][] flippedImage2 = model.getImage("4x3-flipped-hor");
+    int[][] flippedImage2 = model.getImage("4x3-flipped-hor");
     // Test that each pixel in the new image was swapped with the corresponding pixel further down
     // in the same row
     for (int i = 0; i < flippedImage2.length; i++) {
@@ -161,8 +157,6 @@ public class OperationTest {
         assertEquals(flippedImageExpected2[i][j], flippedImage2[i][j]);
       }
     }
-
-
 
 
   }
@@ -180,8 +174,7 @@ public class OperationTest {
 
     try {
       model.getImage("4x4-flipped");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
@@ -200,15 +193,14 @@ public class OperationTest {
             {255, 255, 255}, {255, 255, 255}, {0, 100, 0}, {0, 100, 0},
             {0, 100, 0}, {0, 100, 0}, {100, 0, 0}, {100, 0, 0},
             {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0},
-            };
+    };
     model.doOperation(new FlipVertical(), "4x3", "4x3-vertical");
-    try{
+    try {
       model.getImage("4x3-vertical");
-    }
-    catch(IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("An exception was not supposed to be caught");
     }
-    int [][] flippedImage2 = model.getImage("4x3-vertical");
+    int[][] flippedImage2 = model.getImage("4x3-vertical");
     // Test that each pixel in the new image was swapped with the corresponding pixel further down
     // in the same column
     for (int i = 0; i < flippedImage2.length; i++) {
@@ -226,8 +218,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-red");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
@@ -257,8 +248,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-green");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
@@ -288,8 +278,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-blue");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
@@ -320,8 +309,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-value");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
@@ -351,8 +339,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-intensity");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 
@@ -382,8 +369,7 @@ public class OperationTest {
 
     try {
       model.getImage("koala-luma");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       fail("Copied image was not added to the directory of the model properly.");
     }
 

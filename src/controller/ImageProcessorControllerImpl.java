@@ -33,13 +33,14 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
 
   /**
    * Default constructor for the controller of Image Processor.
+   *
    * @param model representing an ImageProcessorModel.
-   * @param view representing an ImageProcessorView.
+   * @param view  representing an ImageProcessorView.
    * @param input representing a Readable object.
    * @throws IllegalArgumentException if any parameters are null
    */
-  public ImageProcessorControllerImpl
-          (ImageProcessorModel model, ImageProcessorView view, Readable input)
+  public ImageProcessorControllerImpl(ImageProcessorModel model,
+                                      ImageProcessorView view, Readable input)
           throws IllegalArgumentException {
     if (model == null || view == null || input == null) {
       throw new IllegalArgumentException("model, view, and readable object cannot be null");
@@ -75,10 +76,12 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
       this.view.renderMessage("nameToCall representing the name to load the image as in the model");
       this.view.renderMessage("To change the brightness of an image: change-brightness scale" +
               " imageName nameToCall\n");
-      this.view.renderMessage("Scale represents an integer to increase or decrease brightness by\n");
+      this.view.renderMessage("Scale represents an integer to increase or " +
+              "decrease brightness by\n");
       this.view.renderMessage("imageName representing the name of the image to modify\n");
       this.view.renderMessage("nameToCall representing the name to be of the modified image\n");
-      this.view.renderMessage("To flip an image horizontally: flip-horizontal imageName nameToCall\n");
+      this.view.renderMessage("To flip an image horizontally: flip-horizontal " +
+              "imageName nameToCall\n");
       this.view.renderMessage("imageName represents the name of the image to modify\n");
       this.view.renderMessage("nameToCall represents the name to call the modified image\n");
       this.view.renderMessage("To flip an image vertically: flip-vertical imageName nameToCall\n");
@@ -96,7 +99,6 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
               " along with it's specified path\n");
       this.view.renderMessage("imageName represents the name of the image to be saved " +
               "as a file\n");
-    
 
 
       boolean quit = false;
@@ -121,8 +123,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
             if (fileFormat.equals("ppm")) {
               this.model.loadImage(fileName, new PPMImageFormat().read(dest));
               this.view.renderMessage("Image has been loaded\n");
-            }
-            else {
+            } else {
               this.view.renderMessage("The file-type is not supported, re-input a valid command");
             }
 
@@ -149,8 +150,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
                 this.view.renderMessage("Image has been saved\n");
               }
 
-            }
-            else {
+            } else {
               this.view.renderMessage("The file-type is not supported, re-input a valid command");
             }
           } catch (IllegalArgumentException iae) {
@@ -171,11 +171,10 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
               int scale = Integer.parseInt(scan.next());
               String imageName = scan.next();
               String newImageName = scan.next();
-              try{
+              try {
                 this.model.doOperation(new BrightenOrDarken(scale), imageName, newImageName);
                 this.view.renderMessage("Operation has been performed\n");
-              }
-              catch(IllegalArgumentException ie) {
+              } catch (IllegalArgumentException ie) {
                 this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
               }
             } catch (NumberFormatException e) {
@@ -185,13 +184,12 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
             try {
               String imageName = scan.next();
               String newImageName = scan.next();
-              try{
+              try {
                 // image does exist, so do the operation
                 this.model.doOperation(this.operationDirectory.get(strInput),
                         imageName, newImageName);
                 this.view.renderMessage("Operation has been performed\n");
-              }
-              catch(IllegalArgumentException ie) {
+              } catch (IllegalArgumentException ie) {
                 this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
               }
             } catch (IllegalArgumentException iae) {

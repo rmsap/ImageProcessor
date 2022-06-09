@@ -1,5 +1,9 @@
+<<<<<<< HEAD:src/imageFormat/PPMImageFormat.java
+package imageFormat;
+=======
 package imageformat;
 
+>>>>>>> 61b598cf63823eb2b253b57c6e1e21bb95e6eb14:src/imageformat/PPMImageFormat.java
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -65,7 +69,7 @@ public class PPMImageFormat implements ImageFormat {
   @Override
   public void save(String path, int[][] image) throws IllegalArgumentException {
     try {
-      if(image == null) {
+      if (image == null) {
         throw new IllegalArgumentException("Failed to write to file.");
       }
       FileWriter writer = new FileWriter(path);

@@ -35,8 +35,7 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
   public int[][] getImage(String name) throws IllegalArgumentException {
     if (this.directory.get(name) == null) {
       throw new IllegalArgumentException("Image does not exist in the directory.");
-    }
-    else {
+    } else {
       int[][] image = this.directory.get(name);
       int[][] copy = new int[image.length][image[0].length];
 
@@ -50,7 +49,7 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
   }
 
   @Override
-  public void doOperation(Operation op, String name, String dest) throws IllegalArgumentException{
+  public void doOperation(Operation op, String name, String dest) throws IllegalArgumentException {
     if (op == null || name == null || dest == null) {
       throw new IllegalArgumentException("Cannot perform an operation if the operation, name, or "
               + "destination name are null");
