@@ -26,6 +26,10 @@ public class ImageProcessorControllerImplTest {
 
     private StringBuilder log;
 
+    /**
+     * Constructs a new MockImageProcessorModel.
+     * @param log the log that we will be using to record output
+     */
     public MockImageProcessorModel(StringBuilder log) {
       this.log = log;
     }
@@ -49,7 +53,7 @@ public class ImageProcessorControllerImplTest {
     }
   }
 
-  ImageProcessor bruh = new ImageProcessor();
+  ImageProcessor bruh;
 
   @Before
   public void initData() {
@@ -130,12 +134,21 @@ public class ImageProcessorControllerImplTest {
 
   @Test
   public void testOutputsSentToViewAppendable() throws IllegalStateException {
+    try { // test that an invalid command line is being sent
+      Readable readable = new StringReader("hello there q"); // invalid operation
+      Appendable appendable = new StringBuilder();
+      ImageProcessorModel mockModel = new ImageProcessorModelImpl();
+      ImageProcessorView view = new ImageProcessorTextView(mockModel, appendable);
+      ImageProcessorController controller =
+              new ImageProcessorControllerImpl(mockModel, view, readable);
+      controller.execute();
+      String[] messages = appendable.toString().split("\n");
+      String invalidMessage = messages[23];
+      assertEquals("Invalid input, re-enter a valid command", invalidMessage);
 
-    // test that an invalid command line is being sent
-
-
-    // test that the operation message is sent
-
+    } catch (IllegalStateException is) {
+      fail("An exception was not supposed to be caught");
+    }
 
     try { // test that the quit message is being sent
       Readable readable = new StringReader("q"); // valid move
@@ -244,8 +257,6 @@ public class ImageProcessorControllerImplTest {
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");
     }
-
-
   }
 
 
@@ -259,12 +270,8 @@ public class ImageProcessorControllerImplTest {
       ImageProcessorController controller = new ImageProcessorControllerImpl(model, view, readable);
       controller.execute();
       fail("An exception should have been caught but was not");
-
-
     } catch (IllegalStateException ie) {
       // exception successfully caught
     }
   }
-
-
 }
