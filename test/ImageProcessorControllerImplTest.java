@@ -191,7 +191,8 @@ public class ImageProcessorControllerImplTest {
       controller.execute();
       String[] messages = appendable.toString().split("\n");
       String fileMessage = messages[23];
-      assertEquals("File doesn't exist, re-enter a valid command", fileMessage);
+      assertEquals("File doesn't exist or type is not supported, re-enter a valid command",
+              fileMessage);
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");
     }

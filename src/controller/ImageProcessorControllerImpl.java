@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import imageformat.ImageFormat;
 import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import operations.BrightenOrDarken;
@@ -21,14 +22,13 @@ import view.ImageProcessorView;
  * The controller enables a user to utilize the various operations of Image Processor.
  */
 public class ImageProcessorControllerImpl implements ImageProcessorController {
-
   private final ImageProcessorModel model;
-
   private final ImageProcessorView view;
-
   private final Readable input;
 
+  // Map of user input Strings to Operation function objects
   private final Map<String, Operation> operationDirectory;
+  private final Map<String, ImageFormat> formatDirectory;
 
 
   /**
@@ -39,15 +39,16 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
    * @param input representing a Readable object.
    * @throws IllegalArgumentException if any parameters are null
    */
-  public ImageProcessorControllerImpl(ImageProcessorModel model,
-                                      ImageProcessorView view, Readable input)
-          throws IllegalArgumentException {
+  public ImageProcessorControllerImpl(ImageProcessorModel model, ImageProcessorView view,
+                                      Readable input) throws IllegalArgumentException {
     if (model == null || view == null || input == null) {
       throw new IllegalArgumentException("model, view, and readable object cannot be null");
     }
     this.model = model;
     this.view = view;
     this.input = input;
+
+    // Instantiate the operation directory and load all user commands and operations into it
     operationDirectory = new HashMap<String, Operation>();
     operationDirectory.put("flip-horizontal", new FlipHorizontal());
     operationDirectory.put("flip-vertical", new FlipVertical());
@@ -58,15 +59,120 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
             new Greyscale(GreyscaleFactor.Intensity));
     operationDirectory.put("visualize-luma", new Greyscale(GreyscaleFactor.Luma));
     operationDirectory.put("visualize-value", new Greyscale(GreyscaleFactor.Value));
-    // need to add the change-brightness method
     operationDirectory.put("change-brightness", new BrightenOrDarken(0));
 
-
+    // Instantiate the format directory and load all supported image formats into it
+    formatDirectory = new HashMap<String, ImageFormat>();
+    formatDirectory.put("ppm", new PPMImageFormat());
   }
 
 
   @Override
   public void execute() throws IllegalStateException {
+    this.renderMenu();
+
+    boolean quit = false;
+    String strInput = "";
+    Scanner scan = new Scanner(this.input);
+
+    try {
+      while (!quit) {
+        strInput = scan.next();
+
+        // check if the user quits
+        if (strInput.equalsIgnoreCase("q")) {
+          quit = true;
+        }
+        // if the user wants to load an image
+        else if (strInput.equalsIgnoreCase("load")) {
+          String dest = scan.next();
+          String fileName = scan.next();
+          String fileFormat = dest.substring(dest.lastIndexOf('.') + 1);
+          try {
+            this.model.loadImage(fileName, this.formatDirectory.get(fileFormat).read(dest));
+            this.view.renderMessage("Image has been loaded\n");
+          } catch (IllegalArgumentException iae) { // file isn't found
+            this.view.renderMessage("File doesn't exist or type is not supported, "
+                    + "re-enter a valid command\n");
+          }
+        }
+        // need to check if the user saves
+        else if (strInput.equalsIgnoreCase("save")) {
+          try {
+            String imagePath = scan.next();
+            String imageName = scan.next();
+
+            String fileType = imagePath.substring(imagePath.lastIndexOf('.') + 1);
+            if (fileType.equals("ppm")) { // if it's to be saved as a ppm file
+              if (model.getImage(imageName) == null) { // then make the user reinput a valid command
+                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
+              } else { // you are able to successfully save an image
+                new PPMImageFormat().save(imagePath, model.getImage(imageName));
+                //                this.model.saveImage(imagePath, imageName, new PPMImageFormat());
+                this.view.renderMessage("Image has been saved\n");
+              }
+
+            } else {
+              this.view.renderMessage("The file-type is not supported, re-input a valid command");
+            }
+          } catch (IllegalArgumentException iae) {
+            this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
+          }
+        }
+
+        // need to check if a user calls on an operation
+        else if (this.operationDirectory.get(strInput) != null) {
+          // need to deal with additional stuff if they are using change-brightness
+          // that takes in an additional parameter that is an integer
+
+          // need to deal with exception handling if it's not in the hashmap
+          if (strInput.equals("change-brightness")) {
+            int scale = 0;
+            try {
+              scale = Integer.parseInt(scan.next());
+            } catch (NumberFormatException e) {
+              this.view.renderMessage("Please enter a valid integer\n");
+            }
+              String imageName = scan.next();
+              String newImageName = scan.next();
+              try {
+                this.model.doOperation(new BrightenOrDarken(scale), imageName, newImageName);
+                this.view.renderMessage("Operation has been performed\n");
+              } catch (IllegalArgumentException ie) {
+                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
+              }
+          } else { // it's an operation that doesn't take in an additional parameter
+            try {
+              String imageName = scan.next();
+              String newImageName = scan.next();
+              try {
+                // image does exist, so do the operation
+                this.model.doOperation(this.operationDirectory.get(strInput),
+                        imageName, newImageName);
+                this.view.renderMessage("Operation has been performed\n");
+              } catch (IllegalArgumentException ie) {
+                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
+              }
+            } catch (IllegalArgumentException iae) {
+              this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
+            }
+          }
+        } else { // the input was invalid, so the user has to reinput
+          this.view.renderMessage("Invalid input, re-enter a valid command\n");
+        }
+      }
+      // assuming that the user has quit
+      this.view.renderMessage("Image Processor has quit.");
+    } catch (IOException io) {
+      throw new IllegalStateException("Failed to transmit to Appendable or read from Readable");
+    }
+  }
+
+  /**
+   * Instruct the view to render the menu that includes a list of available commands.
+   * @throws IllegalStateException if the controller fails to transmit the menu to the view
+   */
+  private void renderMenu() throws IllegalStateException {
     try {
       this.view.renderMessage("Welcome to Image Processor!\n");
       this.view.renderMessage("The available commands are listed below:\n");
@@ -99,120 +205,9 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
               " along with it's specified path\n");
       this.view.renderMessage("imageName represents the name of the image to be saved " +
               "as a file\n");
-
-
-      boolean quit = false;
-      String strInput = "";
-      Scanner scan = new Scanner(this.input);
-
-      while (!quit) {
-        strInput = scan.next();
-
-        // need to check if the user quits
-        if (strInput.equalsIgnoreCase("q")) {
-          quit = true;
-        }
-        // if the user wants to load an image
-        else if (strInput.equalsIgnoreCase("load")) {
-          String dest = scan.next();
-          String fileName = scan.next();
-          //          String fileFormat = scan.next();
-          String fileFormat = dest.substring(dest.lastIndexOf('.') + 1); // last 3 letters
-          try {
-            // checks that the format is a ppm
-            if (fileFormat.equals("ppm")) {
-              this.model.loadImage(fileName, new PPMImageFormat().read(dest));
-              this.view.renderMessage("Image has been loaded\n");
-            } else {
-              this.view.renderMessage("The file-type is not supported, re-input a valid command");
-            }
-
-
-          } catch (IllegalArgumentException iae) { // file isn't found
-            this.view.renderMessage("File doesn't exist, re-enter a valid command\n");
-          }
-
-
-        }
-        // need to check if the user saves
-        else if (strInput.equalsIgnoreCase("save")) {
-          try {
-            String imagePath = scan.next();
-            String imageName = scan.next();
-
-            String fileType = imagePath.substring(imagePath.lastIndexOf('.') + 1);
-            if (fileType.equals("ppm")) { // if it's to be saved as a ppm file
-              if (model.getImage(imageName) == null) { // then make the user reinput a valid command
-                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-              } else { // you are able to successfully save an image
-                new PPMImageFormat().save(imagePath, model.getImage(imageName));
-                //                this.model.saveImage(imagePath, imageName, new PPMImageFormat());
-                this.view.renderMessage("Image has been saved\n");
-              }
-
-            } else {
-              this.view.renderMessage("The file-type is not supported, re-input a valid command");
-            }
-          } catch (IllegalArgumentException iae) {
-            this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
-          }
-
-
-        }
-
-        // need to check if a user calls on an operation
-        else if (this.operationDirectory.get(strInput) != null) {
-          // need to deal with additional stuff if they are using change-brightness
-          // that takes in an additional parameter that is an integer
-
-          // need to deal with exception handling if it's not in the hashmap
-          if (strInput.equals("change-brightness")) {
-            try {
-              int scale = Integer.parseInt(scan.next());
-              String imageName = scan.next();
-              String newImageName = scan.next();
-              try {
-                this.model.doOperation(new BrightenOrDarken(scale), imageName, newImageName);
-                this.view.renderMessage("Operation has been performed\n");
-              } catch (IllegalArgumentException ie) {
-                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-              }
-            } catch (NumberFormatException e) {
-              this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-            }
-          } else { // it's an operation that doesn't take in an additional parameter
-            try {
-              String imageName = scan.next();
-              String newImageName = scan.next();
-              try {
-                // image does exist, so do the operation
-                this.model.doOperation(this.operationDirectory.get(strInput),
-                        imageName, newImageName);
-                this.view.renderMessage("Operation has been performed\n");
-              } catch (IllegalArgumentException ie) {
-                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-              }
-            } catch (IllegalArgumentException iae) {
-              this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
-            }
-
-          }
-
-
-        } else { // the input was invalid, so the user has to reinput
-          this.view.renderMessage("Invalid input, re-enter a valid command\n");
-        }
-
-
-      }
-
-      // assuming that the user has quit
-      this.view.renderMessage("Image Processor has quit.");
-
-
-    } catch (IOException io) {
-      throw new IllegalStateException("Failed to transmit to Appendable or read from Readable");
     }
-
+    catch (IOException e) {
+      throw new IllegalStateException("Failed to transmit menu of commands to Appendable.");
+    }
   }
 }
