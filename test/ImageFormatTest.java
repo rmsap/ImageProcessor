@@ -45,16 +45,14 @@ public class ImageFormatTest {
     try {
       ppm.read("this is not a real path.ppm");
       fail("read did not throw an IllegalArgumentException when given an invalid path.");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // Exception was thrown successfully, let this test pass
     }
 
     try {
       ppm.read("res/invalidPPM.ppm");
       fail("read did not throw an IllegalArgumentException when given an invalid PPM file.");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // Exception was thrown successfully, let this test pass
     }
   }
@@ -118,15 +116,13 @@ public class ImageFormatTest {
     try {
       ppm.save("/res/this path is invalid and will not be able to save.ppm", arr);
       fail("save did not throw an exception when given an invalid path.");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // Exception was thrown successfully, let this test pass
     }
     try { // fail to save because array is null
       ppm.save("/res/Bruh.ppm", null);
       fail("save did not throw an exception when given a null for the array.");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // Exception was thrown successfully, let this test pass
     }
   }

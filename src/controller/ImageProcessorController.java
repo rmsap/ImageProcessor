@@ -15,5 +15,4 @@ public interface ImageProcessorController {
   public void execute() throws IllegalStateException;
 
 
-
 }

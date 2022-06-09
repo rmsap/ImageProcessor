@@ -9,9 +9,9 @@ import java.io.IOException;
 public interface ImageProcessorView {
 
 
-
   /**
    * Renders a given message to the view.
+   *
    * @param message representing the String that is passed in.
    */
   public void renderMessage(String message) throws IOException;

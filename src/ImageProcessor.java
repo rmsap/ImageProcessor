@@ -13,6 +13,7 @@ import view.ImageProcessorView;
 public class ImageProcessor {
   /**
    * A simple main method to run the image processor.
+   *
    * @param args any command-line arguments necessary to run the image processor
    */
   public static void main(String[] args) throws IllegalStateException {

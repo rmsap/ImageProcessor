@@ -44,32 +44,29 @@ public class ImageProcessorModelImplTest {
 
 
   @Test
-  public void loadImageInvalid() throws IllegalArgumentException{
-    try{ // trying to get from a path that doesn't exist
+  public void loadImageInvalid() throws IllegalArgumentException {
+    try { // trying to get from a path that doesn't exist
       ImageProcessorModel model = new ImageProcessorModelImpl();
       model.loadImage("wowzers", new PPMImageFormat().read("orangejustice"));
       fail("An exception was supposed to be caught since orangejustice is not an existing path");
 
-    }
-    catch(IllegalArgumentException ie) {
+    } catch (IllegalArgumentException ie) {
       // exception successfully caught
     }
-    try{ // the imageFormat object is null
+    try { // the imageFormat object is null
       ImageProcessorModel model = new ImageProcessorModelImpl();
       model.loadImage("wowzers", null);
       fail("An exception was supposed to be caught since no image was provided");
 
-    }
-    catch(IllegalArgumentException ie) {
+    } catch (IllegalArgumentException ie) {
       // exception successfully caught
     }
-    try{ // the name is null
+    try { // the name is null
       ImageProcessorModel model = new ImageProcessorModelImpl();
       model.loadImage(null, new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
       fail("An exception was supposed to be caught since the name is null");
 
-    }
-    catch(IllegalArgumentException ie) {
+    } catch (IllegalArgumentException ie) {
       // exception successfully caught
     }
 
@@ -78,13 +75,12 @@ public class ImageProcessorModelImplTest {
 
   @Test
   public void getImageInvalid() throws IllegalArgumentException {
-    try{
+    try {
       ImageProcessorModel model = new ImageProcessorModelImpl();
       model.getImage(null);
       fail("An exception was supposed to be caught");
 
-    }
-    catch(IllegalArgumentException ie) {
+    } catch (IllegalArgumentException ie) {
       // Exception successfully caught
     }
 
@@ -99,8 +95,6 @@ public class ImageProcessorModelImplTest {
     assertEquals(4, model.getImage("originalPic")[0][1]);
     assertEquals(0, model.getImage("originalPic")[1][1]);
   }
-
-
 
 
 }

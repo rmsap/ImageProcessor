@@ -9,7 +9,7 @@ import model.ImageProcessorModel;
 public class FlipHorizontal implements Operation {
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
-    int [][] copy = model.getImage(name);
+    int[][] copy = model.getImage(name);
     int totalCols = copy.length / copy[0][1];
 
     for (int i = 1; i < copy.length; i++) {
@@ -29,7 +29,8 @@ public class FlipHorizontal implements Operation {
 
   /**
    * Swap the two items at the given indices of the given array.
-   * @param arr the array whose items we want to swap
+   *
+   * @param arr      the array whose items we want to swap
    * @param indexOne the first index whose values we are swapping
    * @param indexTwo the second index whose value we are swapping
    */
