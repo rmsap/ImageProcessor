@@ -1,4 +1,4 @@
-import org.junit.Before;
+
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,6 +11,9 @@ import view.ImageProcessorView;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test class for the view of ImageProcessorTextView.
+ */
 public class ImageProcessorTextViewTest {
   private ImageProcessorModel model = new ImageProcessorModelImpl();
 
@@ -65,10 +68,7 @@ public class ImageProcessorTextViewTest {
     }
   }
 
-  @Before
-  public void initData() {
 
-  }
 
   @Test
   public void renderMessageSuccessful() {

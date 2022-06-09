@@ -2,7 +2,7 @@ package view;
 
 import java.io.IOException;
 
-import model.ImageProcessorModel;
+
 import model.ImageProcessorViewModel;
 
 /**

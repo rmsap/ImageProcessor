@@ -116,7 +116,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         else if (strInput.equalsIgnoreCase("load")) {
           String dest = scan.next();
           String fileName = scan.next();
-//          String fileFormat = scan.next();
+          //          String fileFormat = scan.next();
           String fileFormat = dest.substring(dest.lastIndexOf('.') + 1); // last 3 letters
           try {
             // checks that the format is a ppm
@@ -146,7 +146,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
                 this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
               } else { // you are able to successfully save an image
                 new PPMImageFormat().save(imagePath, model.getImage(imageName));
-//                this.model.saveImage(imagePath, imageName, new PPMImageFormat());
+                //                this.model.saveImage(imagePath, imageName, new PPMImageFormat());
                 this.view.renderMessage("Image has been saved\n");
               }
 

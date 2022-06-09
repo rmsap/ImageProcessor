@@ -16,7 +16,7 @@ public class Greyscale implements Operation {
   /**
    * This enum represents possible colors that we could use to greyscale an image.
    */
-  public enum GreyscaleFactor {Red, Green, Blue, Value, Intensity, Luma}
+  public enum GreyscaleFactor { Red, Green, Blue, Value, Intensity, Luma }
 
   ;
 
@@ -42,11 +42,11 @@ public class Greyscale implements Operation {
     this.greyscaleFactors.put(GreyscaleFactor.Green, pixel -> pixel[1]);
     this.greyscaleFactors.put(GreyscaleFactor.Blue, pixel -> pixel[2]);
     this.greyscaleFactors.put(GreyscaleFactor.Value,
-            pixel -> Math.max(pixel[0], Math.max(pixel[1], pixel[2])));
+        pixel -> Math.max(pixel[0], Math.max(pixel[1], pixel[2])));
     this.greyscaleFactors.put(GreyscaleFactor.Intensity,
-            pixel -> (pixel[0] + pixel[1] + pixel[2]) / 3);
+        pixel -> (pixel[0] + pixel[1] + pixel[2]) / 3);
     this.greyscaleFactors.put(GreyscaleFactor.Luma,
-            pixel -> (int) (0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]));
+        pixel -> (int) (0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]));
   }
 
   @Override

@@ -14,8 +14,14 @@ import view.ImageProcessorView;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test class for the controller of ImageProcessorController.
+ */
 public class ImageProcessorControllerImplTest {
 
+  /**
+   * Mock model of an ImageProcessorModel that stores inputs in a StringBuilder.
+   */
   public class MockImageProcessorModel implements ImageProcessorModel {
 
     private StringBuilder log;
@@ -43,8 +49,11 @@ public class ImageProcessorControllerImplTest {
     }
   }
 
+  ImageProcessor bruh = new ImageProcessor();
+
   @Before
   public void initData() {
+    bruh = new ImageProcessor();
 
   }
 
@@ -139,7 +148,6 @@ public class ImageProcessorControllerImplTest {
       String[] messages = appendable.toString().split("\n");
       String quitMessage = messages[23];
       assertEquals("Image Processor has quit.", quitMessage);
-//      System.out.println(messages.length);
 
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");

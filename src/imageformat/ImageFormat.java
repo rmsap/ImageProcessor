@@ -10,8 +10,8 @@ public interface ImageFormat {
    *
    * @param path the path of the image that is being loading
    * @return the image we are reading represented as a 2-dimensional array of integers
-   * (each inner array has length 3 if it is representing r, g, b, 4 if it is r, g, b, a,
-   * etc.)
+   *          (each inner array has length 3 if it is representing r, g, b, 4 if it is r, g, b, a,
+   *          etc.)
    * @throws IllegalArgumentException if the file cannot be found
    *                                  or if the file is not a valid ppm file
    */
