@@ -109,7 +109,7 @@ public class ImageProcessorControllerImplTest {
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
       controller.execute();
-      assertEquals("Name = Bruh\nName = Bruh, Destination = BruhVert\n", log.toString());
+      assertEquals("Name = Bruh, Destination = BruhVert\n", log.toString());
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");
     }
@@ -122,7 +122,7 @@ public class ImageProcessorControllerImplTest {
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
       controller.execute();
-      assertEquals("Name = Bruh\nName = Bruh, Destination = BruhVert\n", log.toString());
+      assertEquals("Name = Bruh, Destination = BruhVert\n", log.toString());
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");
     }
@@ -221,7 +221,7 @@ public class ImageProcessorControllerImplTest {
       controller.execute();
       String[] messages = appendable.toString().split("\n");
       String operationMessage = messages[24];
-      assertEquals("Something doesn't exist, re-enter a valid command", operationMessage);
+      assertEquals("Image doesn't exist, re-enter a valid command", operationMessage);
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");
     }
