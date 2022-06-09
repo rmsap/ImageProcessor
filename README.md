@@ -19,3 +19,8 @@ represents a different operation. For example, BrightenOrDarken is an operation 
 FlipHorizontal horizontally flips the image, FlipVertical vertically flips the image, and Greyscale greyscales the image based on the given factor (currently the only
 supported greyscale factors are color: red, green, or blue, or brightness: luma, intensity, or value).
 
+Running provided operation script:
+Open res/commandScript.txt. When the program is run, copy and paste the file contents into the text-based user interface and press enter. The script will first load the koala image, then vertically flip the image, then save the vertically flipped image as koala-vertical.ppm, then greyscale the vertically flipped image by red, then brighten the original koala image, then save the red greyscaled image as koalaVertFlipRed.ppm, save the brightened koala image as koalaBright.ppm, and finally quit the program. If you would like the program to keep running after executing the script, delete the 'q' character from the end of the line before pressing enter.
+
+Image Citation:
+The 4x3ppmOriginal.ppm and 4x4ppmOriginal.ppm files were created and owned by the programmers of this application. They both authorize its use in this program. All variations of these images were created by this program and thus are owned by its developers, and they authorize their use as well.
