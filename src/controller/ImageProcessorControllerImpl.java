@@ -22,13 +22,13 @@ import view.ImageProcessorView;
  */
 public class ImageProcessorControllerImpl implements ImageProcessorController {
 
-  private ImageProcessorModel model;
+  private final ImageProcessorModel model;
 
-  private ImageProcessorView view;
+  private final ImageProcessorView view;
 
-  private Readable input;
+  private final Readable input;
 
-  private Map<String, Operation> operationDirectory;
+  private final Map<String, Operation> operationDirectory;
 
 
   /**

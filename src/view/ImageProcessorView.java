@@ -7,8 +7,6 @@ import java.io.IOException;
  * The view enables images to be displayed along with processing changes.
  */
 public interface ImageProcessorView {
-
-
   /**
    * Renders a given message to the view.
    *

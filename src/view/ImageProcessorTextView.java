@@ -11,7 +11,6 @@ import model.ImageProcessorViewModel;
  */
 public class ImageProcessorTextView extends AbstractImageProcessorView {
 
-
   /**
    * Default constructor for the view of Image Processor.
    *
