@@ -12,34 +12,26 @@ import model.ImageProcessorViewModel;
 public class ImageProcessorTextView extends AbstractImageProcessorView {
 
   /**
-   * Default constructor for the view of Image Processor.
+   * Default constructor for the view of Image Processor. Its Appendable will be System.out.
    *
    * @param model representing the ImageProcessorModel.
    * @throws IllegalArgumentException if the argument is null.
    */
   public ImageProcessorTextView(ImageProcessorModel model) throws IllegalArgumentException {
-    if (model == null) {
-      throw new IllegalArgumentException("Parameter cannot be null");
-    }
-    this.model = model;
-    this.appendable = System.out;
+    this(model, System.out);
   }
 
 
   /**
-   * Constructor for the view of Image Processor that takes in a model and an Appendable object.
+   * Constructor for the text view of Image Processor
+   * that takes in a model and an Appendable object.
    *
-   * @param model      representing an ImageProcessorModel.
+   * @param model      the ImageProcessorModel that this view will display.
    * @param appendable representing an Appendable object.
    * @throws IllegalArgumentException if any of the arguments are null
    */
   public ImageProcessorTextView(ImageProcessorViewModel model, Appendable appendable)
           throws IllegalArgumentException {
-    if (model == null || appendable == null) {
-      throw new IllegalArgumentException("Parameters cannot be null");
-    }
-    this.model = model;
-    this.appendable = appendable;
+    super(model, appendable);
   }
-
 }

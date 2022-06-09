@@ -6,7 +6,7 @@ package model;
  */
 public interface ImageProcessorViewModel {
   /**
-   * Get the image with the given name and return it.
+   * Get a copy of the image with the given name and return it.
    *
    * @param name the name of the image we want to get
    * @return the image with the given name

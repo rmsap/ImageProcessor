@@ -3,8 +3,7 @@ package operations;
 import model.ImageProcessorModel;
 
 /**
- * This class represents an Operation that flips the given image of an
- * ImageProcessorModel horizontally.
+ * This class represents an Operation that flips an image from the ImageProcessorModel horizontally.
  */
 public class FlipHorizontal implements Operation {
   @Override

@@ -18,7 +18,6 @@ public class ImageProcessorModelImplTest {
   public void loadImageValid() {
     ImageProcessorModel model = new ImageProcessorModelImpl();
     ImageFormat ppm = new PPMImageFormat();
-    int[][] originalImage = ppm.read("res/4x4ppmOriginal.ppm");
 
     int[][] expected = {
             {4, 4, 255},
@@ -29,13 +28,13 @@ public class ImageProcessorModelImplTest {
 
     model.loadImage("originalPic", ppm.read("res/4x4ppmOriginal.ppm"));
 
+    int[][] actual = model.getImage("originalPic");
 
     for (int i = 0; i < expected.length; i++) {
       for (int j = 0; j < expected[i].length; j++) {
-        assertEquals(expected[i][j], model.getImage("originalPic")[i][j]);
+        assertEquals(expected[i][j], actual[i][j]);
       }
     }
-
   }
 
 
@@ -65,7 +64,6 @@ public class ImageProcessorModelImplTest {
     } catch (IllegalArgumentException ie) {
       // exception successfully caught
     }
-
   }
 
 
@@ -79,7 +77,14 @@ public class ImageProcessorModelImplTest {
     } catch (IllegalArgumentException ie) {
       // Exception successfully caught
     }
+    try {
+      ImageProcessorModel model = new ImageProcessorModelImpl();
+      model.getImage("randomName");
+      fail("An exception was supposed to be caught");
 
+    } catch (IllegalArgumentException ie) {
+      // Exception successfully caught
+    }
   }
 
   @Test
@@ -91,6 +96,4 @@ public class ImageProcessorModelImplTest {
     assertEquals(4, model.getImage("originalPic")[0][1]);
     assertEquals(0, model.getImage("originalPic")[1][1]);
   }
-
-
 }

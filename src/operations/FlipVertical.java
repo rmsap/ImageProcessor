@@ -9,9 +9,7 @@ import model.ImageProcessorModel;
 public class FlipVertical implements Operation {
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
-    // need to reverse the array contents vertically
     // make a 3d arraylist and then convert that array list back to a 2d arraylist
-    // [row] [column] [contents in rc that is an array of 3]
     int[][] reference = model.getImage(name);
 
     int width = reference[0][0];
@@ -24,7 +22,6 @@ public class FlipVertical implements Operation {
     }
 
     this.flippedRows(board);
-
 
     // convert 3d board back to 2d board
     int[][] flippedDeepCopy = new int[reference.length][reference[0].length];
@@ -39,6 +36,11 @@ public class FlipVertical implements Operation {
     return flippedDeepCopy;
   }
 
+  /**
+   * Flip the rows of the given array.
+   * @param stub the array whose rows are being flipped
+   * @return the given array with its rows flipped
+   */
   private int[][][] flippedRows(int[][][] stub) {
     for (int i = 0; i < stub.length / 2; i++) {
       int[][] temp = stub[i];

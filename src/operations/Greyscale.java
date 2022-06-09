@@ -35,6 +35,7 @@ public class Greyscale implements Operation {
     this.gf = gf;
 
     greyscaleFactors = new HashMap<GreyscaleFactor, Function<int[], Integer>>();
+
     // Put all greyscale factors in the map and point them to
     // the function that will return the correct color of a pixel.
     this.greyscaleFactors.put(GreyscaleFactor.Red, pixel -> pixel[0]);

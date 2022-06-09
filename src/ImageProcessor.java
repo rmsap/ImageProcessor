@@ -18,8 +18,7 @@ public class ImageProcessor {
    */
   public static void main(String[] args) throws IllegalStateException {
     ImageProcessorModel model = new ImageProcessorModelImpl();
-
-    ImageProcessorView view = new ImageProcessorTextView(model, System.out);
+    ImageProcessorView view = new ImageProcessorTextView(model);
     ImageProcessorController controller =
             new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
     controller.execute();

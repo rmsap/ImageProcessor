@@ -31,7 +31,7 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
     if (name == null || image == null) {
       throw new IllegalArgumentException("Neither the name nor the image can be null.");
     }
-    directory.put(name, image);
+    this.directory.put(name, image);
   }
 
   @Override
