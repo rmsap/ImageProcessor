@@ -82,7 +82,7 @@ public class ImageProcessorControllerImplTest {
       // NOTE:
       // Running this test will cause a blank ppm file to be saved that has nothing in it
       // and trying to load this created file while using the image processor via the console
-      // will result in a NoSuchElement Exception, so do not load the file created from the test
+      // will result in a NoSuchElementException, so do not load the file created from the test
       Readable readable = new StringReader("save Bruh.ppm Bruh q"); // valid move
       Appendable appendable = new StringBuilder();
       StringBuilder log = new StringBuilder();
@@ -91,7 +91,7 @@ public class ImageProcessorControllerImplTest {
       ImageProcessorController controller =
               new ImageProcessorControllerImpl(mockModel, view, readable);
       controller.execute();
-      assertEquals("Name = Bruh\nName = Bruh\n", log.toString());
+      assertEquals("Name = Bruh\n", log.toString());
 
     } catch (IllegalStateException is) {
       fail("An exception was not supposed to be caught");
