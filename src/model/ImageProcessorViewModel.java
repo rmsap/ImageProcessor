@@ -9,6 +9,8 @@ public interface ImageProcessorViewModel {
    * Get the image with the given name and return it.
    * @param name the name of the image we want to get
    * @return the image with the given name
+   * @throws IllegalArgumentException if an image with the given name does not exist in the
+   *                                  model's directory
    */
-  int[][] getImage(String name);
+  int[][] getImage(String name) throws IllegalArgumentException;
 }
