@@ -26,8 +26,10 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
   private final ImageProcessorView view;
   private final Readable input;
 
-  // Map of user input Strings to Operation function objects
+  // INVARIANT: All keys contained in operationDirectory are valid user inputs
   private final Map<String, Operation> operationDirectory;
+
+  // INVARIANT: All keys contained in formatDirectory are valid file extensions
   private final Map<String, ImageFormat> formatDirectory;
 
 

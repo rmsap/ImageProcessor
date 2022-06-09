@@ -14,18 +14,16 @@ import model.ImageProcessorModel;
 public class Greyscale implements Operation {
 
   /**
-   * This enum represents possible colors that we could use to greyscale an image.
+   * This enum represents possible colors that we could use to greyscale an image. An enum is used
+   * here to ensure that it is impossible to enter an invalid key into the Map created below.
    */
   public enum GreyscaleFactor { Red, Green, Blue, Value, Intensity, Luma }
 
-  ;
-
   // A map of Colors to Integers so that we can get the index of red, green, or blue
   // based on the Color that we are visualizing
-  private final Map<GreyscaleFactor, Function<int[], Integer>> greyscaleFactors =
-          new HashMap<GreyscaleFactor, Function<int[], Integer>>();
+  private final Map<GreyscaleFactor, Function<int[], Integer>> greyscaleFactors;
 
-  // The color that we will be using to greyscale this image.
+  // The factor that we will be using to greyscale this image.
   private final GreyscaleFactor gf;
 
   /**
@@ -36,6 +34,7 @@ public class Greyscale implements Operation {
   public Greyscale(GreyscaleFactor gf) {
     this.gf = gf;
 
+    greyscaleFactors = new HashMap<GreyscaleFactor, Function<int[], Integer>>();
     // Put all greyscale factors in the map and point them to
     // the function that will return the correct color of a pixel.
     this.greyscaleFactors.put(GreyscaleFactor.Red, pixel -> pixel[0]);
@@ -54,7 +53,6 @@ public class Greyscale implements Operation {
     int[][] copy = model.getImage(name);
 
     for (int i = 1; i < copy.length; i++) {
-      ;
       Arrays.fill(copy[i], this.greyscaleFactors.get(this.gf).apply(copy[i]));
     }
     return copy;
