@@ -91,12 +91,12 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
       this.view.renderMessage("To visualize intensity: visualize-intensity imageName nameToCall\n");
       this.view.renderMessage("To visualize luma: visualize-luma imageName nameToCall\n");
       this.view.renderMessage("To visualize value: visualize-value imageName nameToCall\n");
-      this.view.renderMessage("To save an image: save filePath nameToSaveAs\n");
+      this.view.renderMessage("To save an image: save filePath imageName\n");
       this.view.renderMessage("filePath represents the name of the file to save as" +
               " along with it's specified path\n");
-      this.view.renderMessage("nameToSaveAs represents the name of the image to be saved " +
+      this.view.renderMessage("imageName represents the name of the image to be saved " +
               "as a file\n");
-      // 25
+    
 
 
       boolean quit = false;
@@ -171,11 +171,12 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
               int scale = Integer.parseInt(scan.next());
               String imageName = scan.next();
               String newImageName = scan.next();
-              if (this.model.getImage(imageName) == null) {
-                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-              } else {
+              try{
                 this.model.doOperation(new BrightenOrDarken(scale), imageName, newImageName);
                 this.view.renderMessage("Operation has been performed\n");
+              }
+              catch(IllegalArgumentException ie) {
+                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
               }
             } catch (NumberFormatException e) {
               this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
@@ -184,14 +185,14 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
             try {
               String imageName = scan.next();
               String newImageName = scan.next();
-              if (this.model.getImage(imageName) == null) { // image doesn't exist in the directory
-                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
-              } else {
-
+              try{
                 // image does exist, so do the operation
                 this.model.doOperation(this.operationDirectory.get(strInput),
                         imageName, newImageName);
                 this.view.renderMessage("Operation has been performed\n");
+              }
+              catch(IllegalArgumentException ie) {
+                this.view.renderMessage("Image doesn't exist, re-enter a valid command\n");
               }
             } catch (IllegalArgumentException iae) {
               this.view.renderMessage("Something doesn't exist, re-enter a valid command\n");
