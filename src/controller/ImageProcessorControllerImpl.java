@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import imageformat.ImageFormat;
+import imageformat.JPGImageFormat;
+import imageformat.PNGImageFormat;
 import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import operations.BrightenOrDarken;
@@ -66,6 +68,8 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     // Instantiate the format directory and load all supported image formats into it
     formatDirectory = new HashMap<String, ImageFormat>();
     formatDirectory.put("ppm", new PPMImageFormat());
+    formatDirectory.put("jpg", new JPGImageFormat());
+    formatDirectory.put("png", new PNGImageFormat());
   }
 
 
