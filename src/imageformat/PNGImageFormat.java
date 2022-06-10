@@ -31,7 +31,7 @@ public class PNGImageFormat implements ImageFormat {
     // store width and height inside the first array entry
     imagePixels[0][0] = imageWidth;
     imagePixels[0][1] = imageHeight;
-    imagePixels[0][2] = 0; // a filler value that we won't actually use
+    imagePixels[0][2] = 255; // a filler value that we won't actually use
 
     int pixelCount = 1; // used to denote which indice of the array we are on
     for(int r = 0; r < imageHeight; r++) {
@@ -46,7 +46,7 @@ public class PNGImageFormat implements ImageFormat {
         imagePixels[pixelCount][2] = colorTemp.getBlue();
 //        System.out.println("blue " + pixelCount + " :" + imagePixels[pixelCount][2]);
         imagePixels[pixelCount][3] = colorTemp.getAlpha();
-        System.out.println("alpha " + pixelCount + " :" + imagePixels[pixelCount][3]);
+//        System.out.println("alpha " + pixelCount + " :" + imagePixels[pixelCount][3]);
         pixelCount++;
       }
     }
@@ -74,8 +74,15 @@ public class PNGImageFormat implements ImageFormat {
       int pixelCount = 1; // starts at index 1 since 0 just contains metaData
       for(int r = 0; r < height; r++ ) {
         for(int c = 0; c < width; c++) {
+          Color temp = null;
           // convert 3 values into a unified RGB value
-          Color temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2], image[pixelCount][3]);
+          if(image[pixelCount].length == 4) { // if it's rgba
+            temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2], image[pixelCount][3]);
+          }
+          else if (image[pixelCount].length == 3) { // if it's only rgb
+            temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2]);
+          }
+
           int tempRGBColor = temp.getRGB();
           int tempAlphaValue = temp.getAlpha();
           // set each pixel in the buffered image to the rgb value

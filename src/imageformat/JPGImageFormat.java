@@ -33,7 +33,7 @@ public class JPGImageFormat implements ImageFormat{
     // store width and height inside the first array entry
     imagePixels[0][0] = imageWidth;
     imagePixels[0][1] = imageHeight;
-    imagePixels[0][2] = 0; // a filler value that we won't actually use
+    imagePixels[0][2] = 255; // a filler value that we won't actually use
 
     int pixelCount = 1; // used to denote which indice of the array we are on
     for(int r = 0; r < imageHeight; r++) {
