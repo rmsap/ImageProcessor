@@ -16,8 +16,8 @@ import operations.BrightenOrDarken;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
 import operations.Operation;
-import operations.Greyscale;
-import operations.Greyscale.GreyscaleFactor;
+import operations.ColorTransformation;
+import operations.ColorTransformation.Transformation;
 import view.ImageProcessorView;
 
 /**
@@ -57,13 +57,14 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory = new HashMap<String, Operation>();
     operationDirectory.put("flip-horizontal", new FlipHorizontal());
     operationDirectory.put("flip-vertical", new FlipVertical());
-    operationDirectory.put("visualize-green", new Greyscale(GreyscaleFactor.Green));
-    operationDirectory.put("visualize-blue", new Greyscale(GreyscaleFactor.Blue));
-    operationDirectory.put("visualize-red", new Greyscale(GreyscaleFactor.Red));
+    operationDirectory.put("visualize-green", new ColorTransformation(Transformation.Green));
+    operationDirectory.put("visualize-blue", new ColorTransformation(Transformation.Blue));
+    operationDirectory.put("visualize-red", new ColorTransformation(Transformation.Red));
     operationDirectory.put("visualize-intensity",
-            new Greyscale(GreyscaleFactor.Intensity));
-    operationDirectory.put("visualize-luma", new Greyscale(GreyscaleFactor.Luma));
-    operationDirectory.put("visualize-value", new Greyscale(GreyscaleFactor.Value));
+            new ColorTransformation(Transformation.Intensity));
+    operationDirectory.put("visualize-luma", new ColorTransformation(Transformation.Luma));
+    operationDirectory.put("visualize-value", new ColorTransformation(Transformation.Value));
+    operationDirectory.put("sepia", new ColorTransformation(Transformation.Sepia));
     operationDirectory.put("change-brightness", new BrightenOrDarken(0));
 
     // Instantiate the format directory and load all supported image formats into it

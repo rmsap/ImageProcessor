@@ -7,8 +7,8 @@ import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
-import operations.Greyscale;
-import operations.Greyscale.GreyscaleFactor;
+import operations.ColorTransformation;
+import operations.ColorTransformation.Transformation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -229,7 +229,7 @@ public class OperationTest {
   @Test
   public void testVisualizeRed() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new Greyscale(GreyscaleFactor.Red), "koala", "koala-red");
+    model.doOperation(new ColorTransformation(Transformation.Red), "koala", "koala-red");
 
     try {
       model.getImage("koala-red");
@@ -259,7 +259,7 @@ public class OperationTest {
   @Test
   public void testVisualizeGreen() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new Greyscale(GreyscaleFactor.Green), "koala", "koala-green");
+    model.doOperation(new ColorTransformation(Transformation.Green), "koala", "koala-green");
 
     try {
       model.getImage("koala-green");
@@ -289,7 +289,7 @@ public class OperationTest {
   @Test
   public void testVisualizeBlue() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new Greyscale(GreyscaleFactor.Blue), "koala", "koala-blue");
+    model.doOperation(new ColorTransformation(Transformation.Blue), "koala", "koala-blue");
 
     try {
       model.getImage("koala-blue");
@@ -319,7 +319,7 @@ public class OperationTest {
   @Test
   public void testVisualizeValue() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new Greyscale(GreyscaleFactor.Value),
+    model.doOperation(new ColorTransformation(Transformation.Value),
             "koala", "koala-value");
 
     try {
@@ -349,7 +349,7 @@ public class OperationTest {
   @Test
   public void testVisualizeIntensity() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new Greyscale(GreyscaleFactor.Intensity),
+    model.doOperation(new ColorTransformation(Transformation.Intensity),
             "koala", "koala-intensity");
 
     try {
@@ -379,7 +379,7 @@ public class OperationTest {
   @Test
   public void testVisualizeLuma() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new Greyscale(GreyscaleFactor.Luma),
+    model.doOperation(new ColorTransformation(Transformation.Luma),
             "koala", "koala-luma");
 
     try {
@@ -403,6 +403,35 @@ public class OperationTest {
       assertEquals(koalaLuma[i][0], (int) luma);
       assertEquals(koalaLuma[i][1], (int) luma);
       assertEquals(koalaLuma[i][2], (int) luma);
+    }
+  }
+
+  @Test
+  public void testSepia() {
+    int[][] originalKoalaColors = model.getImage("koala");
+    model.doOperation(new ColorTransformation(Transformation.Sepia), "koala", "koala-sepia");
+
+    try {
+      model.getImage("koala-sepia");
+    } catch (IllegalArgumentException e) {
+      fail("Copied image was not added to the directory of the model properly.");
+    }
+
+    int[][] koalaSepia = model.getImage("koala-sepia");
+
+    // Test that the header row of the new image is equal to the header row of the original image
+    assertEquals(koalaSepia[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaSepia[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaSepia[0][2], originalKoalaColors[0][2]);
+
+    // Test that each pixel in the new image had the appropriate color transformation applied to it.
+    for (int i = 1; i < koalaSepia.length; i++) {
+      assertEquals((int) (0.393 * originalKoalaColors[i][0] + 0.769 * originalKoalaColors[i][1]
+              + 0.189 * originalKoalaColors[i][2]), koalaSepia[i][0]);
+      assertEquals((int) (0.349 * originalKoalaColors[i][0] + 0.686 * originalKoalaColors[i][1]
+                      + 0.168 * originalKoalaColors[i][2]), koalaSepia[i][1]);
+      assertEquals((int) (0.272 * originalKoalaColors[i][0] + 0.534 * originalKoalaColors[i][1]
+              + 0.131 * originalKoalaColors[i][2]), koalaSepia[i][2]);
     }
   }
 }
