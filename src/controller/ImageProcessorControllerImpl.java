@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import imageformat.BMPImageFormat;
 import imageformat.ImageFormat;
 import imageformat.JPGImageFormat;
 import imageformat.PNGImageFormat;
@@ -70,6 +71,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     formatDirectory.put("ppm", new PPMImageFormat());
     formatDirectory.put("jpg", new JPGImageFormat());
     formatDirectory.put("png", new PNGImageFormat());
+    formatDirectory.put("bmp", new BMPImageFormat());
   }
 
 
