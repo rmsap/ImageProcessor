@@ -34,6 +34,7 @@ public class JPGImageFormat implements ImageFormat{
     imagePixels[0][0] = imageWidth;
     imagePixels[0][1] = imageHeight;
     imagePixels[0][2] = 255; // a filler value that we won't actually use
+    // we need a helper function that finds that max value of out of all the pixels
 
     int pixelCount = 1; // used to denote which indice of the array we are on
     for(int r = 0; r < imageHeight; r++) {
@@ -74,8 +75,16 @@ public class JPGImageFormat implements ImageFormat{
       int pixelCount = 1; // starts at index 1 since 0 just contains metaData
       for(int r = 0; r < height; r++ ) {
         for(int c = 0; c < width; c++) {
+          Color temp = null;
           // convert 3 values into a unified RGB value
-          int tempColor = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2]).getRGB();
+          if(image[pixelCount].length == 4) { // if it's rgba
+            temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2], image[pixelCount][3]);
+          }
+          else if (image[pixelCount].length == 3) { // if it's only rgb
+            temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2]);
+          }
+          int tempColor = temp.getRGB();
+//          int tempColor = 65536 * image[pixelCount][0] + 256 * image[pixelCount][1] + image[pixelCount][2];
           // set each pixel in the buffered image to the rgb value
           newImage.setRGB(c, r, tempColor);
           pixelCount++;
@@ -89,6 +98,17 @@ public class JPGImageFormat implements ImageFormat{
       throw new IllegalArgumentException("failed to write to file");
     }
 
+
+
+  }
+
+  /**
+   * Finds the max pixel value of a picture.
+   * @param image
+   * @return the int representing the max pixel value
+   */
+  private int findMaxPixelValue(BufferedImage image) {
+    return 0;
 
 
   }
