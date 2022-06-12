@@ -70,7 +70,7 @@ public class JPGImageFormatTest {
   }
 
 
-  // DOES NOT WORK FOR SOME REASON
+  // DOES NOT WORK BECAUSE OF LOSSY COMPRESSION
   @Test
   public void testSave() {
     ImageFormat ppm = new PPMImageFormat();
@@ -92,4 +92,32 @@ public class JPGImageFormatTest {
       }
     }
   }
+
+  @Test
+  public void testSaveInvalid() {
+    int[][] arr = {{1, 1, 255}, {255, 0, 100}};
+    try { // fail to save because array is null
+      jpg.save("res/Bruh.jpg", null);
+      fail("save did not throw an exception when given a null for the array.");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
+
+    try { // fail to save because path is null
+      jpg.save(null, arr);
+      fail("save did not throw an exception when given a null for the path.");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
+
+    try { // fail to save because we are trying to save the file as something other than a ppm
+      jpg.save("res/notAPPM.ppm", arr);
+      fail("save did not throw an exception when attempting to save as something other than a ppm");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
+  }
+
+
+
 }

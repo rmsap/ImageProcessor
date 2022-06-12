@@ -10,6 +10,7 @@ import imageformat.PPMImageFormat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class PNGImageFormatTest {
   ImageFormat png = new PNGImageFormat();
@@ -30,6 +31,24 @@ public class PNGImageFormatTest {
       for(int j = 0; j < neil1[0].length; j++) {
         assertEquals(neil1[i][j], neil2[i][j]);
       }
+    }
+  }
+
+
+  @Test
+  public void testReadInvalid() {
+    try {
+      png.read("this is not a real path.png");
+      fail("read did not throw an IllegalArgumentException when given an invalid path.");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
+
+    try {
+      png.read("res/invalidPPM.png");
+      fail("read did not throw an IllegalArgumentException when given an invalid png file.");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
     }
   }
 
@@ -81,6 +100,32 @@ public class PNGImageFormatTest {
     }
 
 
+  }
+
+
+  @Test
+  public void testSaveInvalid() {
+    int[][] arr = {{1, 1, 255}, {255, 0, 100}};
+    try { // fail to save because array is null
+      png.save("res/Bruh.png", null);
+      fail("save did not throw an exception when given a null for the array.");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
+
+    try { // fail to save because path is null
+      png.save(null, arr);
+      fail("save did not throw an exception when given a null for the path.");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
+
+    try { // fail to save because we are trying to save the file as something other than a ppm
+      png.save("res/notAPPM.jpg", arr);
+      fail("save did not throw an exception when attempting to save as something other than a ppm");
+    } catch (IllegalArgumentException e) {
+      // Exception was thrown successfully, let this test pass
+    }
   }
 
 
