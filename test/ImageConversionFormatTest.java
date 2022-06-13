@@ -36,6 +36,7 @@ public class ImageConversionFormatTest {
         assertEquals(fromPPM[i][j], fromPNG[i][j]);
       }
     }
+    System.out.println(fromPNG[1][3]);
   }
 
   @Test
