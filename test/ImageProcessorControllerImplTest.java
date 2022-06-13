@@ -64,7 +64,7 @@ public class ImageProcessorControllerImplTest {
   @Test
   public void inputsToLoadImage() throws IllegalStateException {
     try {
-      Readable readable = new StringReader("load res/Koala.ppm Koala q"); // valid move
+      Readable readable = new StringReader("load res/4x4PPMOriginal.ppm Koala q"); // valid move
       Appendable appendable = new StringBuilder();
       StringBuilder log = new StringBuilder();
       ImageProcessorModel mockModel = new MockImageProcessorModel(log);
