@@ -8,13 +8,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * This class represents jpg image formats, meaning it can read and save as jpg files.
+ * This class represents an abstract image format that supports modern image formats.
+ * The modern image formats that it supports includes bmp, png, and jpg files.
  */
-public class PNGImageFormat extends AbstractModernImageFormat {
+public abstract class AbstractModernImageFormat implements ImageFormat{
+  @Override
+  public abstract int[][] read(String path) throws IllegalArgumentException;
 
   @Override
-  public int[][] read(String path) throws IllegalArgumentException {
-    /*
+  public abstract void save(String path, int[][] image) throws IllegalArgumentException;
+
+
+  protected int[][] bmpAndPNGLoad(String path) throws IllegalArgumentException {
     BufferedImage image = null;
 
     try {
@@ -53,29 +58,16 @@ public class PNGImageFormat extends AbstractModernImageFormat {
     }
 
     return imagePixels;
-
-     */
-    return this.bmpAndPNGLoad(path);
   }
 
-  @Override
-  public void save(String path, int[][] image) throws IllegalArgumentException {
-    if (image == null || path == null) {
-      throw new IllegalArgumentException("Failed to write to file.");
-    }
-    else if (!(path.substring(path.lastIndexOf('.') + 1).equalsIgnoreCase("png"))) {
-      throw new IllegalArgumentException("Image is trying to be saved as something "
-              + "other than png.");
-    }
-    // do i convert to a byte array?
-    // convert the 3 values into one RGB value???
-    // need to convert to BufferedImage
-    // then write the bufferedImage as a jpg file
-    try{ // first convert to buffered image
-      /*
+
+
+  protected BufferedImage createBufferedImage(int [][] image)  {
+    // first convert to buffered image
       int width = image[0][0];
       int height = image[0][1];
-      BufferedImage newImage = new BufferedImage(image[0][0], image[0][1], BufferedImage.TYPE_INT_ARGB);
+      // for bmp have to change to rgb instead of argb or it will not save to a bmp file
+      BufferedImage newImage = new BufferedImage(image[0][0], image[0][1], BufferedImage.TYPE_INT_RGB);
       int pixelCount = 1; // starts at index 1 since 0 just contains metaData
       for(int r = 0; r < height; r++ ) {
         for(int c = 0; c < width; c++) {
@@ -96,29 +88,8 @@ public class PNGImageFormat extends AbstractModernImageFormat {
           pixelCount++;
         }
       }
-
-       */
-      // then save bufferedImage as a jpg file
-      BufferedImage created = this.createBufferedImage(image);
-      File output = new File(path);
-//      ImageIO.write(newImage, "png", output);
-      ImageIO.write(created, "png", output);
-    }
-    catch(IOException e) {
-      throw new IllegalArgumentException("failed to write to file");
-    }
-
+      return newImage;
 
 
   }
-
-  public static void main (String[] args) {
-    ImageFormat bruh = new PNGImageFormat();
-    int [][] obunga = bruh.read("res/neil.png");
-    System.out.print(obunga[0][0]);
-    bruh.save("res/NeilBruh.png", obunga);
-
-  }
-
-
 }
