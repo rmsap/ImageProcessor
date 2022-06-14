@@ -32,12 +32,12 @@ public class ImageProcessor {
 //    }
     if(args.length > 0) {
       // should only run from command line if there is a "q" so the readable doesn't run out of inputs
-      boolean hasQ = false;
-      for(int i = 0; i < args.length; i++) {
-        if(args[i].equalsIgnoreCase("q")) {
-          hasQ = true;
-        }
-      }
+      boolean hasQ = true;
+//      if(args[0].equalsIgnoreCase("q")) {
+//        hasQ = true;
+//      }
+//    }for(int i = 0; i < args.length; i++) {
+
       if(hasQ) { // we know it's a valid text file
         try{
 //      Scanner input = new Scanner(new File(args[0]));
