@@ -1,4 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import controller.ImageProcessorController;
 import controller.ImageProcessorControllerImpl;
@@ -17,10 +21,35 @@ public class ImageProcessor {
    * @param args any command-line arguments necessary to run the image processor
    */
   public static void main(String[] args) throws IllegalStateException {
+    // must be able to take in a text file of command arguments
+    // if a valid script is provided, it should run it and then exit
+    // a valid text will have q denoting when to quit
     ImageProcessorModel model = new ImageProcessorModelImpl();
     ImageProcessorView view = new ImageProcessorTextView(model);
-    ImageProcessorController controller =
-            new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
+    ImageProcessorController controller = new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
+//    if (args.length == 0) {
+//      controller = new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
+//    }
+    if(args.length > 0) {
+      // should only run from command line if there is a "q" so the readable doesn't run out of inputs
+      boolean hasQ = false;
+      for(int i = 0; i < args.length; i++) {
+        if(args[i].equalsIgnoreCase("q")) {
+          hasQ = true;
+        }
+      }
+      if(hasQ) { // we know it's a valid text file
+        try{
+//      Scanner input = new Scanner(new File(args[0]));
+          FileReader reader = new FileReader(args[0]);
+          controller = new ImageProcessorControllerImpl(model, view, reader);
+        }
+        catch(FileNotFoundException bruh) {
+          controller = new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
+        }
+      }
+
+    }
     controller.execute();
   }
 }
