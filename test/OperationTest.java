@@ -5,6 +5,8 @@ import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
+import operations.Filter;
+import operations.Filter.Filters;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
 import operations.ColorTransformation;
@@ -432,6 +434,125 @@ public class OperationTest {
                       + 0.168 * originalKoalaColors[i][2]), koalaSepia[i][1]);
       assertEquals((int) (0.272 * originalKoalaColors[i][0] + 0.534 * originalKoalaColors[i][1]
               + 0.131 * originalKoalaColors[i][2]), koalaSepia[i][2]);
+    }
+  }
+
+  @Test
+  public void testBlur() {
+    int[][] originalKoalaColors = model.getImage("koala");
+    model.doOperation(new Filter(Filters.Blur), "koala", "koala-blur");
+
+    try {
+      model.getImage("koala-blur");
+    } catch (IllegalArgumentException e) {
+      fail("Copied image was not added to the directory of the model properly.");
+    }
+
+    int[][] koalaBlur = model.getImage("koala-blur");
+
+    // Test that the header row of the new image is equal to the header row of the original image
+    assertEquals(koalaBlur[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaBlur[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaBlur[0][2], originalKoalaColors[0][2]);
+
+    double[][] kernel = {{0.0625, 0.125, 0.0625}, {0.125, 0.25, 0.125}, {0.0625, 0.125, 0.0625}};
+    int kernelRows = kernel.length;
+    int numPixelsPerRow = originalKoalaColors.length / originalKoalaColors[0][1];
+
+    // Iterate through every pixel
+    for (int i = 1; i < originalKoalaColors.length; i++) {
+      // Iterate through each color channel of the ith pixel
+      for (int j = 0; j < 3; j++) {
+        double newColor = 0;
+        // Iterate through each row of the kernel
+        for (int k = 0; k < kernelRows; k++) {
+          int multiplicativeFactor = k - kernelRows / 2;
+          int centerPixelInRowToChange = i + (multiplicativeFactor * numPixelsPerRow);
+          // Iterate through each column of the given row in the kernel
+          for (int l = 0; l < kernel[k].length; l++) {
+            int numLeftOrRight = l - kernel[k].length / 2;
+            try {
+              newColor += kernel[k][l]
+                      * originalKoalaColors[centerPixelInRowToChange + numLeftOrRight][j];
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+              // Do nothing if we catch this Exception because it means that there is no pixel
+              // at the given position.
+            }
+          }
+        }
+        if (newColor > 255) {
+          newColor = 255;
+        }
+        else if (newColor < 0) {
+          newColor = 0;
+        }
+
+        assertEquals((int) newColor, koalaBlur[i][j]);
+        originalKoalaColors[i][j] = (int) newColor;
+      }
+    }
+  }
+
+  @Test
+  public void testSharpen() {
+    int[][] originalKoalaColors = model.getImage("koala");
+    model.doOperation(new Filter(Filters.Sharpen), "koala", "koala-sharp");
+
+    try {
+      model.getImage("koala-sharp");
+    } catch (IllegalArgumentException e) {
+      fail("Copied image was not added to the directory of the model properly.");
+    }
+
+    int[][] koalaSharp = model.getImage("koala-sharp");
+
+    // Test that the header row of the new image is equal to the header row of the original image
+    assertEquals(koalaSharp[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaSharp[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaSharp[0][2], originalKoalaColors[0][2]);
+
+    double[][] kernel = {
+            {-0.125, -0.125, -0.125, -0.125, -0.125},
+            {-0.125, 0.25, 0.25, 0.25, -0.125},
+            {-0.125, 0.25, 1, 0.25, -0.125},
+            {-0.125, 0.25, 0.25, 0.25, -0.125},
+            {-0.125, -0.125, -0.125, -0.125, -0.125}};
+    int kernelRows = kernel.length;
+    int numPixelsPerRow = originalKoalaColors.length / originalKoalaColors[0][1];
+
+    // Iterate through every pixel
+    for (int i = 1; i < originalKoalaColors.length; i++) {
+      // Iterate through each color channel of the ith pixel
+      for (int j = 0; j < 3; j++) {
+        double newColor = 0;
+        // Iterate through each row of the kernel
+        for (int k = 0; k < kernelRows; k++) {
+          int multiplicativeFactor = k - kernelRows / 2;
+          int centerPixelInRowToChange = i + (multiplicativeFactor * numPixelsPerRow);
+          // Iterate through each column of the given row in the kernel
+          for (int l = 0; l < kernel[k].length; l++) {
+            int numLeftOrRight = l - kernel[k].length / 2;
+            try {
+              newColor += kernel[k][l]
+                      * originalKoalaColors[centerPixelInRowToChange + numLeftOrRight][j];
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+              // Do nothing if we catch this Exception because it means that there is no pixel
+              // at the given position.
+            }
+          }
+        }
+        if (newColor > 255) {
+          newColor = 255;
+        }
+        else if (newColor < 0) {
+          newColor = 0;
+        }
+
+        assertEquals((int) newColor, koalaSharp[i][j]);
+        originalKoalaColors[i][j] = (int) newColor;
+      }
     }
   }
 }
