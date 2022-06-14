@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 /**
  * This class represents jpg image formats, meaning it can read and save as jpg files.
  */
-public class JPGImageFormat implements ImageFormat{
+public class JPGImageFormat extends AbstractModernImageFormat{
   @Override
   public int[][] read(String path) throws IllegalArgumentException {
     Scanner sc;
@@ -69,6 +69,7 @@ public class JPGImageFormat implements ImageFormat{
     // need to convert to BufferedImage
     // then write the bufferedImage as a jpg file
     try{ // first convert to buffered image
+      /*
       int width = image[0][0];
       int height = image[0][1];
       BufferedImage newImage = new BufferedImage(image[0][0], image[0][1], BufferedImage.TYPE_INT_RGB);
@@ -90,9 +91,13 @@ public class JPGImageFormat implements ImageFormat{
           pixelCount++;
         }
       }
+
+       */
       // then save bufferedImage as a jpg file
+      BufferedImage created = this.createBufferedImage(image);
       File output = new File(path);
-      ImageIO.write(newImage, "jpg", output);
+//      ImageIO.write(newImage, "jpg", output);
+      ImageIO.write(created, "jpg", output);
     }
     catch(IOException e) {
       throw new IllegalArgumentException("failed to write to file");

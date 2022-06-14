@@ -10,9 +10,10 @@ import javax.imageio.ImageIO;
 /**
  * The following class supports bmp format images. The class can read and save to bmp images.
  */
-public class BMPImageFormat implements ImageFormat {
+public class BMPImageFormat extends AbstractModernImageFormat {
   @Override
   public int[][] read(String path) throws IllegalArgumentException {
+    /*
     BufferedImage image = null;
 
     try {
@@ -51,6 +52,9 @@ public class BMPImageFormat implements ImageFormat {
     }
 
     return imagePixels;
+
+     */
+    return this.bmpAndPNGLoad(path);
   }
 
   @Override
@@ -67,6 +71,7 @@ public class BMPImageFormat implements ImageFormat {
     // need to convert to BufferedImage
     // then write the bufferedImage as a jpg file
     try{ // first convert to buffered image
+      /*
       int width = image[0][0];
       int height = image[0][1];
       // for bmp have to change to rgb instead of argb or it will not save to a bmp file
@@ -91,9 +96,13 @@ public class BMPImageFormat implements ImageFormat {
           pixelCount++;
         }
       }
+
+       */
       // then save bufferedImage as a bmp file
+      BufferedImage created = this.createBufferedImage(image);
       File output = new File(path);
-      ImageIO.write(newImage, "BMP", output);
+//      ImageIO.write(newImage, "BMP", output);
+      ImageIO.write(created, "BMP", output);
     }
     catch(IOException e) {
       throw new IllegalArgumentException("failed to write to file");
