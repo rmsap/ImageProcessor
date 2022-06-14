@@ -21,7 +21,7 @@ public class Filter implements Operation {
 
   private final Map<Filters, double[][]> filtersMap;
 
-  Filter(Filters filter) {
+  public Filter(Filters filter) {
     this.filter = filter;
 
     this.filtersMap = new HashMap<Filters, double[][]>();
@@ -29,55 +29,53 @@ public class Filter implements Operation {
             {0.0625, 0.125, 0.0625},
             {0.125, 0.25, 0.125},
             {0.0625, 0.125, 0.0625}});
+    this.filtersMap.put(Filters.Sharpen, new double[][] {
+            {-0.125, -0.125, -0.125, -0.125, -0.125},
+            {-0.125, 0.25, 0.25, 0.25, -0.125},
+            {-0.125, 0.25, 1, 0.25, -0.125},
+            {-0.125, 0.25, 0.25, 0.25, -0.125},
+            {-0.125, -0.125, -0.125, -0.125, -0.125}});
   }
 
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
     int[][] copy = model.getImage(name);
     int numPixels = copy.length;
-    int numPixelsPerRow = copy.length / copy[0][0];
+    int numPixelsPerRow = copy.length / copy[0][1];
+    int kernelRows = this.filtersMap.get(this.filter).length;
 
     // Iterate through every pixel
     for (int i = 1; i < numPixels; i++) {
       // Iterate through each color channel of the ith pixel
-      for (int j = 0; j < copy[i].length; j++) {
-        int sum = 0;
-        // Iterate through each element of the kernel and apply its transformation
-        for (int k = 0; k < filtersMap.get(this.filter).length; k++) {
-          // If we are going above the center row of the image
-          if (k < filtersMap.get(this.filter).length + 1) {
-            int numRowsAboveCenter = filtersMap.get(this.filter).length / 2 - k;
-//                      - (filtersMap.get(this.filter).length
-//                      - filtersMap.get(this.filter).length / 2 - 1
-//                      - (filtersMap.get(this.filter).length / 2 - k));
-            // If the number of rows above that we need to go exists
-            if (i - numPixelsPerRow * numRowsAboveCenter > 0) {
-              for (int l = 0; l < filtersMap.get(this.filter)[k].length; l++) {
-                // If we are going to the left of the center
-                if (l < filtersMap.get(this.filter)[k].length / 2 + 1) {
-                  int numColsLeftOfCenter = filtersMap.get(this.filter)[k].length / 2 - l;
-                  // If the column we are looking for exists
-                  if (i - numColsLeftOfCenter >= 1) {
-                    sum += copy[i - l][j] * filtersMap.get(this.filter)[k][l];
-                  }
-                }
-              }
+      for (int j = 0; j < 3; j++) {
+        double newColor = 0;
+        // Iterate through each row of the kernel
+        for (int k = 0; k < kernelRows; k++) {
+          int multiplicativeFactor = k - kernelRows / 2;
+          int centerPixelInRowToChange = i + (multiplicativeFactor * numPixelsPerRow);
+          // Iterate through each column of the given row in the kernel
+          for (int l = 0; l < this.filtersMap.get(this.filter)[k].length; l++) {
+            int numLeftOrRight = l - this.filtersMap.get(this.filter)[k].length / 2;
+            try {
+              newColor += this.filtersMap.get(this.filter)[k][l]
+                      * copy[centerPixelInRowToChange + numLeftOrRight][j];
             }
-
+            catch (ArrayIndexOutOfBoundsException e) {
+              // Do nothing if we catch this Exception because it means that there is no pixel
+              // at the given position.
+            }
           }
-          // If we are going below the center row of the image
-          else if (k > filtersMap.get(this.filter).length + 1) {
-
-          }
-          // If we are in the center row of the image
-          else {
-
-          }
-          copy[i][j] = Math.min(sum, 255);
         }
+        if (newColor > 255) {
+          newColor = 255;
+        }
+        else if (newColor < 0) {
+          newColor = 0;
+        }
+
+        copy[i][j] = (int) newColor;
       }
     }
-
-    return new int[0][];
+    return copy;
   }
 }

@@ -13,6 +13,8 @@ import imageformat.PNGImageFormat;
 import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import operations.BrightenOrDarken;
+import operations.Filter;
+import operations.Filter.Filters;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
 import operations.Operation;
@@ -66,6 +68,8 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory.put("visualize-value", new ColorTransformation(Transformation.Value));
     operationDirectory.put("sepia", new ColorTransformation(Transformation.Sepia));
     operationDirectory.put("change-brightness", new BrightenOrDarken(0));
+    operationDirectory.put("blur", new Filter(Filters.Blur));
+    operationDirectory.put("sharpen", new Filter(Filters.Sharpen));
 
     // Instantiate the format directory and load all supported image formats into it
     formatDirectory = new HashMap<String, ImageFormat>();
@@ -234,6 +238,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         } catch (IllegalArgumentException e) {
           this.view.renderMessage("An image with the given name does not exist in the model " +
                   "or the file path is invalid.\n");
+          System.out.println(e.getMessage());
         }
       } catch (IOException io) {
         throw new IllegalStateException("Failed to write to Appendable");
