@@ -67,6 +67,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory.put("visualize-luma", new ColorTransformation(Transformation.Luma));
     operationDirectory.put("visualize-value", new ColorTransformation(Transformation.Value));
     operationDirectory.put("sepia", new ColorTransformation(Transformation.Sepia));
+    operationDirectory.put("greyscale", new ColorTransformation(Transformation.Luma));
     operationDirectory.put("change-brightness", new BrightenOrDarken(0));
     operationDirectory.put("blur", new Filter(Filters.Blur));
     operationDirectory.put("sharpen", new Filter(Filters.Sharpen));
@@ -181,6 +182,9 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
       this.view.renderMessage("To visualize intensity: visualize-intensity imageName nameToCall\n");
       this.view.renderMessage("To visualize luma: visualize-luma imageName nameToCall\n");
       this.view.renderMessage("To visualize value: visualize-value imageName nameToCall\n");
+      this.view.renderMessage("To greyscale: greyscale imageName nameToCall\n");
+      this.view.renderMessage("To blur: blur imageName nameToCall\n");
+      this.view.renderMessage("To sharpen: sharpen imageName nameToCall\n");
       this.view.renderMessage("To save an image: save filePath imageName\n");
       this.view.renderMessage("filePath represents the name of the file to save as" +
               " along with it's specified path\n");
