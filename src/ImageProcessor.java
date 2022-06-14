@@ -25,7 +25,7 @@ public class ImageProcessor {
     // if a valid script is provided, it should run it and then exit
     // a valid text will have q denoting when to quit
     ImageProcessorModel model = new ImageProcessorModelImpl();
-    ImageProcessorView view = new ImageProcessorTextView(model);
+    ImageProcessorView view = new ImageProcessorTextView(model, System.out);
     ImageProcessorController controller = new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
 //    if (args.length == 0) {
 //      controller = new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
@@ -41,7 +41,8 @@ public class ImageProcessor {
       if(hasQ) { // we know it's a valid text file
         try{
 //      Scanner input = new Scanner(new File(args[0]));
-          FileReader reader = new FileReader(args[0]);
+          File file = new File(args[0]);
+          FileReader reader = new FileReader(file);
           controller = new ImageProcessorControllerImpl(model, view, reader);
         }
         catch(FileNotFoundException bruh) {
