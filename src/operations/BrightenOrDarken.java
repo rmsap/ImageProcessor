@@ -28,7 +28,7 @@ public class BrightenOrDarken implements Operation {
 
     // starting at index 1 since the 0th index contains the header information
     for (int i = 1; i < deepCopy.length; i++) {
-      for (int j = 0; j < deepCopy[i].length; j++) {
+      for (int j = 0; j < 3; j++) {
         deepCopy[i][j] += scale;
         if (deepCopy[i][j] < 0) {
           deepCopy[i][j] = 0;

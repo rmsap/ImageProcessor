@@ -20,6 +20,8 @@ import operations.FlipVertical;
 import operations.Operation;
 import operations.ColorTransformation;
 import operations.ColorTransformation.Transformation;
+import operations.VisualizeComponent;
+import operations.VisualizeComponent.Component;
 import view.ImageProcessorView;
 
 /**
@@ -59,15 +61,15 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory = new HashMap<String, Operation>();
     operationDirectory.put("flip-horizontal", new FlipHorizontal());
     operationDirectory.put("flip-vertical", new FlipVertical());
-    operationDirectory.put("visualize-green", new ColorTransformation(Transformation.Green));
-    operationDirectory.put("visualize-blue", new ColorTransformation(Transformation.Blue));
-    operationDirectory.put("visualize-red", new ColorTransformation(Transformation.Red));
+    operationDirectory.put("visualize-green", new VisualizeComponent(Component.Green));
+    operationDirectory.put("visualize-blue", new VisualizeComponent(Component.Blue));
+    operationDirectory.put("visualize-red", new VisualizeComponent(Component.Red));
     operationDirectory.put("visualize-intensity",
-            new ColorTransformation(Transformation.Intensity));
-    operationDirectory.put("visualize-luma", new ColorTransformation(Transformation.Luma));
-    operationDirectory.put("visualize-value", new ColorTransformation(Transformation.Value));
+            new VisualizeComponent(Component.Red.Intensity));
+    operationDirectory.put("visualize-luma", new VisualizeComponent(Component.Luma));
+    operationDirectory.put("visualize-value", new VisualizeComponent(Component.Value));
     operationDirectory.put("sepia", new ColorTransformation(Transformation.Sepia));
-    operationDirectory.put("greyscale", new ColorTransformation(Transformation.Luma));
+    operationDirectory.put("greyscale", new ColorTransformation(Transformation.Greyscale));
     operationDirectory.put("change-brightness", new BrightenOrDarken(0));
     operationDirectory.put("blur", new Filter(Filters.Blur));
     operationDirectory.put("sharpen", new Filter(Filters.Sharpen));

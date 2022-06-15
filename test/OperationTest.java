@@ -11,6 +11,8 @@ import operations.FlipHorizontal;
 import operations.FlipVertical;
 import operations.ColorTransformation;
 import operations.ColorTransformation.Transformation;
+import operations.VisualizeComponent;
+import operations.VisualizeComponent.Component;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -231,7 +233,7 @@ public class OperationTest {
   @Test
   public void testVisualizeRed() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new ColorTransformation(Transformation.Red), "koala", "koala-red");
+    model.doOperation(new VisualizeComponent(Component.Red), "koala", "koala-red");
 
     try {
       model.getImage("koala-red");
@@ -261,7 +263,7 @@ public class OperationTest {
   @Test
   public void testVisualizeGreen() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new ColorTransformation(Transformation.Green), "koala", "koala-green");
+    model.doOperation(new VisualizeComponent(Component.Green), "koala", "koala-green");
 
     try {
       model.getImage("koala-green");
@@ -291,7 +293,7 @@ public class OperationTest {
   @Test
   public void testVisualizeBlue() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new ColorTransformation(Transformation.Blue), "koala", "koala-blue");
+    model.doOperation(new VisualizeComponent(Component.Blue), "koala", "koala-blue");
 
     try {
       model.getImage("koala-blue");
@@ -321,7 +323,7 @@ public class OperationTest {
   @Test
   public void testVisualizeValue() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new ColorTransformation(Transformation.Value),
+    model.doOperation(new VisualizeComponent(Component.Value),
             "koala", "koala-value");
 
     try {
@@ -351,7 +353,7 @@ public class OperationTest {
   @Test
   public void testVisualizeIntensity() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new ColorTransformation(Transformation.Intensity),
+    model.doOperation(new VisualizeComponent(Component.Intensity),
             "koala", "koala-intensity");
 
     try {
@@ -381,7 +383,37 @@ public class OperationTest {
   @Test
   public void testVisualizeLuma() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new ColorTransformation(Transformation.Luma),
+    model.doOperation(new VisualizeComponent(Component.Luma),
+            "koala", "koala-luma");
+
+    try {
+      model.getImage("koala-luma");
+    } catch (IllegalArgumentException e) {
+      fail("Copied image was not added to the directory of the model properly.");
+    }
+
+    int[][] koalaLuma = model.getImage("koala-luma");
+
+    // Test that the header row of the new image is equal to the header row of the original image
+    assertEquals(koalaLuma[0][0], originalKoalaColors[0][0]);
+    assertEquals(koalaLuma[0][1], originalKoalaColors[0][1]);
+    assertEquals(koalaLuma[0][2], originalKoalaColors[0][2]);
+
+    // Test that each pixel in the new image has all 3 of its RGB values
+    // set to the green value of the corresponding pixel in the original image
+    for (int i = 1; i < koalaLuma.length; i++) {
+      double luma = 0.2126 * originalKoalaColors[i][0] + 0.7152 * originalKoalaColors[i][1]
+              + 0.0722 * originalKoalaColors[i][2];
+      assertEquals(koalaLuma[i][0], (int) luma);
+      assertEquals(koalaLuma[i][1], (int) luma);
+      assertEquals(koalaLuma[i][2], (int) luma);
+    }
+  }
+
+  @Test
+  public void testGreyscale() {
+    int[][] originalKoalaColors = model.getImage("koala");
+    model.doOperation(new ColorTransformation(Transformation.Greyscale),
             "koala", "koala-luma");
 
     try {
