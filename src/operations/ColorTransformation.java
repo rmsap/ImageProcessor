@@ -54,6 +54,11 @@ public class ColorTransformation implements Operation {
 
     for (int i = 1; i < copy.length; i++) {
       copy[i] = this.transformations.get(this.transform).apply(copy[i]).clone();
+      for(int j = 0; j < 3 ; j++) { // checking every color value in each pixel
+        if(copy[i][j] > 255) { // clamp at 255 if it exceeds the value
+          copy[i][j] = 255;
+        }
+      }
     }
     return copy;
   }
