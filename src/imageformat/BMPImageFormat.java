@@ -109,11 +109,5 @@ public class BMPImageFormat extends AbstractModernImageFormat {
     }
 
   }
-  public static void main (String[] args) {
-    ImageFormat bruh = new BMPImageFormat();
-    int [][] obunga = bruh.read("res/sample_640×426.bmp");
-    System.out.print(obunga[1][3]);
-    bruh.save("res/sampleBruh.bmp", obunga);
 
-  }
 }

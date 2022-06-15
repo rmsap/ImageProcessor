@@ -118,12 +118,6 @@ public class JPGImageFormat extends AbstractModernImageFormat{
 
   }
 
-  public static void main (String[] args) {
-    ImageFormat bruh = new JPGImageFormat();
-    int [][] obunga = bruh.read("res/Warner.jpg");
-    System.out.print(obunga[0][0]);
-    bruh.save("res/WarnerBruhthers.jpg", obunga);
 
-  }
 
 }

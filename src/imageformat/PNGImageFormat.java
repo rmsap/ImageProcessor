@@ -112,13 +112,6 @@ public class PNGImageFormat extends AbstractModernImageFormat {
 
   }
 
-  public static void main (String[] args) {
-    ImageFormat bruh = new PNGImageFormat();
-    int [][] obunga = bruh.read("res/neil.png");
-    System.out.print(obunga[0][0]);
-    bruh.save("res/NeilBruh.png", obunga);
-
-  }
 
 
 }
