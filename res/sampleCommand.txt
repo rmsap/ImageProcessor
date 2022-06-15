@@ -1,4 +1,4 @@
-load res/neil.png neil flip-horizontal neil neil-horizontal
-save res/neilHorizontal.bmp neil-horizontal
-load res/Warner.jpg warner change-brightness 100 warner warner-brighter
-save res/warnerBrighter.png warner-brighter q
+load neil.png neil flip-horizontal neil neil-horizontal
+save neilHorizontal.bmp neil-horizontal
+load Warner.jpg warner change-brightness 100 warner warner-brighter
+save warnerBrighter.png warner-brighter q
