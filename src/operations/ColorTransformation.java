@@ -8,22 +8,21 @@ import java.util.function.Function;
 import model.ImageProcessorModel;
 
 /**
- * This class represents a function object that converts an image to greyscale based on its one of
- * its color components.
+ * This class represents a function object that transforms the colors of an image (e.g. give an
+ * image a sepia tint).
  */
 public class ColorTransformation implements Operation {
 
   /**
-   * This enum represents possible colors that we could use to greyscale an image. An enum is used
-   * here to ensure that it is impossible to enter an invalid key into the Map created below.
+   * This enum represents possible transformations that we could use to change an image's color.
    */
-  public enum Transformation { Red, Green, Blue, Value, Intensity, Luma, Sepia }
+  public enum Transformation { Greyscale, Sepia }
 
-  // A map of Colors to int arrays so that we can get the new values for each of the color channel
-  // of the pixel
+  // A map of Transformations to a Function that, given a pixel's three color channels,
+  // determines what the channels should be for a given transformation.
   private final Map<Transformation, Function<int[], int[]>> transformations;
 
-  // The factor that we will be using to greyscale this image.
+  // The transformation that we will be using on this image.
   private final Transformation transform;
 
   /**
@@ -38,22 +37,7 @@ public class ColorTransformation implements Operation {
 
     // Put all transformations in the map and point them to
     // the function that will return the correct color of a pixel.
-    this.transformations.put(Transformation.Red, pixel -> new int[] {pixel[0], pixel[0], pixel[0]});
-    this.transformations.put(Transformation.Green, pixel ->
-            new int[] {pixel[1], pixel[1], pixel[1]});
-    this.transformations.put(Transformation.Blue, pixel ->
-            new int[] {pixel[2], pixel[2], pixel[2]});
-    this.transformations.put(Transformation.Value,
-            pixel -> {
-      int max = Math.max(pixel[0], Math.max(pixel[1], pixel[2]));
-      return new int[] {max, max, max};
-    });
-    this.transformations.put(Transformation.Intensity,
-        pixel -> {
-      int intensity = (pixel[0] + pixel[1] + pixel[2]) / 3;
-      return new int[] {intensity, intensity, intensity};
-    });
-    this.transformations.put(Transformation.Luma,
+    this.transformations.put(Transformation.Greyscale,
         pixel -> {
       int luma = (int) (0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]);
       return new int[] {luma, luma, luma};
