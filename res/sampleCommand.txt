@@ -18,7 +18,7 @@ visualize-green warner-vertical warner-green
 save warnerGreen.ppm warner-green
 visualize-value warner-vertical warner-value
 blur warner-vertical warner-blur
-save warnerBlur.bpm warner-blur
+save warnerBlur.bmp warner-blur
 
 load koala.ppm koala
 visualize-blue koala koala-blue
@@ -28,7 +28,7 @@ save koalaLuma.ppm koala-luma
 flip-horizontal koala-luma koala-horizontal
 save koalaHorizontal.png koala-horizontal
 flip-vertical koala-horizontal koala-vertical
-save koalaVert.bpm koala-vertical
+save koalaVert.bmp koala-vertical
 
 load sampleBMP.bmp sample-bmp
 visualize-red sample-bmp bmp-red
