@@ -24,6 +24,7 @@ Open res/commandScript.txt. When the program is run, copy and paste the file con
 
 Image Citation:
 The 4x3ppmOriginal.ppm and 4x4ppmOriginal.ppm files were created and owned by the programmers of this application. They both authorize its use in this program. All variations of these images were created by this program and thus are owned by its developers, and they authorize their use as well. Note: the provided Koala.ppm image from the starter code is used in the folder solely for testing purposes and is not meant to be an example image.
+The Warner.jpg, sampleBMP.bmp, and neil.png were created and owned by the programmers of this application. They both authorize its use in this program. All variations of these images were created by this program and thus are owned by its developers, and they authorize their use as well.
 
 Changes between Assignments 4 and 5:
 Greyscale class was renamed to VisualizeComponent. This was done because the "greyscale" command that was added is different from what this pre-existing code did, and the class having the same name as a different command would be confusing. So, it was renamed to avoid this confusion.
