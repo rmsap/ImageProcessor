@@ -460,12 +460,12 @@ public class OperationTest {
 
     // Test that each pixel in the new image had the appropriate color transformation applied to it.
     for (int i = 1; i < koalaSepia.length; i++) {
-      assertEquals((int) (0.393 * originalKoalaColors[i][0] + 0.769 * originalKoalaColors[i][1]
-              + 0.189 * originalKoalaColors[i][2]), koalaSepia[i][0]);
-      assertEquals((int) (0.349 * originalKoalaColors[i][0] + 0.686 * originalKoalaColors[i][1]
-                      + 0.168 * originalKoalaColors[i][2]), koalaSepia[i][1]);
-      assertEquals((int) (0.272 * originalKoalaColors[i][0] + 0.534 * originalKoalaColors[i][1]
-              + 0.131 * originalKoalaColors[i][2]), koalaSepia[i][2]);
+      assertEquals(Math.min((int) (0.393 * originalKoalaColors[i][0] + 0.769 * originalKoalaColors[i][1]
+              + 0.189 * originalKoalaColors[i][2]), 255), koalaSepia[i][0]);
+      assertEquals(Math.min((int) (0.349 * originalKoalaColors[i][0] + 0.686 * originalKoalaColors[i][1]
+                      + 0.168 * originalKoalaColors[i][2]), 255), koalaSepia[i][1]);
+      assertEquals(Math.min((int) (0.272 * originalKoalaColors[i][0] + 0.534 * originalKoalaColors[i][1]
+              + 0.131 * originalKoalaColors[i][2]), 255), koalaSepia[i][2]);
     }
   }
 
