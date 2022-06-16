@@ -1,0 +1,41 @@
+USEME
+
+For ImageProcessor, the following script commands are supported when running the program through ImageProcessor.java, which contains the main method:
+
+Note: "filePath" refers to the file to be used, which includes its filepath in the String. "imageName" refers to the name of the image in the model. "nameToCall" refers to the name of the new image that is created when performing an operation.
+
+To run each of the script commands, follow the corresponding order to make the command work.
+
+To load an image: load filePath nameToCall
+In order to successfully load an image, filePath must be a ppm, jpg, png, or bmp file. The file must also exist.
+
+To save an image(Note:filepath represents how you want to save an image): save filePath imageName
+In order to successfully save an image, filePath must be a valid address and must be either a ppm, jpg, png, or bmp file. imageName must also exist in the model that stores images.
+
+
+
+The following script commands below are supported for operations. It is noted that imageName must exist within the model in order for the script command to execute successfully. An imageName will be valid if an image that is loaded is designated the corresponding name. To successfully execute a script command, the commands should be typed in the corresponding order below (name of operation, the image name, and the name to call the new image):
+
+To flip an image horizontally: flip-horizontal imageName nameToCall
+To fip an image vertically: flip-vertical imageName nameToCall
+To visualize the green component of an image: visualize-green imageName nameToCall
+To visualize the blue component of an image: visualize-blue imageName nameToCall
+To visualize the red component of an image: visualize-red imageName nameToCall
+To visualize the luma of an image: visualize-luma imageName nameToCall
+To visualize the intensity of an image: visualize-intensity imageName nameToCall
+To visualize the value of an image: visualize-value imageName nameToCall
+To visualzie a sepia tone of an image: sepia imageName nameToCall
+To greyscale an image: greyscale imageName nameToCall
+To brighten or darken an image (Note: entering a positive integer will brighten an image by that many color values, and entering a negative integer will darken the image by reducing the image's pixels by that many color values): changeBrightness integer imageName nameToCall
+To blur an image: blur imageName nameToCall
+To sharpen an image: sharpen imageName nameToCall
+
+To quit ImageProcessor: q
+
+
+To run the program through the jar file, enter the following command in the corresponding order: jav -jar ImageProcessor.java
+To run the program through the jar file and take in a script file, enter the command in the corresponding order (scriptFile represents the name and path of the script file to be used): java -jar ImageProcessor.java scriptFile
+
+
+
+
