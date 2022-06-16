@@ -1,4 +1,41 @@
-load neil.png neil flip-horizontal neil neil-horizontal
+load neil.png neil
+flip-horizontal neil neil-horizontal
 save neilHorizontal.bmp neil-horizontal
-load Warner.jpg warner change-brightness 100 warner warner-brighter
-save warnerBrighter.png warner-brighter q
+change-brightness 50 neil-horizontal dark-neil
+save darkNeil.ppm dark-neil
+sepia dark-neil sepia-neil
+save sepiaNeil.jpg sepia-neil
+visualize-intensity sepia-neil neil-intensity
+sharpen dark-neil neil-sharp
+save neilSharp.png neil-sharp
+
+load Warner.jpg warner
+change-brightness 100 warner warner-brighter
+save warnerBrighter.png warner-brighter
+flip-vertical warner-brighter warner-vertical
+save warnerVertical.jpg warner-vertical
+visualize-green warner-vertical warner-green
+save warnerGreen.ppm warner-green
+visualize-value warner-vertical warner-value
+blur warner-vertical warner-blur
+save warnerBlur.bpm warner-blur
+
+load koala.ppm koala
+visualize-blue koala koala-blue
+save koalaBlue.jpg koala-blue
+visualize-luma koala koala-luma
+save koalaLuma.ppm koala-luma
+flip-horizontal koala-luma koala-horizontal
+save koalaHorizontal.png koala-horizontal
+flip-vertical koala-horizontal koala-vertical
+save koalaVert.bpm koala-vertical
+
+load sampleBMP.bmp sample-bmp
+visualize-red sample-bmp bmp-red
+save bmpRed.jpg bmp-red
+greyscale sample-bmp bmp-grey
+save bmpGrey.png bmp-grey
+blur sample-bmp bmp-blur
+save bmpBlur.bmp bmp-blur
+blur bmp-blur bmp-blurrier
+save bmpBlurrier.ppm bmp-blurrier q
