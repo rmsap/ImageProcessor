@@ -13,7 +13,6 @@ To save an image(Note:filepath represents how you want to save an image): save f
 In order to successfully save an image, filePath must be a valid address and must be either a ppm, jpg, png, or bmp file. imageName must also exist in the model that stores images.
 
 
-
 The following script commands below are supported for operations. It is noted that imageName must exist within the model in order for the script command to execute successfully. An imageName will be valid if an image that is loaded is designated the corresponding name. To successfully execute a script command, the commands should be typed in the corresponding order below (name of operation, the image name, and the name to call the new image):
 
 To flip an image horizontally: flip-horizontal imageName nameToCall
@@ -32,10 +31,6 @@ To sharpen an image: sharpen imageName nameToCall
 
 To quit ImageProcessor: q
 
-
 To run the program through the jar file, enter the following command in the corresponding order: jav -jar ImageProcessor.java
 To run the program through the jar file and take in a script file, enter the command in the corresponding order (scriptFile represents the name and path of the script file to be used): java -jar ImageProcessor.java scriptFile
-
-
-
-
+To run the program through the jar file with our sample script file, enter the command in the corresponding order: java -jar ImageProcessor.java scriptCommand.txt
