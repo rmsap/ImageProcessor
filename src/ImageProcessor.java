@@ -14,7 +14,8 @@ import view.ImageProcessorView;
 /**
  * This class represents a main method to run the image processor program.
  */
-public class ImageProcessor {
+public class
+ImageProcessor {
   /**
    * A simple main method to run the image processor.
    *
