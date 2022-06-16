@@ -503,13 +503,12 @@ public class OperationTest {
           // Iterate through each column of the given row in the kernel
           for (int l = 0; l < kernel[k].length; l++) {
             int numLeftOrRight = l - kernel[k].length / 2;
-            try {
+            if (!(i % numPixelsPerRow == 0 && numLeftOrRight > 0)
+                    && !(i % numPixelsPerRow == 1 && numLeftOrRight < 0)
+                    && centerPixelInRowToChange + numLeftOrRight > 0
+                    && centerPixelInRowToChange + numLeftOrRight < originalKoalaColors.length) {
               newColor += kernel[k][l]
                       * originalKoalaColors[centerPixelInRowToChange + numLeftOrRight][j];
-            }
-            catch (ArrayIndexOutOfBoundsException e) {
-              // Do nothing if we catch this Exception because it means that there is no pixel
-              // at the given position.
             }
           }
         }
@@ -524,6 +523,84 @@ public class OperationTest {
         originalKoalaColors[i][j] = (int) newColor;
       }
     }
+
+    model.doOperation(new Filter(Filters.Blur), "4x4", "4x4-blur");
+
+    try {
+      model.getImage("4x4-blur");
+    } catch (IllegalArgumentException e) {
+      fail("Copied image was not added to the directory of the model properly.");
+    }
+
+    int[][] fourByFourBlur = model.getImage("4x4-blur");
+
+    assertEquals(4, fourByFourBlur[0][0]);
+    assertEquals(4, fourByFourBlur[0][1]);
+    assertEquals(255, fourByFourBlur[0][2]);
+
+    assertEquals(56, fourByFourBlur[1][0]);
+    assertEquals(0, fourByFourBlur[1][1]);
+    assertEquals(0, fourByFourBlur[1][2]);
+
+    assertEquals(50, fourByFourBlur[2][0]);
+    assertEquals(0, fourByFourBlur[2][1]);
+    assertEquals(0, fourByFourBlur[2][2]);
+
+    assertEquals(12, fourByFourBlur[3][0]);
+    assertEquals(0, fourByFourBlur[3][1]);
+    assertEquals(0, fourByFourBlur[3][2]);
+
+    assertEquals(1, fourByFourBlur[4][0]);
+    assertEquals(0, fourByFourBlur[4][1]);
+    assertEquals(0, fourByFourBlur[4][2]);
+
+    assertEquals(47, fourByFourBlur[5][0]);
+    assertEquals(18, fourByFourBlur[5][1]);
+    assertEquals(0, fourByFourBlur[5][2]);
+
+    assertEquals(57, fourByFourBlur[6][0]);
+    assertEquals(36, fourByFourBlur[6][1]);
+    assertEquals(15, fourByFourBlur[6][2]);
+
+    assertEquals(59, fourByFourBlur[7][0]);
+    assertEquals(58, fourByFourBlur[7][1]);
+    assertEquals(49, fourByFourBlur[7][2]);
+
+    assertEquals(56, fourByFourBlur[8][0]);
+    assertEquals(55, fourByFourBlur[8][1]);
+    assertEquals(53, fourByFourBlur[8][2]);
+
+    assertEquals(9, fourByFourBlur[9][0]);
+    assertEquals(60, fourByFourBlur[9][1]);
+    assertEquals(0, fourByFourBlur[9][2]);
+
+    assertEquals(62, fourByFourBlur[10][0]);
+    assertEquals(108, fourByFourBlur[10][1]);
+    assertEquals(52, fourByFourBlur[10][2]);
+
+    assertEquals(165, fourByFourBlur[11][0]);
+    assertEquals(176, fourByFourBlur[11][1]);
+    assertEquals(160, fourByFourBlur[11][2]);
+
+    assertEquals(142, fourByFourBlur[12][0]);
+    assertEquals(144, fourByFourBlur[12][1]);
+    assertEquals(141, fourByFourBlur[12][2]);
+
+    assertEquals(5, fourByFourBlur[13][0]);
+    assertEquals(51, fourByFourBlur[13][1]);
+    assertEquals(3, fourByFourBlur[13][2]);
+
+    assertEquals(51, fourByFourBlur[14][0]);
+    assertEquals(91, fourByFourBlur[14][1]);
+    assertEquals(48, fourByFourBlur[14][2]);
+
+    assertEquals(135, fourByFourBlur[15][0]);
+    assertEquals(144, fourByFourBlur[15][1]);
+    assertEquals(133, fourByFourBlur[15][2]);
+
+    assertEquals(108, fourByFourBlur[16][0]);
+    assertEquals(110, fourByFourBlur[16][1]);
+    assertEquals(108, fourByFourBlur[16][2]);
   }
 
   @Test
@@ -565,14 +642,12 @@ public class OperationTest {
           // Iterate through each column of the given row in the kernel
           for (int l = 0; l < kernel[k].length; l++) {
             int numLeftOrRight = l - kernel[k].length / 2;
-            try {
+            if (!(i % numPixelsPerRow == 0 && numLeftOrRight > 0)
+                    && !(i % numPixelsPerRow == 1 && numLeftOrRight < 0)
+                    && centerPixelInRowToChange + numLeftOrRight > 0
+                    && centerPixelInRowToChange + numLeftOrRight < originalKoalaColors.length)
               newColor += kernel[k][l]
                       * originalKoalaColors[centerPixelInRowToChange + numLeftOrRight][j];
-            }
-            catch (ArrayIndexOutOfBoundsException e) {
-              // Do nothing if we catch this Exception because it means that there is no pixel
-              // at the given position.
-            }
           }
         }
         if (newColor > 255) {
@@ -586,5 +661,62 @@ public class OperationTest {
         originalKoalaColors[i][j] = (int) newColor;
       }
     }
+
+    model.doOperation(new Filter(Filters.Sharpen), "4x4", "4x4-sharp");
+
+    try {
+      model.getImage("4x4-sharp");
+    } catch (IllegalArgumentException e) {
+      fail("Copied image was not added to the directory of the model properly.");
+    }
+
+    int[][] fourByFourSharp = model.getImage("4x4-sharp");
+    int[][] image = model.getImage("4x4");
+
+    double color = /*fourByFourSharp[0][0] * -.125 + fourByFourSharp[0][0] * -.125 + fourByFourSharp[0][0] * -.125
+            + fourByFourSharp[0][0] * -.125 + fourByFourSharp[0][0] * -.125*/
+
+            /*+ fourByFourSharp[1][0] * -.125 +*/ fourByFourSharp[1][0] * .25 + fourByFourSharp[2][0] * .25
+            + fourByFourSharp[3][0] * .25 + fourByFourSharp[4][0] * -.125
+
+            /*+ fourByFourSharp[2][0] * -.125*/ + fourByFourSharp[5][0] * .25 + image[6][0] * 1
+            + image[7][0] * .25 + image[8][0] * -.125
+
+            /*+ image[6][0] * -.125*/ + image[9][0] * .25 + image[10][0] * .25
+            + image[11][0] * .25 + image[12][0] * -.125
+
+            /*+ image[10][0] * -.125*/ + image[13][0] * -.125 + image[14][0] * -.125
+            + image[15][0] * -.125 + image[16][0] * -.125;
+
+    System.out.println((int)color);
+
+    assertEquals(4, fourByFourSharp[0][0]);
+    assertEquals(4, fourByFourSharp[0][1]);
+    assertEquals(255, fourByFourSharp[0][2]);
+
+    assertEquals(143, fourByFourSharp[1][0]);
+    assertEquals(0, fourByFourSharp[1][1]);
+    assertEquals(0, fourByFourSharp[1][2]);
+
+    assertEquals(122, fourByFourSharp[2][0]);
+    assertEquals(0, fourByFourSharp[2][1]);
+    assertEquals(0, fourByFourSharp[2][2]);
+
+    assertEquals(0, fourByFourSharp[3][0]);
+    assertEquals(0, fourByFourSharp[3][1]);
+    assertEquals(0, fourByFourSharp[3][2]);
+
+    assertEquals(0, fourByFourSharp[4][0]);
+    assertEquals(0, fourByFourSharp[4][1]);
+    assertEquals(0, fourByFourSharp[4][2]);
+
+    assertEquals(127, fourByFourSharp[5][0]);
+    assertEquals(0, fourByFourSharp[5][1]);
+    assertEquals(0, fourByFourSharp[5][2]);
+
+    // Breaks when k = 4, l = 3
+    assertEquals(166, fourByFourSharp[6][0]);
+    assertEquals(0, fourByFourSharp[6][1]);
+    assertEquals(0, fourByFourSharp[6][2]);
   }
 }

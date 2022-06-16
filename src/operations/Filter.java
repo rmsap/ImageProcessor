@@ -56,13 +56,12 @@ public class Filter implements Operation {
           // Iterate through each column of the given row in the kernel
           for (int l = 0; l < this.filtersMap.get(this.filter)[k].length; l++) {
             int numLeftOrRight = l - this.filtersMap.get(this.filter)[k].length / 2;
-            try {
+            if (!(i % numPixelsPerRow == 0 && numLeftOrRight > 0)
+                    && !(i % numPixelsPerRow == 1 && numLeftOrRight < 0)
+                    && centerPixelInRowToChange + numLeftOrRight > 0
+                    && centerPixelInRowToChange + numLeftOrRight < copy.length) {
               newColor += this.filtersMap.get(this.filter)[k][l]
                       * copy[centerPixelInRowToChange + numLeftOrRight][j];
-            }
-            catch (ArrayIndexOutOfBoundsException e) {
-              // Do nothing if we catch this Exception because it means that there is no pixel
-              // at the given position.
             }
           }
         }
