@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.util.Scanner;
+
 
 import controller.ImageProcessorController;
 import controller.ImageProcessorControllerImpl;
@@ -28,18 +28,19 @@ public class ImageProcessor {
     ImageProcessorView view = new ImageProcessorTextView(model, System.out);
     ImageProcessorController controller = new ImageProcessorControllerImpl(model,
             view, new InputStreamReader(System.in));
-    if(args.length > 0) {
-      // should only run from command line if there is a "q" so the readable doesn't run out of inputs
+    if (args.length > 0) {
+      // should only run from command line if there is a "q" so the readable doesn't
+      // run out of inputs
       boolean hasQ = true;
 
-      if(hasQ) { // we know it's a valid text file
-        try{
+      if (hasQ) { // we know it's a valid text file
+        try {
           File file = new File(args[0]);
           FileReader reader = new FileReader(file);
           controller = new ImageProcessorControllerImpl(model, view, reader);
-        }
-        catch(FileNotFoundException bruh) {
-          controller = new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
+        } catch (FileNotFoundException bruh) {
+          controller = new ImageProcessorControllerImpl(model, view,
+                  new InputStreamReader(System.in));
         }
       }
 

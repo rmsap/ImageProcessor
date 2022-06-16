@@ -25,10 +25,10 @@ public class BMPImageFormatTest {
 
   @Test
   public void testRead() {
-    int [][] image1 = bmp.read("res/sampleBMP.bmp");
-    int [][] image2 = bmp.read("res/sampleCopy.bmp");
-    for(int i = 0; i < image1.length; i++) {
-      for(int j = 0; j < image1[0].length; j++) {
+    int[][] image1 = bmp.read("res/sampleBMP.bmp");
+    int[][] image2 = bmp.read("res/sampleCopy.bmp");
+    for (int i = 0; i < image1.length; i++) {
+      for (int j = 0; j < image1[0].length; j++) {
         assertEquals(image1[i][j], image2[i][j]);
       }
     }
@@ -56,7 +56,7 @@ public class BMPImageFormatTest {
 
   @Test
   public void testSave() {
-    int [][] somePPM = bmp.read("res/sampleBMP.bmp");
+    int[][] somePPM = bmp.read("res/sampleBMP.bmp");
     // If a file called randomPPM.ppm already exists in the res folder before these tests are run,
     // it must be deleted else these tests will fail. We are assuming that the file does not exist,
     // so we are creating it.

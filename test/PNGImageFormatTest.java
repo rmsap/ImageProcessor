@@ -64,7 +64,7 @@ public class PNGImageFormatTest {
     // it must be deleted else these tests will fail. We are assuming that the file does not exist,
     // so we are creating it.
     File somePPMFile = new File("res/someNeil.png");
-//    assertFalse(somePPMFile.exists());
+    //    assertFalse(somePPMFile.exists());
     png.save("res/someNeil.png", somePPM);
     assertTrue(somePPMFile.exists());
 
@@ -86,7 +86,7 @@ public class PNGImageFormatTest {
     // it must be deleted else these tests will fail. We are assuming that the file does not exist,
     // so we are creating it.
     File wow = new File("res/4x4.png");
-//    assertFalse(somePPMFile.exists());
+    //    assertFalse(somePPMFile.exists());
     png.save("res/4x4.png", some);
     assertTrue(somePPMFile.exists());
 

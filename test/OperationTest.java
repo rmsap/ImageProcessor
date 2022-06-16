@@ -443,7 +443,8 @@ public class OperationTest {
   @Test
   public void testSepia() {
     int[][] originalKoalaColors = model.getImage("koala");
-    model.doOperation(new ColorTransformation(Transformation.Sepia), "koala", "koala-sepia");
+    model.doOperation(new ColorTransformation(Transformation.Sepia), "koala",
+            "koala-sepia");
 
     try {
       model.getImage("koala-sepia");
@@ -460,11 +461,14 @@ public class OperationTest {
 
     // Test that each pixel in the new image had the appropriate color transformation applied to it.
     for (int i = 1; i < koalaSepia.length; i++) {
-      assertEquals(Math.min((int) (0.393 * originalKoalaColors[i][0] + 0.769 * originalKoalaColors[i][1]
+      assertEquals(Math.min((int) (0.393 * originalKoalaColors[i][0] + 0.769 *
+              originalKoalaColors[i][1]
               + 0.189 * originalKoalaColors[i][2]), 255), koalaSepia[i][0]);
-      assertEquals(Math.min((int) (0.349 * originalKoalaColors[i][0] + 0.686 * originalKoalaColors[i][1]
-                      + 0.168 * originalKoalaColors[i][2]), 255), koalaSepia[i][1]);
-      assertEquals(Math.min((int) (0.272 * originalKoalaColors[i][0] + 0.534 * originalKoalaColors[i][1]
+      assertEquals(Math.min((int) (0.349 * originalKoalaColors[i][0] + 0.686 *
+              originalKoalaColors[i][1]
+              + 0.168 * originalKoalaColors[i][2]), 255), koalaSepia[i][1]);
+      assertEquals(Math.min((int) (0.272 * originalKoalaColors[i][0] + 0.534 *
+              originalKoalaColors[i][1]
               + 0.131 * originalKoalaColors[i][2]), 255), koalaSepia[i][2]);
     }
   }
@@ -507,8 +511,7 @@ public class OperationTest {
 
             if (i % numPixelsPerRow != 0) {
               lastPixelInRow = i + (numPixelsPerRow - (i % numPixelsPerRow)); // math bad
-            }
-            else {
+            } else {
               lastPixelInRow = i;
             }
 
@@ -526,8 +529,7 @@ public class OperationTest {
         }
         if (newColor > 255) {
           newColor = 255;
-        }
-        else if (newColor < 0) {
+        } else if (newColor < 0) {
           newColor = 0;
         }
 
@@ -658,8 +660,7 @@ public class OperationTest {
 
             if (i % numPixelsPerRow != 0) {
               lastPixelInRow = i + (numPixelsPerRow - (i % numPixelsPerRow)); // math bad
-            }
-            else {
+            } else {
               lastPixelInRow = i;
             }
 
@@ -669,15 +670,17 @@ public class OperationTest {
                     && centerPixelInRowToChange + numLeftOrRight > 0
                     && centerPixelInRowToChange + numLeftOrRight < originalKoalaColors.length
                     && centerPixelInRowToChange > 0
-                    && centerPixelInRowToChange < originalKoalaColors.length)
-              newColor += kernel[k][l]
-                      * originalKoalaColors[centerPixelInRowToChange + numLeftOrRight][j];
+                    && centerPixelInRowToChange < originalKoalaColors.length) {
+              newColor += (kernel[k][l]
+                      * originalKoalaColors[centerPixelInRowToChange + numLeftOrRight][j]);
+            }
+
+
           }
         }
         if (newColor > 255) {
           newColor = 255;
-        }
-        else if (newColor < 0) {
+        } else if (newColor < 0) {
           newColor = 0;
         }
 

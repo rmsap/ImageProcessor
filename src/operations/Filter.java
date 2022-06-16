@@ -14,7 +14,7 @@ public class Filter implements Operation {
   /**
    * This enum represents potential filters that can be applied to an image.
    */
-  public enum Filters {Blur, Sharpen}
+  public enum Filters { Blur, Sharpen }
 
   ;
 
@@ -24,6 +24,10 @@ public class Filter implements Operation {
   // A map from filters to the matrix that applies them
   private final Map<Filters, double[][]> filtersMap;
 
+  /**
+   * Represents a storage of various filter operations.
+   * @param filter representing the collection of Filter enumerations
+   */
   public Filter(Filters filter) {
     this.filter = filter;
 

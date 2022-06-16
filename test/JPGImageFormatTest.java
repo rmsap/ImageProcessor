@@ -8,6 +8,7 @@ import imageformat.JPGImageFormat;
 import imageformat.PPMImageFormat;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -78,7 +79,7 @@ public class JPGImageFormatTest {
     ImageFormat ppm = new PPMImageFormat();
     int[][] warner = ppm.read("res/4x4PPMOriginal.ppm");
     File someJPGFile = new File("res/oogabooga.jpg");
-//    assertFalse(someJPGFile.exists());
+    assertFalse(someJPGFile.exists());
     jpg.save("res/oogabooga.jpg", warner);
     assertTrue(someJPGFile.exists());
 

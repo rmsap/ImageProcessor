@@ -15,7 +15,7 @@ public class ColorTransformation implements Operation {
   /**
    * This enum represents possible transformations that we could use to change an image's color.
    */
-  public enum Transformation {Greyscale, Sepia}
+  public enum Transformation { Greyscale, Sepia }
 
   // A map of Transformations to a Function that, given a pixel's three color channels,
   // determines what the channels should be for a given transformation.
@@ -37,14 +37,14 @@ public class ColorTransformation implements Operation {
     // Put all transformations in the map and point them to
     // the function that will return the correct color of a pixel.
     this.transformations.put(Transformation.Greyscale,
-            pixel -> {
-              int luma = (int) (0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]);
-              return new int[]{luma, luma, luma};
-            });
+        pixel -> {
+            int luma = (int) (0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]);
+            return new int[]{luma, luma, luma};
+        });
     this.transformations.put(Transformation.Sepia,
-            pixel -> new int[]{(int) (0.393 * pixel[0] + 0.769 * pixel[1] + 0.189 * pixel[2]),
-                    (int) (0.349 * pixel[0] + 0.686 * pixel[1] + 0.168 * pixel[2]),
-                    (int) (0.272 * pixel[0] + 0.534 * pixel[1] + 0.131 * pixel[2])});
+        pixel -> new int[]{(int) (0.393 * pixel[0] + 0.769 * pixel[1] + 0.189 * pixel[2]),
+            (int) (0.349 * pixel[0] + 0.686 * pixel[1] + 0.168 * pixel[2]),
+            (int) (0.272 * pixel[0] + 0.534 * pixel[1] + 0.131 * pixel[2])});
   }
 
   @Override

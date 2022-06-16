@@ -42,11 +42,11 @@ public class VisualizeComponent implements Operation {
     this.components.put(Component.Green, pixel -> pixel[1]);
     this.components.put(Component.Blue, pixel -> pixel[2]);
     this.components.put(Component.Value,
-            pixel -> Math.max(pixel[0], Math.max(pixel[1], pixel[2])));
+        pixel -> Math.max(pixel[0], Math.max(pixel[1], pixel[2])));
     this.components.put(Component.Intensity,
-            pixel -> (pixel[0] + pixel[1] + pixel[2]) / 3);
+        pixel -> (pixel[0] + pixel[1] + pixel[2]) / 3);
     this.components.put(Component.Luma,
-            pixel -> (int) (0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]));
+        pixel -> (int) (0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]));
   }
 
   @Override
