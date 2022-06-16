@@ -56,10 +56,22 @@ public class Filter implements Operation {
           // Iterate through each column of the given row in the kernel
           for (int l = 0; l < this.filtersMap.get(this.filter)[k].length; l++) {
             int numLeftOrRight = l - this.filtersMap.get(this.filter)[k].length / 2;
-            if (!(i % numPixelsPerRow == 0 && numLeftOrRight > 0)
-                    && !(i % numPixelsPerRow == 1 && numLeftOrRight < 0)
+            int lastPixelInRow;
+
+            if (i % numPixelsPerRow != 0) {
+              lastPixelInRow = i + (numPixelsPerRow - (i % numPixelsPerRow)); // math bad
+            }
+            else {
+              lastPixelInRow = i;
+            }
+
+            if ((i + numLeftOrRight <= lastPixelInRow)
+                    && !(i % numPixelsPerRow <= Math.abs(numLeftOrRight) && i % numPixelsPerRow != 0
+                    && numLeftOrRight < 0)
                     && centerPixelInRowToChange + numLeftOrRight > 0
-                    && centerPixelInRowToChange + numLeftOrRight < copy.length) {
+                    && centerPixelInRowToChange + numLeftOrRight < copy.length
+                    && centerPixelInRowToChange > 0
+                    && centerPixelInRowToChange < copy.length) {
               newColor += this.filtersMap.get(this.filter)[k][l]
                       * copy[centerPixelInRowToChange + numLeftOrRight][j];
             }

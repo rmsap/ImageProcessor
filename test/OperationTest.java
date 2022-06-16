@@ -503,10 +503,22 @@ public class OperationTest {
           // Iterate through each column of the given row in the kernel
           for (int l = 0; l < kernel[k].length; l++) {
             int numLeftOrRight = l - kernel[k].length / 2;
-            if (!(i % numPixelsPerRow == 0 && numLeftOrRight > 0)
-                    && !(i % numPixelsPerRow == 1 && numLeftOrRight < 0)
+            int lastPixelInRow;
+
+            if (i % numPixelsPerRow != 0) {
+              lastPixelInRow = i + (numPixelsPerRow - (i % numPixelsPerRow)); // math bad
+            }
+            else {
+              lastPixelInRow = i;
+            }
+
+            if ((i + numLeftOrRight <= lastPixelInRow)
+                    && !(i % numPixelsPerRow <= Math.abs(numLeftOrRight) && i % numPixelsPerRow != 0
+                    && numLeftOrRight < 0)
                     && centerPixelInRowToChange + numLeftOrRight > 0
-                    && centerPixelInRowToChange + numLeftOrRight < originalKoalaColors.length) {
+                    && centerPixelInRowToChange + numLeftOrRight < originalKoalaColors.length
+                    && centerPixelInRowToChange > 0
+                    && centerPixelInRowToChange < originalKoalaColors.length) {
               newColor += kernel[k][l]
                       * originalKoalaColors[centerPixelInRowToChange + numLeftOrRight][j];
             }
@@ -642,10 +654,22 @@ public class OperationTest {
           // Iterate through each column of the given row in the kernel
           for (int l = 0; l < kernel[k].length; l++) {
             int numLeftOrRight = l - kernel[k].length / 2;
-            if (!(i % numPixelsPerRow == 0 && numLeftOrRight > 0)
-                    && !(i % numPixelsPerRow == 1 && numLeftOrRight < 0)
+            int lastPixelInRow;
+
+            if (i % numPixelsPerRow != 0) {
+              lastPixelInRow = i + (numPixelsPerRow - (i % numPixelsPerRow)); // math bad
+            }
+            else {
+              lastPixelInRow = i;
+            }
+
+            if ((i + numLeftOrRight <= lastPixelInRow)
+                    && !(i % numPixelsPerRow <= Math.abs(numLeftOrRight) && i % numPixelsPerRow != 0
+                    && numLeftOrRight < 0)
                     && centerPixelInRowToChange + numLeftOrRight > 0
-                    && centerPixelInRowToChange + numLeftOrRight < originalKoalaColors.length)
+                    && centerPixelInRowToChange + numLeftOrRight < originalKoalaColors.length
+                    && centerPixelInRowToChange > 0
+                    && centerPixelInRowToChange < originalKoalaColors.length)
               newColor += kernel[k][l]
                       * originalKoalaColors[centerPixelInRowToChange + numLeftOrRight][j];
           }
@@ -671,24 +695,6 @@ public class OperationTest {
     }
 
     int[][] fourByFourSharp = model.getImage("4x4-sharp");
-    int[][] image = model.getImage("4x4");
-
-    double color = /*fourByFourSharp[0][0] * -.125 + fourByFourSharp[0][0] * -.125 + fourByFourSharp[0][0] * -.125
-            + fourByFourSharp[0][0] * -.125 + fourByFourSharp[0][0] * -.125*/
-
-            /*+ fourByFourSharp[1][0] * -.125 +*/ fourByFourSharp[1][0] * .25 + fourByFourSharp[2][0] * .25
-            + fourByFourSharp[3][0] * .25 + fourByFourSharp[4][0] * -.125
-
-            /*+ fourByFourSharp[2][0] * -.125*/ + fourByFourSharp[5][0] * .25 + image[6][0] * 1
-            + image[7][0] * .25 + image[8][0] * -.125
-
-            /*+ image[6][0] * -.125*/ + image[9][0] * .25 + image[10][0] * .25
-            + image[11][0] * .25 + image[12][0] * -.125
-
-            /*+ image[10][0] * -.125*/ + image[13][0] * -.125 + image[14][0] * -.125
-            + image[15][0] * -.125 + image[16][0] * -.125;
-
-    System.out.println((int)color);
 
     assertEquals(4, fourByFourSharp[0][0]);
     assertEquals(4, fourByFourSharp[0][1]);
@@ -714,9 +720,48 @@ public class OperationTest {
     assertEquals(0, fourByFourSharp[5][1]);
     assertEquals(0, fourByFourSharp[5][2]);
 
-    // Breaks when k = 4, l = 3
     assertEquals(166, fourByFourSharp[6][0]);
     assertEquals(0, fourByFourSharp[6][1]);
     assertEquals(0, fourByFourSharp[6][2]);
+
+    assertEquals(102, fourByFourSharp[7][0]);
+    assertEquals(51, fourByFourSharp[7][1]);
+    assertEquals(63, fourByFourSharp[7][2]);
+
+    assertEquals(53, fourByFourSharp[8][0]);
+    assertEquals(51, fourByFourSharp[8][1]);
+    assertEquals(79, fourByFourSharp[8][2]);
+
+    assertEquals(0, fourByFourSharp[9][0]);
+    assertEquals(104, fourByFourSharp[9][1]);
+    assertEquals(0, fourByFourSharp[9][2]);
+
+    assertEquals(122, fourByFourSharp[10][0]);
+    assertEquals(246, fourByFourSharp[10][1]);
+    assertEquals(69, fourByFourSharp[10][2]);
+
+    assertEquals(255, fourByFourSharp[11][0]);
+    assertEquals(255, fourByFourSharp[11][1]);
+    assertEquals(255, fourByFourSharp[11][2]);
+
+    assertEquals(255, fourByFourSharp[12][0]);
+    assertEquals(255, fourByFourSharp[12][1]);
+    assertEquals(255, fourByFourSharp[12][2]);
+
+    assertEquals(0, fourByFourSharp[13][0]);
+    assertEquals(142, fourByFourSharp[13][1]);
+    assertEquals(0, fourByFourSharp[13][2]);
+
+    assertEquals(38, fourByFourSharp[14][0]);
+    assertEquals(255, fourByFourSharp[14][1]);
+    assertEquals(63, fourByFourSharp[14][2]);
+
+    assertEquals(255, fourByFourSharp[15][0]);
+    assertEquals(255, fourByFourSharp[15][1]);
+    assertEquals(255, fourByFourSharp[15][2]);
+
+    assertEquals(255, fourByFourSharp[16][0]);
+    assertEquals(255, fourByFourSharp[16][1]);
+    assertEquals(255, fourByFourSharp[16][2]);
   }
 }
