@@ -137,6 +137,40 @@ public class ImageConversionFormatTest {
     }
   }
 
+  // convert to JPG and check that the file exists
+
+  @Test
+  public void ppmToJPG() {
+    int [][] fromPPM = ppm.read("res/4x4ppmOriginal.ppm");
+    jpg.save("res/4x4ppmOriginalToJPG.jpg", fromPPM);
+    int [][] fromJPG = jpg.read("res/4x4ppmOriginalToJPG.jpg");
+    assertEquals(fromPPM.length, fromJPG.length);
+    assertEquals(fromPPM[0][0], fromJPG[0][0]);
+    assertEquals(fromPPM[0][1], fromJPG[0][1]);
+
+  }
+
+  @Test
+  public void pngToJPG() {
+    int [][] fromPNG = png.read("res/neil.png");
+    jpg.save("res/neilToJPG.jpg",fromPNG);
+    int [][] fromJPG = jpg.read("res/neilToJPG.jpg");
+    assertEquals(fromPNG.length, fromJPG.length);
+    assertEquals(fromPNG[0][0], fromJPG[0][0]);
+    assertEquals(fromPNG[0][1], fromJPG[0][1]);
+  }
+
+  @Test
+  public void bmpToJPG() {
+    int [][] fromBMP = bmp.read("res/sampleBMP.bmp");
+    jpg.save("res/sampleBMPtoJPG.jpg", fromBMP);
+    int [][] fromJPG = jpg.read("res/sampleBMPtoJPG.jpg");
+    assertEquals(fromBMP.length, fromJPG.length);
+    assertEquals(fromBMP[0][0], fromJPG[0][0]);
+    assertEquals(fromBMP[0][1], fromJPG[0][1]);
+
+  }
+
 
 
 
