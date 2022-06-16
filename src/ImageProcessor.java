@@ -14,8 +14,7 @@ import view.ImageProcessorView;
 /**
  * This class represents a main method to run the image processor program.
  */
-public class
-ImageProcessor {
+public class ImageProcessor {
   /**
    * A simple main method to run the image processor.
    *
@@ -27,21 +26,14 @@ ImageProcessor {
     // a valid text will have q denoting when to quit
     ImageProcessorModel model = new ImageProcessorModelImpl();
     ImageProcessorView view = new ImageProcessorTextView(model, System.out);
-    ImageProcessorController controller = new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
-//    if (args.length == 0) {
-//      controller = new ImageProcessorControllerImpl(model, view, new InputStreamReader(System.in));
-//    }
+    ImageProcessorController controller = new ImageProcessorControllerImpl(model,
+            view, new InputStreamReader(System.in));
     if(args.length > 0) {
       // should only run from command line if there is a "q" so the readable doesn't run out of inputs
       boolean hasQ = true;
-//      if(args[0].equalsIgnoreCase("q")) {
-//        hasQ = true;
-//      }
-//    }for(int i = 0; i < args.length; i++) {
 
       if(hasQ) { // we know it's a valid text file
         try{
-//      Scanner input = new Scanner(new File(args[0]));
           File file = new File(args[0]);
           FileReader reader = new FileReader(file);
           controller = new ImageProcessorControllerImpl(model, view, reader);
