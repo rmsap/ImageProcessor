@@ -19,6 +19,7 @@ public class Filter implements Operation {
   // The filter that we will apply to this image
   private final Filters filter;
 
+  // A map from filters to the matrix that applies them
   private final Map<Filters, double[][]> filtersMap;
 
   public Filter(Filters filter) {
