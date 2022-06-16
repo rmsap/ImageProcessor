@@ -65,7 +65,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory.put("visualize-blue", new VisualizeComponent(Component.Blue));
     operationDirectory.put("visualize-red", new VisualizeComponent(Component.Red));
     operationDirectory.put("visualize-intensity",
-            new VisualizeComponent(Component.Red.Intensity));
+            new VisualizeComponent(Component.Intensity));
     operationDirectory.put("visualize-luma", new VisualizeComponent(Component.Luma));
     operationDirectory.put("visualize-value", new VisualizeComponent(Component.Value));
     operationDirectory.put("sepia", new ColorTransformation(Transformation.Sepia));
