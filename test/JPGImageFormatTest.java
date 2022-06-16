@@ -86,11 +86,17 @@ public class JPGImageFormatTest {
     int[][] savedFile = jpg.read("res/oogabooga.jpg");
 
 
+    // because JPG has lossy compression, the rgb values of the pixels will not be saved
+    // the exact same as the 2d array in the model
+    // as a result, we cannot verify that both the 2d arrays have equal rgb values for every pixel
+    /*
     for (int i = 0; i < warner.length; i++) {
       for (int j = 0; j < warner[i].length; j++) {
         assertEquals(warner[i][j], savedFile[i][j]);
       }
     }
+
+     */
   }
 
   @Test
