@@ -46,13 +46,9 @@ public abstract class AbstractModernImageFormat implements ImageFormat{
         int pixelData = image.getRGB(c,r); // X and then Y so width then height
         Color colorTemp = new Color(pixelData, true);
         imagePixels[pixelCount][0] = colorTemp.getRed();
-//        System.out.println("red " + pixelCount + " :" + imagePixels[pixelCount][0]);
         imagePixels[pixelCount][1] = colorTemp.getGreen();
-//        System.out.println("green " + pixelCount + " :" + imagePixels[pixelCount][1]);
         imagePixels[pixelCount][2] = colorTemp.getBlue();
-//        System.out.println("blue " + pixelCount + " :" + imagePixels[pixelCount][2]);
         imagePixels[pixelCount][3] = colorTemp.getAlpha();
-//        System.out.println("alpha " + pixelCount + " :" + imagePixels[pixelCount][3]);
         pixelCount++;
       }
     }
@@ -89,7 +85,5 @@ public abstract class AbstractModernImageFormat implements ImageFormat{
         }
       }
       return newImage;
-
-
   }
 }
