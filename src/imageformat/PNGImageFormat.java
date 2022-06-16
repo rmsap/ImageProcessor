@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * This class represents jpg image formats, meaning it can read and save as jpg files.
+ * This class represents png image formats, meaning it can read and save as png files.
  */
 public class PNGImageFormat extends AbstractModernImageFormat {
 
