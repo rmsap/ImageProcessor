@@ -14,7 +14,9 @@ public class Filter implements Operation {
   /**
    * This enum represents potential filters that can be applied to an image.
    */
-  public enum Filters { Blur, Sharpen };
+  public enum Filters {Blur, Sharpen}
+
+  ;
 
   // The filter that we will apply to this image
   private final Filters filter;
@@ -26,11 +28,11 @@ public class Filter implements Operation {
     this.filter = filter;
 
     this.filtersMap = new HashMap<Filters, double[][]>();
-    this.filtersMap.put(Filters.Blur, new double[][] {
+    this.filtersMap.put(Filters.Blur, new double[][]{
             {0.0625, 0.125, 0.0625},
             {0.125, 0.25, 0.125},
             {0.0625, 0.125, 0.0625}});
-    this.filtersMap.put(Filters.Sharpen, new double[][] {
+    this.filtersMap.put(Filters.Sharpen, new double[][]{
             {-0.125, -0.125, -0.125, -0.125, -0.125},
             {-0.125, 0.25, 0.25, 0.25, -0.125},
             {-0.125, 0.25, 1, 0.25, -0.125},
@@ -61,8 +63,7 @@ public class Filter implements Operation {
 
             if (i % numPixelsPerRow != 0) {
               lastPixelInRow = i + (numPixelsPerRow - (i % numPixelsPerRow)); // math bad
-            }
-            else {
+            } else {
               lastPixelInRow = i;
             }
 
@@ -80,8 +81,7 @@ public class Filter implements Operation {
         }
         if (newColor > 255) {
           newColor = 255;
-        }
-        else if (newColor < 0) {
+        } else if (newColor < 0) {
           newColor = 0;
         }
 

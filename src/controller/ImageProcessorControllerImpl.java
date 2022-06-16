@@ -208,7 +208,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
   private void handleLoad(String dest, String fileName) throws IllegalStateException {
     String fileFormat = dest.substring(dest.lastIndexOf('.') + 1);
 
-    if(this.formatDirectory.get(fileFormat) != null) {
+    if (this.formatDirectory.get(fileFormat) != null) {
       try {
         this.model.loadImage(fileName, this.formatDirectory.get(fileFormat).read(dest));
         try {
@@ -225,12 +225,10 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         }
       }
 
-    }
-    else{
-      try{
+    } else {
+      try {
         this.view.renderMessage("The file-type is not supported\n");
-      }
-      catch (IOException ei) {
+      } catch (IOException ei) {
         throw new IllegalStateException("Failed to write to appendable");
       }
 

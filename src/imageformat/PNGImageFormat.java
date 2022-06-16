@@ -1,6 +1,6 @@
 package imageformat;
 
-import java.awt.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,20 +21,19 @@ public class PNGImageFormat extends AbstractModernImageFormat {
   public void save(String path, int[][] image) throws IllegalArgumentException {
     if (image == null || path == null) {
       throw new IllegalArgumentException("Failed to write to file.");
-    }
-    else if (!(path.substring(path.lastIndexOf('.') + 1).equalsIgnoreCase("png"))) {
+    } else if (!(path.substring(path.lastIndexOf('.') + 1)
+            .equalsIgnoreCase("png"))) {
       throw new IllegalArgumentException("Image is trying to be saved as something "
               + "other than png.");
     }
 
-    try{
+    try {
       // first convert to buffered image
       // then save bufferedImage as a jpg file
       BufferedImage created = this.createBufferedImage(image);
       File output = new File(path);
       ImageIO.write(created, "png", output);
-    }
-    catch(IOException e) {
+    } catch (IOException e) {
       throw new IllegalArgumentException("failed to write to file");
     }
   }

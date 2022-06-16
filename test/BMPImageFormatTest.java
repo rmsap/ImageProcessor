@@ -11,6 +11,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * The class represents tests for the BMPImageFormat class.
+ */
 public class BMPImageFormatTest {
 
   ImageFormat bmp = new BMPImageFormat();

@@ -8,10 +8,12 @@ import imageformat.JPGImageFormat;
 import imageformat.PPMImageFormat;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * The following class tests the JPGImageFormat class.
+ */
 public class JPGImageFormatTest {
 
   ImageFormat jpg = new JPGImageFormat();
@@ -24,8 +26,8 @@ public class JPGImageFormatTest {
   @Test
   public void read() {
     ImageFormat ppm = new PPMImageFormat();
-    int [][] image1 = jpg.read("res/WarnerCopy.jpg");
-    int [][] image2 = jpg.read("res/Warner.jpg");
+    int[][] image1 = jpg.read("res/WarnerCopy.jpg");
+    int[][] image2 = jpg.read("res/Warner.jpg");
     for (int i = 0; i < image1.length; i++) {
       for (int j = 0; j < image1[i].length; j++) {
         assertEquals(image1[i][j], image2[i][j]);
@@ -74,7 +76,7 @@ public class JPGImageFormatTest {
   @Test
   public void testSave() {
     ImageFormat ppm = new PPMImageFormat();
-    int [][] warner = ppm.read("res/4x4PPMOriginal.ppm");
+    int[][] warner = ppm.read("res/4x4PPMOriginal.ppm");
     File someJPGFile = new File("res/oogabooga.jpg");
 //    assertFalse(someJPGFile.exists());
     jpg.save("res/oogabooga.jpg", warner);
@@ -123,7 +125,6 @@ public class JPGImageFormatTest {
       // Exception was thrown successfully, let this test pass
     }
   }
-
 
 
 }

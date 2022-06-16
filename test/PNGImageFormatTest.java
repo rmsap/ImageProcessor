@@ -11,23 +11,26 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * The following class tests the PNGImageFormat class.
+ */
 public class PNGImageFormatTest {
   ImageFormat png = new PNGImageFormat();
 
 
   @Before
   public void initData() {
-    this.png  = new PNGImageFormat();
+    this.png = new PNGImageFormat();
   }
 
 
   @Test
   public void testRead() {
-    int [][] neil1 = png.read("res/neil.png");
-    int [][] neil2 = png.read("res/NeilBruh.png");
+    int[][] neil1 = png.read("res/neil.png");
+    int[][] neil2 = png.read("res/NeilBruh.png");
 
-    for(int i = 0; i < neil1.length; i++) {
-      for(int j = 0; j < neil1[0].length; j++) {
+    for (int i = 0; i < neil1.length; i++) {
+      for (int j = 0; j < neil1[0].length; j++) {
         assertEquals(neil1[i][j], neil2[i][j]);
       }
     }
@@ -56,7 +59,7 @@ public class PNGImageFormatTest {
 
   @Test
   public void testSave() {
-    int [][] somePPM = png.read("res/neil.png");
+    int[][] somePPM = png.read("res/neil.png");
     // If a file called randomPPM.ppm already exists in the res folder before these tests are run,
     // it must be deleted else these tests will fail. We are assuming that the file does not exist,
     // so we are creating it.
@@ -78,7 +81,7 @@ public class PNGImageFormatTest {
 
 
     ImageFormat ppm = new PPMImageFormat();
-    int [][] some = ppm.read("res/4x4PPMOriginal.ppm");
+    int[][] some = ppm.read("res/4x4PPMOriginal.ppm");
     // If a file called randomPPM.ppm already exists in the res folder before these tests are run,
     // it must be deleted else these tests will fail. We are assuming that the file does not exist,
     // so we are creating it.
@@ -126,7 +129,6 @@ public class PNGImageFormatTest {
       // Exception was thrown successfully, let this test pass
     }
   }
-
 
 
 }

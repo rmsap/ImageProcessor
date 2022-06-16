@@ -3,8 +3,6 @@ package imageformat;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -13,7 +11,7 @@ import javax.imageio.ImageIO;
 /**
  * This class represents jpg image formats, meaning it can read and save as jpg files.
  */
-public class JPGImageFormat extends AbstractModernImageFormat{
+public class JPGImageFormat extends AbstractModernImageFormat {
   @Override
   public int[][] read(String path) throws IllegalArgumentException {
     Scanner sc;
@@ -27,7 +25,7 @@ public class JPGImageFormat extends AbstractModernImageFormat{
 
     int imageHeight = image.getHeight();
     int imageWidth = image.getWidth();
-    int [][] imagePixels = new int[imageWidth * imageHeight + 1][3]; // make it plus one?
+    int[][] imagePixels = new int[imageWidth * imageHeight + 1][3]; // make it plus one?
 
     // store width and height inside the first array entry
     imagePixels[0][0] = imageWidth;
@@ -36,10 +34,10 @@ public class JPGImageFormat extends AbstractModernImageFormat{
     // we need a helper function that finds that max value of out of all the pixels
 
     int pixelCount = 1; // used to denote which indice of the array we are on
-    for(int r = 0; r < imageHeight; r++) {
-      for(int c = 0; c < imageWidth; c++) {
+    for (int r = 0; r < imageHeight; r++) {
+      for (int c = 0; c < imageWidth; c++) {
         // need to get individual rgb values from the getRGB;
-        int pixelData = image.getRGB(c,r); // X and then Y so width then height
+        int pixelData = image.getRGB(c, r); // X and then Y so width then height
         Color colorTemp = new Color(pixelData, true);
         imagePixels[pixelCount][0] = colorTemp.getRed();
         imagePixels[pixelCount][1] = colorTemp.getGreen();
@@ -55,8 +53,8 @@ public class JPGImageFormat extends AbstractModernImageFormat{
   public void save(String path, int[][] image) throws IllegalArgumentException {
     if (image == null || path == null) {
       throw new IllegalArgumentException("Failed to write to file.");
-    }
-    else if (!(path.substring(path.lastIndexOf('.') + 1).equalsIgnoreCase("jpg"))) {
+    } else if (!(path.substring(path.lastIndexOf('.') + 1)
+            .equalsIgnoreCase("jpg"))) {
       throw new IllegalArgumentException("Image is trying to be saved as something "
               + "other than jpg.");
     }
@@ -66,8 +64,7 @@ public class JPGImageFormat extends AbstractModernImageFormat{
       BufferedImage created = this.createBufferedImage(image);
       File output = new File(path);
       ImageIO.write(created, "jpg", output);
-    }
-    catch(IOException e) {
+    } catch (IOException e) {
       throw new IllegalArgumentException("failed to write to file");
     }
   }
