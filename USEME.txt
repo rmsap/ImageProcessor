@@ -23,7 +23,7 @@ To visualize the red component of an image: visualize-red imageName nameToCall
 To visualize the luma of an image: visualize-luma imageName nameToCall
 To visualize the intensity of an image: visualize-intensity imageName nameToCall
 To visualize the value of an image: visualize-value imageName nameToCall
-To visualzie a sepia tone of an image: sepia imageName nameToCall
+To visualize a sepia tone of an image: sepia imageName nameToCall
 To greyscale an image: greyscale imageName nameToCall
 To brighten or darken an image (Note: entering a positive integer will brighten an image by that many color values, and entering a negative integer will darken the image by reducing the image's pixels by that many color values): changeBrightness integer imageName nameToCall
 To blur an image: blur imageName nameToCall
@@ -32,5 +32,5 @@ To sharpen an image: sharpen imageName nameToCall
 To quit ImageProcessor: q
 
 To run the program through the jar file, enter the following command in the corresponding order: jav -jar ImageProcessor.java
-To run the program through the jar file and take in a script file, enter the command in the corresponding order (scriptFile represents the name and path of the script file to be used): java -jar ImageProcessor.java scriptFile
-To run the program through the jar file with our sample script file, enter the command in the corresponding order: java -jar ImageProcessor.java scriptCommand.txt
+To run the program through the jar file and take in a script file, enter the command in the corresponding order (scriptFile represents the name and path of the script file to be used): java -jar ImageProcessor.java scriptCommand.txt
+To run the program through the jar file with our sample script file, enter the command in the corresponding order (you must be in the res folder in order for the following command to work): java -jar ImageProcessor.jar -file sampleCommand.txt

@@ -8,6 +8,7 @@ import imageformat.PNGImageFormat;
 import imageformat.PPMImageFormat;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -64,7 +65,7 @@ public class PNGImageFormatTest {
     // it must be deleted else these tests will fail. We are assuming that the file does not exist,
     // so we are creating it.
     File somePPMFile = new File("res/someNeil.png");
-    //    assertFalse(somePPMFile.exists());
+    assertFalse(somePPMFile.exists());
     png.save("res/someNeil.png", somePPM);
     assertTrue(somePPMFile.exists());
 

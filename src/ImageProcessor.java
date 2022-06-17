@@ -28,6 +28,7 @@ public class ImageProcessor {
     ImageProcessorView view = new ImageProcessorTextView(model, System.out);
     ImageProcessorController controller = new ImageProcessorControllerImpl(model,
             view, new InputStreamReader(System.in));
+    /*
     if (args.length > 0) {
       // should only run from command line if there is a "q" so the readable doesn't
       // run out of inputs
@@ -41,6 +42,23 @@ public class ImageProcessor {
         } catch (FileNotFoundException bruh) {
           controller = new ImageProcessorControllerImpl(model, view,
                   new InputStreamReader(System.in));
+        }
+      }
+
+    }
+
+     */
+    if (args.length == 2) { // -file nameOfFile.txt
+      if (args[0].equals("-file")) {
+        if (args[1].substring(args[1].length() - 4).equals(".txt")) { // ends in .txt
+          try {
+            File file = new File(args[1]);
+            FileReader reader = new FileReader(file);
+            controller = new ImageProcessorControllerImpl(model, view, reader);
+          } catch (FileNotFoundException bruh) { // if the file doesn't exist
+            controller = new ImageProcessorControllerImpl(model, view,
+                    new InputStreamReader(System.in));
+          }
         }
       }
 

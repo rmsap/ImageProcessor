@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * This class represents tests for ImageFormats.
+ * This class represents tests for PPMImageFormat.
  */
 public class ImageFormatTest {
   ImageFormat ppm;
