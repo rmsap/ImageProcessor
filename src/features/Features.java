@@ -8,5 +8,25 @@ package features;
  * Each method is essentially a request.
  */
 public interface Features {
-  // put all the operations along with load and save here?
+  void brightenOrDarken(int input);
+
+  void greyscale();
+
+  void sepia();
+
+  void sharpen();
+
+  void blur();
+
+  void flipHorizontal();
+
+  void flipVertical();
+
+  void visualizeRed();
+
+  void visualizeGreen();
+
+  void visualizeBlue();
+
+  void visualizeIntensity();
 }
