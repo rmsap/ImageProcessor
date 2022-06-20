@@ -31,6 +31,6 @@ To sharpen an image: sharpen imageName nameToCall
 
 To quit ImageProcessor: q
 
-To run the program through the jar file, enter the following command in the corresponding order: jav -jar ImageProcessor.java
-To run the program through the jar file and take in a script file, enter the command in the corresponding order (scriptFile represents the name and path of the script file to be used): java -jar ImageProcessor.java -file scriptCommand.txt
+To run the program through the jar file, enter the following command in the corresponding order: jav -jar ImageProcessor.jar
+To run the program through the jar file and take in a script file, enter the command in the corresponding order (scriptFile represents the name and path of the script file to be used): java -jar ImageProcessor.jar -file scriptCommand.txt
 To run the program through the jar file with our sample script file, enter the command in the corresponding order (you must be in the res folder in order for the following command to work): java -jar ImageProcessor.jar -file sampleCommand.txt
