@@ -5,7 +5,7 @@ package controller;
  * Should the GUI controller implement the Features Interface?
  */
 public class ImageProcessorControllerGUI implements ImageProcessorController{
-  // the controller should have some object that implements the Features interface 
+  // the controller should have some object that implements the Features interface
   @Override
   public void execute() throws IllegalStateException {
     // the controller should have the ActionListeners that then tell the view what to do
