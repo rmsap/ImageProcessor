@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.InputStreamReader;
 
 
+import controller.Features;
+import controller.FeaturesImpl;
 import controller.ImageProcessorController;
 import controller.ImageProcessorControllerGUI;
 import controller.ImageProcessorControllerImpl;
@@ -95,7 +97,8 @@ public class ImageProcessor {
       isInvalid = false;
       // make the controller be the GUI version
       GUIViewImpl guiView = new GUIViewImpl("dummy");
-      controller = new ImageProcessorControllerGUI(guiView, model);
+      Features features = new FeaturesImpl();
+      controller = new ImageProcessorControllerGUI(guiView, model, features);
 
     }
 
