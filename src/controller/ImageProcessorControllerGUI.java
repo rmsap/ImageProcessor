@@ -5,7 +5,11 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
+import imageformat.BMPImageFormat;
 import imageformat.ImageFormat;
+import imageformat.JPGImageFormat;
+import imageformat.PNGImageFormat;
+import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import view.GUIViewImpl;
 
@@ -40,6 +44,10 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     this.features = features;
     this.features.setController(this);
     this.formatDirectory = new HashMap<String, ImageFormat>();
+    this.formatDirectory.put("ppm", new PPMImageFormat());
+    this.formatDirectory.put("png", new PNGImageFormat());
+    this.formatDirectory.put("jpg", new JPGImageFormat());
+    this.formatDirectory.put("bmp", new BMPImageFormat());
   }
 
 
