@@ -1,6 +1,8 @@
 package view;
 
-import features.Features;
+import java.awt.image.BufferedImage;
+
+import controller.Features;
 
 /**
  * This interface represents a GUI view for ImageProcessor.
@@ -11,7 +13,7 @@ public interface ImageProcessorGUIView extends ImageProcessorView {
   /**
    * Refreshes the screen and updates the image.
    */
-  void refresh();
+  void refresh(BufferedImage bruh);
 
   /**
    * Adds the features to the view.

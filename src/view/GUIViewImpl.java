@@ -1,11 +1,13 @@
 package view;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.*;
 
-import features.Features;
+import controller.Features;
+
 import model.ImageProcessorViewModel;
 
 
@@ -30,7 +32,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private JButton darken;
   private JButton brighten;
 
-  private Appendable appendable;
+  private JPanel imagePicture;
+  private JPanel imageHistogram;
 
 
   public GUIViewImpl(String caption) throws IllegalArgumentException {
@@ -130,6 +133,11 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.brighten.setActionCommand("brighten button");
     this.add(darken);
 
+
+    // setting the supposed image
+
+    // setting the supposed image histogram
+
     pack();
 
 
@@ -138,7 +146,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
 
   @Override
-  public void refresh() {
+  public void refresh(BufferedImage bruh) {
 
   }
 
@@ -150,14 +158,38 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     toggleButton.addActionListener(evt -> features.toggleColor());
     exitButton.addActionListener(evt -> features.exitProgram());
      */
+    this.save.addActionListener(evt -> features.save());
+    this.load.addActionListener(evt -> features.load("bruh"));
+    this.brighten.addActionListener(evt -> features.brightenOrDarken(1));
+    this.darken.addActionListener(evt -> features.brightenOrDarken( -1));
+    this.flipVertical.addActionListener(evt -> features.flipVertical());
+    this.flipHorizontal.addActionListener(evt -> features.flipHorizontal());
+    this.visualizeRed.addActionListener(evt -> features.visualizeRed());
+    this.visualizeBlue.addActionListener(evt -> features.visualizeBlue());
+    this.visualizeGreen.addActionListener(evt -> features.visualizeGreen());
+    this.visualizeIntensity.addActionListener(evt -> features.visualizeIntensity());
+    this.visualizeLuma.addActionListener(evt -> features.visualizeLuma());
+    this.visualizeValue.addActionListener(evt -> features.visualizeValue());
+    this.greyscale.addActionListener(evt -> features.greyscale());
+    this.sepia.addActionListener(evt -> features.sepia());
+    this.blur.addActionListener(evt -> features.blur());
+    this.sharpen.addActionListener(evt -> features.sharpen());
 
 
+
+  }
+
+  @Override
+  public void visualizeHistogram() {
 
   }
 
 
   @Override
   public void renderMessage(String message) throws IOException {
+    // should make a panel with the message and show it
+    JLabel text = new JLabel(message);
+    this.add(text);
 
   }
 }

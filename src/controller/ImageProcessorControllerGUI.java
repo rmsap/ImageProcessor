@@ -19,7 +19,7 @@ import view.GUIViewImpl;
  * The class represents a controller implementation that works with the view.
  * Should the GUI controller implement the Features Interface?
  */
-<<<<<<< HEAD
+
 public class ImageProcessorControllerGUI implements ImageProcessorController, Features {
   private final ImageProcessorModel model;
   private final GUIViewImpl view;
@@ -47,10 +47,10 @@ public class ImageProcessorControllerGUI implements ImageProcessorController, Fe
     this.formatDirectory = new HashMap<String, ImageFormat>();
   }
 
-=======
-public class ImageProcessorControllerGUI implements ImageProcessorController{
+
+
   // the controller should have some object that implements the Features interface
->>>>>>> 322d272f90315fe6793c0b4fb2829e8a09fca6ba
+
   @Override
   public void execute() throws IllegalStateException {
     this.view.addFeatures(this.features);
@@ -149,7 +149,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorController{
     // Not sure if this needs to be in a try catch so just leaving it for now
     try {
       this.model.loadImage(filePath, this.formatDirectory.get(fileFormat).read("image"));
-      this.view.refresh();
+      this.view.refresh(this.produceBufferedImage());
     } catch (IllegalArgumentException e) {
 
     }
