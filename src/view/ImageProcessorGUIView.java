@@ -1,18 +1,27 @@
 package view;
 
+import features.Features;
+
 /**
  * This interface represents a GUI view for ImageProcessor.
  */
-public interface ImageProcessorGUIView {
+public interface ImageProcessorGUIView extends ImageProcessorView {
 
 
   /**
-   * Refreshes the screen.
+   * Refreshes the screen and updates the image.
    */
   void refresh();
 
   /**
-   * Displays all action buttons and the space for the image and the image histogram.
+   * Adds the features to the view.
+   * @param features representing the features
    */
-  void displayDefaultScreen();
+  void addFeatures(Features features);
+
+
+  /**
+   * Visualizes the image histogram of the image.
+   */
+  void visualizeHistogram();
 }

@@ -17,7 +17,7 @@ public class ImageProcessorTextView extends AbstractImageProcessorView {
    * @param model representing the ImageProcessorModel.
    * @throws IllegalArgumentException if the argument is null.
    */
-  public ImageProcessorTextView(ImageProcessorModel model) throws IllegalArgumentException {
+  public ImageProcessorTextView(ImageProcessorViewModel model) throws IllegalArgumentException {
     this(model, System.out);
   }
 
