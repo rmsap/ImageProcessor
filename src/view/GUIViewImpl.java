@@ -2,9 +2,11 @@ package view;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.Features;
 
@@ -160,8 +162,30 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     toggleButton.addActionListener(evt -> features.toggleColor());
     exitButton.addActionListener(evt -> features.exitProgram());
      */
+<<<<<<< HEAD
     this.save.addActionListener(evt -> features.save(savePath));
     this.load.addActionListener(evt -> features.load(loadPath));
+=======
+    this.save.addActionListener(evt -> {
+      final JFileChooser fchooser = new JFileChooser(".");
+      int retvalue = fchooser.showSaveDialog(GUIViewImpl.this);
+      if (retvalue == JFileChooser.APPROVE_OPTION) {
+        File f = fchooser.getSelectedFile();
+        features.save(f.getPath());
+      }
+    });
+    this.load.addActionListener(evt -> {
+      final JFileChooser fchooser = new JFileChooser(".");
+      FileNameExtensionFilter filter = new FileNameExtensionFilter(
+              "PPM, JPG, PNG, & BMP Images", "jpg", "ppm", "png", "bmp");
+      fchooser.setFileFilter(filter);
+      int retvalue = fchooser.showOpenDialog(GUIViewImpl.this);
+      if (retvalue == JFileChooser.APPROVE_OPTION) {
+        File f = fchooser.getSelectedFile();
+        features.load(f.getName());
+      }
+    });
+>>>>>>> 0a96e1deb7a55fff6ff592f06ed023da806d5300
     this.brighten.addActionListener(evt -> features.brightenOrDarken(1));
     this.darken.addActionListener(evt -> features.brightenOrDarken( -1));
     this.flipVertical.addActionListener(evt -> features.flipVertical());
