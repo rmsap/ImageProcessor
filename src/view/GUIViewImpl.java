@@ -151,6 +151,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
   @Override
   public void refresh(BufferedImage bruh) {
+    imagePicture.
 
   }
 
