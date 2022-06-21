@@ -32,6 +32,20 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private JButton darken;
   private JButton brighten;
 
+
+  private JScrollPane imageHouseScrollPane;
+
+//  private JScrollPane actualImageVerticalScrollPane;
+//  private JScrollPane actualImageHorizontalScrollPane;
+//
+//  private JScrollPane histogramVerticalScrollPane;
+//  private JScrollPane histogramHorizontalScrollPane;
+
+  private JPanel imageHousePanel;
+
+  private JPanel operationPanel;
+
+
   private JLabel imagePicture;
   private JLabel imageHistogram;
 
@@ -51,6 +65,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     // this.setMinimumSize(new Dimension(300,300));
 
     this.setLayout(new FlowLayout());
+    operationPanel = new JPanel();
 
     //load button
     this.load = new JButton("load");
@@ -138,8 +153,28 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.add(darken);
 
 
+    // making a panel that contains the actual image and the histogram
+    imageHousePanel = new JPanel();
+    // histogram is to vertically below the image
+    imageHousePanel.setLayout(new BoxLayout(imageHousePanel, BoxLayout.PAGE_AXIS));
+    // scrollbar around this main panel
+    imageHouseScrollPane = new JScrollPane(imageHousePanel);
+    add(imageHouseScrollPane);
+
+
     // setting JLabel containing the actual image
-    this.imagePicture.setLayout(new FlowLayout());
+    // adding a scrollbar for the actual image (vertical and horizontal when needed)
+    JScrollPane imagePictureScrollPane = new JScrollPane(imagePicture);
+    imageHousePanel.add(imagePicture);
+
+
+    // setting the JLabel containing the histogram
+    JScrollPane histogramScrollPane = new JScrollPane(imageHistogram);
+    imageHousePanel.add(imageHistogram);
+
+    // setting the main scroll pane for the images panel
+    imageHousePanel.add(imageHouseScrollPane);
+
 
 
 

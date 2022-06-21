@@ -11,6 +11,9 @@ import operations.Operation;
 import operations.VisualizeComponent;
 import operations.VisualizeComponent.Component;
 
+/**
+ * The class represents a Features object that implements the methods of the interface.
+ */
 public class FeaturesImpl implements Features {
   private ImageProcessorController controller;
 
