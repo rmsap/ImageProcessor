@@ -64,13 +64,20 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     // this.setResizable(false);
     // this.setMinimumSize(new Dimension(300,300));
 
+
     this.setLayout(new FlowLayout());
+
+    // adding the panel that houses all operations
     operationPanel = new JPanel();
+    operationPanel.setLayout(new FlowLayout());
+    operationPanel.setSize(200,1000);
+    this.add(operationPanel);
+
 
     //load button
     this.load = new JButton("load");
     this.load.setActionCommand("load button");
-    this.add(load);
+    this.operationPanel.add(load);
 
 
 
@@ -78,79 +85,79 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     //save button
     this.save = new JButton("save");
     this.save.setActionCommand("save button");
-    this.add(save);
+    this.operationPanel.add(save);
 
 
 
     //flip-horizontal button
     this.flipHorizontal = new JButton("flip horizontal");
     this.flipHorizontal.setActionCommand("flip-horizontal button");
-    this.add(flipHorizontal);
+    this.operationPanel.add(flipHorizontal);
 
     //flip-vertical button
     this.flipVertical = new JButton("flip vertical");
     this.flipVertical.setActionCommand("flip-vertical button");
-    this.add(flipVertical);
+    this.operationPanel.add(flipVertical);
 
     //sepia button
     this.sepia = new JButton("sepia");
     this.sepia.setActionCommand("sepia button");
-    this.add(sepia);
+    this.operationPanel.add(sepia);
 
     //greyscale
     this.greyscale = new JButton("greyscale");
     this.greyscale.setActionCommand("greyscale button");
-    this.add(greyscale);
+    this.operationPanel.add(greyscale);
 
     //blur button
     this.blur = new JButton("blur");
     this.blur.setActionCommand("blur button");
-    this.add(blur);
+    this.operationPanel.add(blur);
 
     //sharpen button
     this.sharpen = new JButton("sharpen");
     this.sharpen.setActionCommand("sharpen button");
-    this.add(sharpen);
+    this.operationPanel.add(sharpen);
 
     //visualizeBlue button
     this.visualizeBlue = new JButton("visualize blue");
     this.visualizeBlue.setActionCommand("visualize-blue button");
-    this.add(visualizeBlue);
+    this.operationPanel.add(visualizeBlue);
 
     //visualizeGreen button
     this.visualizeGreen = new JButton("visualize green");
     this.visualizeGreen.setActionCommand("visualize-green button");
-    this.add(visualizeGreen);
+    this.operationPanel.add(visualizeGreen);
 
     //visualizeRed button
     this.visualizeRed = new JButton("visualize red");
     this.visualizeRed.setActionCommand("visualize-red button");
-    this.add(visualizeRed);
+    this.operationPanel.add(visualizeRed);
 
     //visualizeValue button
     this.visualizeValue = new JButton("visualize value");
     this.visualizeValue.setActionCommand("visualize-value button");
-    this.add(visualizeValue);
+    this.operationPanel.add(visualizeValue);
 
     //visualizeLuma button
     this.visualizeLuma = new JButton("visualize luma");
     this.visualizeLuma.setActionCommand("visualize-luma button");
-    this.add(visualizeLuma);
+    this.operationPanel.add(visualizeLuma);
 
     //visualizeIntensity button
     this.visualizeIntensity = new JButton("visualize intensity");
     this.visualizeIntensity.setActionCommand("visualize intensity");
-    this.add(visualizeIntensity);
+    this.operationPanel.add(visualizeIntensity);
 
     //darken button
     this.darken = new JButton("darken");
     this.darken.setActionCommand("darken button");
-    this.add(darken);
+    this.operationPanel.add(darken);
 
     //brighten button
     this.brighten = new JButton("brighten");
     this.brighten.setActionCommand("brighten button");
-    this.add(darken);
+    this.operationPanel.add(darken);
 
 
     // making a panel that contains the actual image and the histogram
@@ -158,22 +165,27 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     // histogram is to vertically below the image
     imageHousePanel.setLayout(new BoxLayout(imageHousePanel, BoxLayout.PAGE_AXIS));
     // scrollbar around this main panel
-    imageHouseScrollPane = new JScrollPane(imageHousePanel);
+    imageHouseScrollPane = new JScrollPane();
     add(imageHouseScrollPane);
 
 
     // setting JLabel containing the actual image
     // adding a scrollbar for the actual image (vertical and horizontal when needed)
     JScrollPane imagePictureScrollPane = new JScrollPane(imagePicture);
+    imagePicture = new JLabel();
     imageHousePanel.add(imagePicture);
 
 
     // setting the JLabel containing the histogram
     JScrollPane histogramScrollPane = new JScrollPane(imageHistogram);
+    imageHistogram = new JLabel();
     imageHousePanel.add(imageHistogram);
 
     // setting the main scroll pane for the images panel
     imageHousePanel.add(imageHouseScrollPane);
+
+    // adding a border around imagePanel
+    imageHousePanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
 
 
