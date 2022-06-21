@@ -8,8 +8,6 @@ import javax.swing.*;
 
 import controller.Features;
 
-import model.ImageProcessorViewModel;
-
 
 /**
  * The class represents an implementation of a GUI view from the GUI interface.
@@ -34,6 +32,10 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
   private JPanel imagePicture;
   private JPanel imageHistogram;
+
+
+  private String savePath;
+  private String loadPath;
 
 
   public GUIViewImpl(String caption) throws IllegalArgumentException {
@@ -158,8 +160,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     toggleButton.addActionListener(evt -> features.toggleColor());
     exitButton.addActionListener(evt -> features.exitProgram());
      */
-    this.save.addActionListener(evt -> features.save());
-    this.load.addActionListener(evt -> features.load("bruh"));
+    this.save.addActionListener(evt -> features.save(savePath));
+    this.load.addActionListener(evt -> features.load(loadPath));
     this.brighten.addActionListener(evt -> features.brightenOrDarken(1));
     this.darken.addActionListener(evt -> features.brightenOrDarken( -1));
     this.flipVertical.addActionListener(evt -> features.flipVertical());

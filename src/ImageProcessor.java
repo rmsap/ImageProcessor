@@ -5,9 +5,11 @@ import java.io.InputStreamReader;
 
 
 import controller.ImageProcessorController;
+import controller.ImageProcessorControllerGUI;
 import controller.ImageProcessorControllerImpl;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
+import view.GUIViewImpl;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
 
@@ -92,7 +94,8 @@ public class ImageProcessor {
     } else if (args.length == 0) { // run the GUI version of the program
       isInvalid = false;
       // make the controller be the GUI version
-
+      GUIViewImpl guiView = new GUIViewImpl("dummy");
+      controller = new ImageProcessorControllerGUI(guiView, model);
 
     }
 
