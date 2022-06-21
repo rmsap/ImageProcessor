@@ -1,4 +1,6 @@
-package features;
+package controller;
+
+import model.ImageProcessorModel;
 
 /**
  * Represents an interface of features (basically ActionListeners, etc).
@@ -29,4 +31,12 @@ public interface Features {
   void visualizeBlue();
 
   void visualizeIntensity();
+
+  void visualizeValue();
+
+  void visualizeLuma();
+
+  void load(String filePath);
+
+  void save();
 }
