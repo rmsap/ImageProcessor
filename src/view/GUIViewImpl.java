@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -47,7 +48,10 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
 
   private JLabel imagePicture;
-  private JLabel imageHistogram;
+  private JPanel redHistogram;
+  private JPanel greenHistogram;
+  private JPanel blueHistogram;
+  private JPanel intensityHistogram;
 
 
   private String savePath;
@@ -169,8 +173,14 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
 
     // setting the JLabel containing the histogram
-    JScrollPane histogramScrollPane = new JScrollPane(imageHistogram);
-    imageHousePanel.add(imageHistogram);
+    JScrollPane redHistogramScrollPane = new JScrollPane(redHistogram);
+    imageHousePanel.add(redHistogram);
+    JScrollPane greenHistogramScrollPane = new JScrollPane(greenHistogram);
+    imageHousePanel.add(greenHistogram);
+    JScrollPane blueHistogramScrollPane = new JScrollPane(blueHistogram);
+    imageHousePanel.add(blueHistogram);
+    JScrollPane intensityHistogramScrollPane = new JScrollPane(intensityHistogram);
+    imageHousePanel.add(intensityHistogram);
 
     // setting the main scroll pane for the images panel
     imageHousePanel.add(imageHouseScrollPane);
@@ -195,6 +205,32 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.imagePicture.setIcon(image); // putting the image in the JLabel
 
     // also need to refresh the histogram
+
+    // Set up arrays to count each occurrence of each color channel/intensity
+    int[] redCounts = new int[256];
+    int[] greenCounts = new int[256];
+    int[] blueCounts = new int[256];
+    int[] intensityCounts = new int[256];
+
+    // Set each index of each array to 0
+    Arrays.fill(redCounts, 0);
+    Arrays.fill(greenCounts, 0);
+    Arrays.fill(blueCounts, 0);
+    Arrays.fill(intensityCounts, 0);
+
+    for (int i = 0; i < bruh.getWidth(); i++) {
+      for (int j = 0; j < bruh.getHeight(); j++) {
+        Color color = new Color(bruh.getRGB(i, j));
+        redCounts[color.getRed()]++;
+        greenCounts[color.getGreen()]++;
+        blueCounts[color.getBlue()]++;
+        redCounts[(color.getRed() + color.getGreen() + color.getBlue()) / 3]++;
+      }
+    }
+    this.redHistogram = new Histogram(redCounts);
+    this.greenHistogram = new Histogram(greenCounts);
+    this.blueHistogram = new Histogram(blueCounts);
+    this.intensityHistogram = new Histogram(intensityCounts);
   }
 
   @Override
