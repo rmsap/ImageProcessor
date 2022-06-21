@@ -32,8 +32,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private JButton darken;
   private JButton brighten;
 
-  private JPanel imagePicture;
-  private JPanel imageHistogram;
+  private JLabel imagePicture;
+  private JLabel imageHistogram;
 
 
   private String savePath;
@@ -138,6 +138,11 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.add(darken);
 
 
+    // setting JLabel containing the actual image
+    this.imagePicture.setLayout(new FlowLayout());
+
+
+
     // setting the supposed image
 
     // setting the supposed image histogram
@@ -151,8 +156,10 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
   @Override
   public void refresh(BufferedImage bruh) {
-    imagePicture.
+    ImageIcon image = new ImageIcon(bruh);
+    this.imagePicture.setIcon(image); // putting the image in the JLabel
 
+    // also need to refresh the histogram
   }
 
   @Override
@@ -203,6 +210,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
   @Override
   public void visualizeHistogram() {
+
 
   }
 
