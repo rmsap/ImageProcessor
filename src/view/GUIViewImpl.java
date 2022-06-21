@@ -182,6 +182,10 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     imageHousePanel.add(imagePicture);
 
 
+    redHistogram = new JPanel();
+    blueHistogram = new JPanel();
+    greenHistogram = new JPanel();
+    intensityHistogram = new JPanel();
     // setting the JLabel containing the histogram
     JScrollPane redHistogramScrollPane = new JScrollPane(redHistogram);
     imageHousePanel.add(redHistogram);
