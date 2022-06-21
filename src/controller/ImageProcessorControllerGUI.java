@@ -23,7 +23,6 @@ import view.GUIViewImpl;
 public class ImageProcessorControllerGUI implements ImageProcessorController, Features {
   private final ImageProcessorModel model;
   private final GUIViewImpl view;
-  private final Features features;
 
   // INVARIANT: All keys contained in formatDirectory are valid file extensions
   private final Map<String, ImageFormat> formatDirectory;
@@ -33,17 +32,15 @@ public class ImageProcessorControllerGUI implements ImageProcessorController, Fe
    * model and view.
    * @param model the model that this controller will control
    * @param view the view that this controller will control
-   * @param features the features that this controller will support
    * @throws IllegalArgumentException if any of the parameters are null
    */
-  public ImageProcessorControllerGUI(GUIViewImpl view, ImageProcessorModel model,
-                                     Features features) throws IllegalArgumentException {
-    if (model == null || view == null || features == null) {
+  public ImageProcessorControllerGUI(GUIViewImpl view, ImageProcessorModel model)
+          throws IllegalArgumentException {
+    if (model == null || view == null) {
       throw new IllegalArgumentException("None of the parameters can be null.");
     }
     this.model = model;
     this.view = view;
-    this.features = features;
     this.formatDirectory = new HashMap<String, ImageFormat>();
   }
 
@@ -156,8 +153,10 @@ public class ImageProcessorControllerGUI implements ImageProcessorController, Fe
   }
 
   @Override
-  public void save() {
+  public void save(String filePath) {
+    String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
+    this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
   }
 
   /**

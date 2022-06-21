@@ -86,6 +86,7 @@ public interface Features {
 
   /**
    * Represents the action listener that calls on the model's save method.
+   * @param filePath representing the path of the file that is to be saved.
    */
-  void save();
+  void save(String filePath);
 }
