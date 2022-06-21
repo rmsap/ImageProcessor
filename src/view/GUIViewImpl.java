@@ -143,7 +143,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     // setting the supposed image histogram
 
     pack();
-
+    setVisible(true);
 
 
   }
