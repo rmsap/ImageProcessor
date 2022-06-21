@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -74,7 +75,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     // adding the panel that houses all operations
     operationPanel = new JPanel();
     operationPanel.setLayout(new GridLayout(8,2));
-    operationPanel.setSize(1000,1000);
+    operationPanel.setSize(300,300);
 //    this.add(operationPanel);
 
 
@@ -172,13 +173,24 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     imageHousePanel.setLayout(new BoxLayout(imageHousePanel, BoxLayout.PAGE_AXIS));
     // scrollbar around this main panel
     imageHouseScrollPane = new JScrollPane();
-    add(imageHouseScrollPane);
+//    add(imageHouseScrollPane);
 
 
     // setting JLabel containing the actual image
     // adding a scrollbar for the actual image (vertical and horizontal when needed)
     JScrollPane imagePictureScrollPane = new JScrollPane(imagePicture);
-    imagePicture = new JLabel();
+    BufferedImage dog = null;
+    File f = new File("res/Dog.jpg");
+    try{
+      dog = ImageIO.read(f);
+    }
+    catch(IOException e) {
+
+    }
+    ImageIcon d = new ImageIcon(dog);
+
+
+    imagePicture = new JLabel(d);
     imageHousePanel.add(imagePicture);
 
 
@@ -200,7 +212,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     imageHousePanel.add(imageHouseScrollPane);
 
     // adding a border around imagePanel
-    imageHousePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+    imageHousePanel.setBorder(BorderFactory.createTitledBorder("Using Password fields"));
+    add(imageHousePanel);
 
 
 
