@@ -59,7 +59,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     super(caption);
 
     setSize(1000,1000);
-    setLocation(200,200);
+    setLocation(0,200);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // this.setResizable(false);
     // this.setMinimumSize(new Dimension(300,300));
@@ -69,9 +69,9 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     // adding the panel that houses all operations
     operationPanel = new JPanel();
-    operationPanel.setLayout(new FlowLayout());
-    operationPanel.setSize(200,1000);
-    this.add(operationPanel);
+    operationPanel.setLayout(new GridLayout(8,2));
+    operationPanel.setSize(1000,1000);
+//    this.add(operationPanel);
 
 
     //load button
@@ -158,6 +158,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.brighten = new JButton("brighten");
     this.brighten.setActionCommand("brighten button");
     this.operationPanel.add(darken);
+
+    this.add(operationPanel);
 
 
     // making a panel that contains the actual image and the histogram
