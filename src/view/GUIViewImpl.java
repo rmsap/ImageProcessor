@@ -178,7 +178,6 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     // setting JLabel containing the actual image
     // adding a scrollbar for the actual image (vertical and horizontal when needed)
-    JScrollPane imagePictureScrollPane = new JScrollPane(imagePicture);
     BufferedImage dog = null;
     File f = new File("res/Dog.jpg");
     try{
@@ -191,7 +190,16 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
 
     imagePicture = new JLabel(d);
-    imageHousePanel.add(imagePicture);
+
+    JScrollPane imagePictureScrollPane = new JScrollPane() {
+      @Override
+      public Dimension getPreferredSize() {
+        return new Dimension(700, 600);
+      }
+    };
+
+    imagePictureScrollPane.setViewportView(imagePicture);
+    imageHousePanel.add(imagePictureScrollPane);
 
 
     redHistogram = new JPanel();
@@ -287,7 +295,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
       int retvalue = fchooser.showOpenDialog(GUIViewImpl.this);
       if (retvalue == JFileChooser.APPROVE_OPTION) {
         File f = fchooser.getSelectedFile();
-        features.load(f.getName());
+        features.load(f.getPath());
       }
     });
     this.brighten.addActionListener(evt -> features.brightenOrDarken(1));

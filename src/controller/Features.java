@@ -1,8 +1,5 @@
 package controller;
 
-import model.ImageProcessorModel;
-import operations.Operation;
-
 /**
  * Represents an interface of features (basically ActionListeners, etc).
  * Contains application-specific events.
@@ -16,68 +13,68 @@ public interface Features {
    * Represents the action listener for brightenOrDarken.
    * @param input representing the amount to brighten/darken by.
    */
-  Operation brightenOrDarken(int input);
+  void brightenOrDarken(int input);
 
   /**
    * Represents the action listener for greyscale operation.
    */
-  Operation greyscale();
+  void greyscale();
 
   /**
    * Represents the action listener for the sepia operation.
    */
-  Operation sepia();
+  void sepia();
 
   /**
    * Represents the action listener for the sharpen operation.
    */
-  Operation sharpen();
+  void sharpen();
 
   /**
    * Represents the action listener for the blur operation.
    */
-  Operation blur();
+  void blur();
 
   /**
    * Represents the action listener for the operation that flips an image horizontally.
    */
-  Operation flipHorizontal();
+  void flipHorizontal();
 
   /**
    * Represents the action listener for the operation that flips an image vertically.
    */
-  Operation flipVertical();
+  void flipVertical();
 
   /**
    * Represents the action listener for the operation that visualizes the red components.
    */
-  Operation visualizeRed();
+  void visualizeRed();
 
   /**
    * Represents the action listener for the operation that visualizes the green components.
    */
-  Operation visualizeGreen();
+  void visualizeGreen();
 
   /**
    * Represents the action listener for the operation that visualizes the blue components.
    */
-  Operation visualizeBlue();
+  void visualizeBlue();
 
   /**
    * Represents the action listener for the operation that visualizes the intensity of an image.
    */
-  Operation visualizeIntensity();
+  void visualizeIntensity();
 
   /**
    * Represents the action listener for the operation that visualize the value of an image's pixels.
    */
-  Operation visualizeValue();
+  void visualizeValue();
 
 
   /**
    * Represents the action listener that calls on the operation that visualizes luma.
    */
-  Operation visualizeLuma();
+  void visualizeLuma();
 
   /**
    * Represents the action listener that calls on the model's load method.
@@ -91,5 +88,5 @@ public interface Features {
    */
   void save(String filePath);
 
-  void setController(ImageProcessorController controller);
+  void setController(ImageProcessorGUIController controller);
 }

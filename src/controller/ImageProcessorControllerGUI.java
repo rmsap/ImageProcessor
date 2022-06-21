@@ -11,6 +11,7 @@ import imageformat.JPGImageFormat;
 import imageformat.PNGImageFormat;
 import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
+import operations.Operation;
 import view.GUIViewImpl;
 
 /**
@@ -151,10 +152,12 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
 
     // Not sure if this needs to be in a try catch so just leaving it for now
     try {
+      System.out.println(filePath);
       this.model.loadImage(filePath, this.formatDirectory.get(fileFormat).read("image"));
       this.view.refresh(this.produceBufferedImage());
+      System.out.println("Loaded");
     } catch (IllegalArgumentException e) {
-
+      System.out.println(e.getMessage());
     }
   }
 
@@ -163,6 +166,12 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
     this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
+  }
+
+  @Override
+  public void doOperation(Operation op) {
+    this.model.doOperation(op, "image", "image");
+    this.view.refresh(this.produceBufferedImage());
   }
 
   /**

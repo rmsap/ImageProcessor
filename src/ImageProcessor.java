@@ -9,6 +9,7 @@ import controller.FeaturesImpl;
 import controller.ImageProcessorController;
 import controller.ImageProcessorControllerGUI;
 import controller.ImageProcessorControllerImpl;
+import controller.ImageProcessorGUIController;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import view.GUIViewImpl;
@@ -99,7 +100,7 @@ public class ImageProcessor {
       GUIViewImpl guiView = new GUIViewImpl("dummy");
       Features features = new FeaturesImpl();
       controller = new ImageProcessorControllerGUI(guiView, model, features);
-      features.setController(controller);
+      features.setController((ImageProcessorGUIController) controller);
 
     }
 

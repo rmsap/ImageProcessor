@@ -15,91 +15,85 @@ import operations.VisualizeComponent.Component;
  * The class represents a Features object that implements the methods of the interface.
  */
 public class FeaturesImpl implements Features {
-  private ImageProcessorController controller;
+  private ImageProcessorGUIController controller;
 
   @Override
-  public Operation brightenOrDarken(int input) {
-    return new BrightenOrDarken(input);
+  public void brightenOrDarken(int input) {
+    this.controller.doOperation(new BrightenOrDarken(input));
   }
 
   @Override
-  public Operation greyscale() {
-    return new ColorTransformation(Transformation.Greyscale);
+  public void greyscale() {
+    this.controller.doOperation(new ColorTransformation(Transformation.Greyscale));
   }
 
   @Override
-  public Operation sepia() {
-    return new ColorTransformation(Transformation.Sepia);
+  public void sepia() {
+    this.controller.doOperation(new ColorTransformation(Transformation.Sepia));
   }
 
   @Override
-  public Operation sharpen() {
-    return new Filter(Filters.Sharpen);
+  public void sharpen() {
+    this.controller.doOperation(new Filter(Filters.Sharpen));
   }
 
   @Override
-  public Operation blur() {
-    return new Filter(Filters.Blur);
+  public void blur() {
+    this.controller.doOperation(new Filter(Filters.Blur));
   }
 
   @Override
-  public Operation flipHorizontal() {
-    return new FlipHorizontal();
+  public void flipHorizontal() {
+    this.controller.doOperation(new FlipHorizontal());
   }
 
   @Override
-  public Operation flipVertical() {
-    return new FlipVertical();
+  public void flipVertical() {
+    this.controller.doOperation(new FlipVertical());
   }
 
   @Override
-  public Operation visualizeRed() {
-    return new VisualizeComponent(Component.Red);
+  public void visualizeRed() {
+    this.controller.doOperation(new VisualizeComponent(Component.Red));
   }
 
   @Override
-  public Operation visualizeGreen() {
-    return new VisualizeComponent(Component.Green);
+  public void visualizeGreen() {
+    this.controller.doOperation(new VisualizeComponent(Component.Green));
   }
 
   @Override
-  public Operation visualizeBlue() {
-    return new VisualizeComponent(Component.Blue);
+  public void visualizeBlue() {
+    this.controller.doOperation(new VisualizeComponent(Component.Blue));
   }
 
   @Override
-  public Operation visualizeIntensity() {
-    return new VisualizeComponent(Component.Intensity);
+  public void visualizeIntensity() {
+    this.controller.doOperation(new VisualizeComponent(Component.Intensity));
   }
 
   @Override
-  public Operation visualizeValue() {
-    return new VisualizeComponent(Component.Value);
+  public void visualizeValue() {
+    this.controller.doOperation(new VisualizeComponent(Component.Value));
   }
 
   @Override
-  public Operation visualizeLuma() {
-    return new VisualizeComponent(Component.Luma);
+  public void visualizeLuma() {
+    this.controller.doOperation(new VisualizeComponent(Component.Luma));
   }
 
   @Override
   public void load(String filePath) {
-    if (this.controller instanceof ImageProcessorGUIController) {
-      ImageProcessorGUIController c = (ImageProcessorGUIController) this.controller;
-      c.load(filePath);
-    }
+    controller.load(filePath);
   }
 
   @Override
   public void save(String filePath) {
-    if (this.controller instanceof ImageProcessorGUIController) {
-      ImageProcessorGUIController c = (ImageProcessorGUIController) this.controller;
-      c.save(filePath);
-    }
+    controller.save(filePath);
   }
 
   @Override
-  public void setController(ImageProcessorController controller) {
+  public void setController(ImageProcessorGUIController controller) {
     this.controller = controller;
   }
 }

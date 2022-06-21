@@ -1,5 +1,7 @@
 package controller;
 
+import operations.Operation;
+
 /**
  * Represents the interface for the GUI version of a controller for Image Processor.
  */
@@ -15,4 +17,6 @@ public interface ImageProcessorGUIController extends ImageProcessorController {
    * @param filePath representing the path that the file is to be saved as
    */
   void save(String filePath);
+
+  void doOperation(Operation op);
 }
