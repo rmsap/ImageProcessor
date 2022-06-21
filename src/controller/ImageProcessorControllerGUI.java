@@ -50,7 +50,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorController, Fe
 
   @Override
   public void execute() throws IllegalStateException {
-    this.view.addFeatures(this.features);
+    this.view.addFeatures(this);
   }
 
   @Override
