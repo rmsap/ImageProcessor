@@ -150,7 +150,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     toggleButton.addActionListener(evt -> features.toggleColor());
     exitButton.addActionListener(evt -> features.exitProgram());
      */
-    
+
 
 
   }

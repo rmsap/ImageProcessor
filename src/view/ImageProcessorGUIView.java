@@ -9,7 +9,7 @@ public interface ImageProcessorGUIView extends ImageProcessorView {
 
 
   /**
-   * Refreshes the screen.
+   * Refreshes the screen and updates the image.
    */
   void refresh();
 
@@ -18,4 +18,10 @@ public interface ImageProcessorGUIView extends ImageProcessorView {
    * @param features representing the features
    */
   void addFeatures(Features features);
+
+
+  /**
+   * Visualizes the image histogram of the image.
+   */
+  void visualizeHistogram();
 }
