@@ -152,11 +152,8 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
 
     // Not sure if this needs to be in a try catch so just leaving it for now
     try {
-      System.out.println(filePath);
-//      this.model.loadImage(filePath, this.formatDirectory.get(fileFormat).read("image"));
       this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
       this.view.refresh(this.produceBufferedImage());
-      System.out.println("Loaded");
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }
@@ -184,19 +181,24 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     BufferedImage image = new BufferedImage(imageArr[0][0], imageArr[0][1],
             BufferedImage.TYPE_INT_ARGB);
 
-    boolean hasOpacity = imageArr[0].length > 3;
+    boolean hasOpacity = imageArr[1].length > 3;
 
-    for (int i = 1; i < imageArr.length; i++) {
+    int curPixel = 1;
+    for (int i = 0; i < imageArr[0][0]; i++) {
+      for (int j = 0; j < imageArr[0][1]; j++) {
         Color color;
 
-      if (hasOpacity) {
-        color = new Color(imageArr[i][0], imageArr[i][1], imageArr[i][2], imageArr[i][3]);
-      }
-      else {
-        color = new Color(imageArr[i][0], imageArr[i][1], imageArr[i][2], 255);
-      }
+        if (hasOpacity) {
+          color = new Color(imageArr[curPixel][0], imageArr[curPixel][1],
+                  imageArr[curPixel][2], imageArr[curPixel][3]);
+        } else {
+          color = new Color(imageArr[curPixel][0], imageArr[curPixel][1],
+                  imageArr[curPixel][2]);
+        }
 
-      image.setRGB(i / imageArr[0][0], i % imageArr[0][0] - 1, color.getRGB());
+        image.setRGB(i, j, color.getRGB());
+        curPixel++;
+      }
     }
 
     return image;

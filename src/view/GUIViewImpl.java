@@ -178,18 +178,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     // setting JLabel containing the actual image
     // adding a scrollbar for the actual image (vertical and horizontal when needed)
-    BufferedImage dog = null;
-    File f = new File("res/Dog.jpg");
-    try{
-      dog = ImageIO.read(f);
-    }
-    catch(IOException e) {
-
-    }
-    ImageIcon d = new ImageIcon(dog);
-
-
-    imagePicture = new JLabel(d);
+    ImageIcon icon = new ImageIcon();
+    imagePicture = new JLabel(icon);
 
     JScrollPane imagePictureScrollPane = new JScrollPane() {
       @Override
@@ -240,6 +230,11 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   @Override
   public void refresh(BufferedImage bruh) {
     ImageIcon image = new ImageIcon(bruh);
+//    for (int i = 0; i < 4; i++) {
+//      for (int j = 0; j < 4; j++) {
+//        System.out.println(new Color(bruh.getRGB(i,j)).getRed());
+//      }
+//    }
     this.imagePicture.setIcon(image); // putting the image in the JLabel
 
     // also need to refresh the histogram
