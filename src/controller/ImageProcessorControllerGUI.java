@@ -168,7 +168,18 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
   public void save(String filePath) {
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
-    this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
+    try{
+      this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
+    }
+    catch (IllegalArgumentException i) {
+      try{
+        this.view.renderMessage("An image must be loaded before saving.");
+      }
+      catch(IOException f) {
+        // gg dunno what else to do
+      }
+    }
+
   }
 
   @Override
