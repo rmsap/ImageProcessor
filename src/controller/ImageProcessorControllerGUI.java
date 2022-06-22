@@ -173,8 +173,23 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
 
   @Override
   public void doOperation(Operation op) {
-    this.model.doOperation(op, "image", "image");
-    this.view.refresh(this.produceBufferedImage());
+    try{
+      this.model.doOperation(op, "image", "image");
+      this.view.refresh(this.produceBufferedImage());
+    }
+    catch(IllegalArgumentException b) {
+      try{
+        this.view.renderMessage("An image must be loaded to perform an operation.");
+      }
+      catch(IOException f) {
+        // if an exception is caught then gg
+        System.out.print("lmao");
+      }
+
+
+    }
+
+
   }
 
   /**

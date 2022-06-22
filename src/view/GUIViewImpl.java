@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -55,8 +54,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private JPanel intensityHistogram;
 
 
-  private String savePath;
-  private String loadPath;
+  private JFrame errorMessage;
 
 
   public GUIViewImpl(String caption) throws IllegalArgumentException {
@@ -75,7 +73,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     // adding the panel that houses all operations
     operationPanel = new JPanel();
     operationPanel.setLayout(new GridLayout(8,2));
-    operationPanel.setSize(300,300);
+    operationPanel.setSize(100,100);
 //    this.add(operationPanel);
 
 
@@ -214,7 +212,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     imageHousePanel.add(intensityHistogramScrollPane);
 
     // adding a border around imagePanel
-    imageHousePanel.setBorder(BorderFactory.createTitledBorder("Using Password fields"));
+    imageHousePanel.setBorder(BorderFactory.createTitledBorder("Image and histograms"));
     add(imageHousePanel);
 
 
@@ -329,9 +327,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
   @Override
   public void renderMessage(String message) throws IOException {
-    // should make a panel with the message and show it
-    JLabel text = new JLabel(message);
-    this.add(text);
-
+    JOptionPane.showMessageDialog(this,
+            "An image must be loaded in order to perform an operation.");
   }
 }
