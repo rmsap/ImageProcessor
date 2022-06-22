@@ -218,6 +218,9 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
      */
     this.save.addActionListener(evt -> {
       final JFileChooser fchooser = new JFileChooser(".");
+      FileNameExtensionFilter filter = new FileNameExtensionFilter(
+              "PPM, JPG, PNG, & BMP Images", "jpg", "ppm", "png", "bmp");
+      fchooser.setFileFilter(filter);
       int retvalue = fchooser.showSaveDialog(GUIViewImpl.this);
       if (retvalue == JFileChooser.APPROVE_OPTION) {
         File f = fchooser.getSelectedFile();

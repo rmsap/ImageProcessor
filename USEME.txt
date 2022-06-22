@@ -34,3 +34,31 @@ To quit ImageProcessor: q
 To run the program through the jar file, enter the following command in the corresponding order: jav -jar ImageProcessor.jar
 To run the program through the jar file and take in a script file, enter the command in the corresponding order (scriptFile represents the name and path of the script file to be used): java -jar ImageProcessor.jar -file scriptCommand.txt
 To run the program through the jar file with our sample script file, enter the command in the corresponding order (you must be in the res folder in order for the following command to work): java -jar ImageProcessor.jar -file sampleCommand.txt
+
+
+
+GUI Instructions
+- Load an Image by selecting the "load" button, which will bring up the file chooser. You must slect either a jpg, png, ppm, or bmp file. You must load in an image before pressing any operation button or otherwise a popup message saying to do so will appear.
+- To flip an image horizontally, press the "flip horizontal" button. The picture shown on the screen will flip horizontally and the histogram will update accordingly.
+- To flip an image vertically, press the "flip vertical" button. The picture shown on the screen will flip vertically and the histogram will update accordingly.
+- To blur an image, press the "blur" button. The picture shown will blur and the histogram will update accordingly.
+- To sharpen an image, press the "sharpen" button. The picture will sharpen and the histogram will update accordingly.
+- To make the image a sepia color, press the "sepia" button. The picture will be in sepia-style and the histogram will update accordingly.
+- To greyscale an image, press the "greyscale" button. The picture will greyscale and the histogram will update accordingly.
+- To visualize the blue component of an image's pixels, press the "visualize blue" button. The picture and histogram will update accordingly to reflect the change.
+- To visualize the red component of an image's pixels, press the "visualize red" button. The picture and histogram will update accordingly to reflect the change.
+- To visualize the green component of an image's pixels, press the "visualize green" button. The picture and histogram will update accordingly to reflect the change.
+- To visualize the value of an image's pixels, press the "visualize value" button. The picture and histogram will update accordingly to reflect the change.
+- To visualize the intensity of an image's pixels, press the "visualize intensity" button. The picture and histogram will update accordingly to reflect the change.
+- To visualize the luma of an image's pixels, press the "visualize luma" button. The picture and histogram will update accordingly to reflect the change.
+- To darken an image, press the "darken" button. The image will darken and the histogram will update accordingly.
+- To brighten an image, press the "brighten" button. The image will brighten and the histogram will update accordingly.
+- To save an image, press the "save button", which will bring up a file chooser. You must save the image as either a jpg, png, ppm, or bmp file. You must load an image into the program to save an image otherwise a popup message saying to do so will appear.
+- To exit the program, select the close button on the window in the top right corner.
+
+
+
+
+
+
+

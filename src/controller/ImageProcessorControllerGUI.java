@@ -91,6 +91,14 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
         throw new IllegalArgumentException("Unable to render message on view.");
       }
     }
+    catch(NullPointerException d) {
+      try {
+        this.view.renderMessage("Image must be saved as either .jpg, .ppm, .png, or .bmp");
+      }
+      catch(IOException f) {
+        throw new IllegalArgumentException("Unable to render message on view.");
+      }
+    }
   }
 
   @Override
