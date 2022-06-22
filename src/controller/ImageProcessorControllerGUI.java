@@ -153,7 +153,8 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     // Not sure if this needs to be in a try catch so just leaving it for now
     try {
       System.out.println(filePath);
-      this.model.loadImage(filePath, this.formatDirectory.get(fileFormat).read("image"));
+//      this.model.loadImage(filePath, this.formatDirectory.get(fileFormat).read("image"));
+      this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
       this.view.refresh(this.produceBufferedImage());
       System.out.println("Loaded");
     } catch (IllegalArgumentException e) {
@@ -183,7 +184,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     BufferedImage image = new BufferedImage(imageArr[0][0], imageArr[0][1],
             BufferedImage.TYPE_INT_ARGB);
 
-    boolean hasOpacity = imageArr.length > 3;
+    boolean hasOpacity = imageArr[0].length > 3;
 
     for (int i = 1; i < imageArr.length; i++) {
         Color color;
