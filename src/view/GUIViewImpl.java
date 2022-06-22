@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -54,6 +55,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private JPanel blueHistogram;
   private JPanel intensityHistogram;
 
+  private JLabel histogramPanel;
+
 
   private String savePath;
   private String loadPath;
@@ -64,7 +67,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     super(caption);
 
     setSize(1000,1000);
-    setLocation(0,200);
+    setLocation(100,0);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // this.setResizable(false);
     // this.setMinimumSize(new Dimension(300,300));
@@ -184,7 +187,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     JScrollPane imagePictureScrollPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
-        return new Dimension(700, 600);
+        return new Dimension(200, 200);
       }
     };
 
@@ -198,20 +201,36 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     intensityHistogram = new JPanel();
     // setting the JLabel containing the histogram
     JScrollPane redHistogramScrollPane = new JScrollPane(redHistogram);
-    imageHousePanel.add(redHistogram);
+//    imageHousePanel.add(redHistogram);
     JScrollPane greenHistogramScrollPane = new JScrollPane(greenHistogram);
-    imageHousePanel.add(greenHistogram);
+//    imageHousePanel.add(greenHistogram);
     JScrollPane blueHistogramScrollPane = new JScrollPane(blueHistogram);
-    imageHousePanel.add(blueHistogram);
+//    imageHousePanel.add(blueHistogram);
     JScrollPane intensityHistogramScrollPane = new JScrollPane(intensityHistogram);
-    imageHousePanel.add(intensityHistogram);
+//    imageHousePanel.add(intensityHistogram);
+
+    ImageIcon icon1 = new ImageIcon();
+    histogramPanel = new JLabel(icon1);
+
+    JScrollPane histogramScrollPane = new JScrollPane() {
+      @Override
+      public Dimension getPreferredSize() {
+        return new Dimension(300, 300);
+      }
+    };
+
+    histogramScrollPane.setViewportView(histogramPanel);
+    imageHousePanel.add(histogramScrollPane);
+//    imageHousePanel.add(histogramPanel);
 
     // setting the main scroll pane for the images panel
     imageHousePanel.add(imageHouseScrollPane);
-    imageHousePanel.add(redHistogramScrollPane);
-    imageHousePanel.add(blueHistogramScrollPane);
-    imageHousePanel.add(greenHistogramScrollPane);
-    imageHousePanel.add(intensityHistogramScrollPane);
+//    imageHousePanel.add(redHistogramScrollPane);
+//    imageHousePanel.add(blueHistogramScrollPane);
+//    imageHousePanel.add(greenHistogramScrollPane);
+//    imageHousePanel.add(intensityHistogramScrollPane);
+
+//    imageHousePanel.add(histogramScrollPane);
 
     // adding a border around imagePanel
     imageHousePanel.setBorder(BorderFactory.createTitledBorder("Using Password fields"));
@@ -244,34 +263,6 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     // also need to refresh the histogram
 
     // Set up arrays to count each occurrence of each color channel/intensity
-    int[] redCounts = new int[256];
-    int[] greenCounts = new int[256];
-    int[] blueCounts = new int[256];
-    int[] intensityCounts = new int[256];
-
-    // Set each index of each array to 0
-    Arrays.fill(redCounts, 0);
-    Arrays.fill(greenCounts, 0);
-    Arrays.fill(blueCounts, 0);
-    Arrays.fill(intensityCounts, 0);
-
-    if (bruh instanceof BufferedImage) {
-      BufferedImage buffered = (BufferedImage) bruh;
-
-      for (int i = 0; i < buffered.getWidth(); i++) {
-        for (int j = 0; j < buffered.getHeight(); j++) {
-          Color color = new Color(buffered.getRGB(i, j));
-          redCounts[color.getRed()]++;
-          greenCounts[color.getGreen()]++;
-          blueCounts[color.getBlue()]++;
-          redCounts[(color.getRed() + color.getGreen() + color.getBlue()) / 3]++;
-        }
-      }
-    }
-    this.redHistogram = new Histogram(redCounts);
-    this.greenHistogram = new Histogram(greenCounts);
-    this.blueHistogram = new Histogram(blueCounts);
-    this.intensityHistogram = new Histogram(intensityCounts);
   }
 
   @Override
@@ -321,9 +312,78 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   }
 
   @Override
-  public void visualizeHistogram() {
+  public void visualizeHistogram(Image image) {
+    int[] redCounts = new int[256];
+    int[] greenCounts = new int[256];
+    int[] blueCounts = new int[256];
+    int[] intensityCounts = new int[256];
 
+    // Set each index of each array to 0
+    Arrays.fill(redCounts, 0);
+    Arrays.fill(greenCounts, 0);
+    Arrays.fill(blueCounts, 0);
+    Arrays.fill(intensityCounts, 0);
 
+    if (image instanceof BufferedImage) {
+      BufferedImage buffered = (BufferedImage) image;
+
+      for (int i = 0; i < buffered.getWidth(); i++) {
+        for (int j = 0; j < buffered.getHeight(); j++) {
+          Color color = new Color(buffered.getRGB(i, j));
+          redCounts[color.getRed()]++;
+          greenCounts[color.getGreen()]++;
+          blueCounts[color.getBlue()]++;
+          intensityCounts[(color.getRed() + color.getGreen() + color.getBlue()) / 3]++;
+        }
+      }
+    }
+
+    BufferedImage imageRed = new BufferedImage(256, 300, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage imageGreen = new BufferedImage(256, 300, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage imageBlue = new BufferedImage(256, 300, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage imageIntensity = new BufferedImage(256,
+            300, BufferedImage.TYPE_INT_ARGB);
+
+    int maxValue = Math.max(Arrays.stream(redCounts).max().getAsInt(),
+            Math.max(Arrays.stream(greenCounts).max().getAsInt(),
+            Math.max(Arrays.stream(blueCounts).max().getAsInt(),
+                    Arrays.stream(intensityCounts).max().getAsInt())));
+
+    int minValue = Math.min(Arrays.stream(redCounts).min().getAsInt(),
+            Math.min(Arrays.stream(greenCounts).min().getAsInt(),
+                    Math.min(Arrays.stream(blueCounts).min().getAsInt(),
+                            Arrays.stream(intensityCounts).min().getAsInt())));
+
+    int range = maxValue - minValue;
+
+    for (int i = 0; i < 256; i++) {
+      for (int j = 0; j < (int) ((redCounts[i] - minValue) / ((double) range) * 300); j++) {
+        imageRed.setRGB(i, 299 - j, new Color(100, 0, 0, 75).getRGB());
+      }
+
+      for (int j = 0; j < (int) ((greenCounts[i] - minValue) / ((double) range) * 300); j++) {
+        imageGreen.setRGB(i, 299 - j, new Color(0, 100, 0, 75).getRGB());
+      }
+
+      for (int j = 0; j < (int) ((blueCounts[i] - minValue) / ((double) range) * 300); j++) {
+        imageBlue.setRGB(i, 299 - j, new Color(0, 0, 100, 75).getRGB());
+      }
+
+      for (int j = 0; j < (int) ((intensityCounts[i] - minValue) / ((double) range) * 300); j++) {
+        imageIntensity.setRGB(i, 299 - j, new Color(100, 100, 50, 75).getRGB());
+      }
+    }
+
+    BufferedImage histogram = new BufferedImage(256, 300, BufferedImage.TYPE_INT_ARGB);
+
+    Graphics g = histogram.getGraphics();
+    g.drawImage(imageRed, 0, 0, null);
+    g.drawImage(imageGreen, 0, 0, null);
+    g.drawImage(imageBlue, 0, 0, null);
+    g.drawImage(imageGreen, 0, 0, null);
+
+    ImageIcon icon = new ImageIcon(histogram);
+    histogramPanel.setIcon(icon);
   }
 
 

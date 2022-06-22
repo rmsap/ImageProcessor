@@ -157,7 +157,9 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     // Not sure if this needs to be in a try catch so just leaving it for now
     try {
       this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
-      this.view.refresh(this.produceBufferedImage());
+      Image image = this.produceBufferedImage();
+      this.view.refresh(image);
+      this.view.visualizeHistogram(image);
 
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
@@ -174,7 +176,9 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
   @Override
   public void doOperation(Operation op) {
     this.model.doOperation(op, "image", "image");
-    this.view.refresh(this.produceBufferedImage());
+    Image image = this.produceBufferedImage();
+    this.view.refresh(image);
+    this.view.visualizeHistogram(image);
   }
 
   /**

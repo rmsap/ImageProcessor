@@ -26,5 +26,5 @@ public interface ImageProcessorGUIView extends ImageProcessorView {
   /**
    * Visualizes the image histogram of the image.
    */
-  void visualizeHistogram();
+  void visualizeHistogram(Image image);
 }
