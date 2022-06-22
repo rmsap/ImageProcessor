@@ -33,32 +33,11 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private JButton visualizeIntensity;
   private JButton darken;
   private JButton brighten;
-
-
   private JScrollPane imageHouseScrollPane;
-
-//  private JScrollPane actualImageVerticalScrollPane;
-//  private JScrollPane actualImageHorizontalScrollPane;
-//
-//  private JScrollPane histogramVerticalScrollPane;
-//  private JScrollPane histogramHorizontalScrollPane;
-
   private JPanel imageHousePanel;
-
   private JPanel operationPanel;
-
-
   private JLabel imagePicture;
-  private JPanel redHistogram;
-  private JPanel greenHistogram;
-  private JPanel blueHistogram;
-  private JPanel intensityHistogram;
-
   private JLabel histogramPanel;
-
-
-  private JFrame errorMessage;
-
 
   public GUIViewImpl(String caption) throws IllegalArgumentException {
 
@@ -185,7 +164,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     JScrollPane imagePictureScrollPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
-        return new Dimension(200, 200);
+        return new Dimension(900, 400);
       }
     };
 
@@ -193,69 +172,35 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     imageHousePanel.add(imagePictureScrollPane);
 
 
-    redHistogram = new JPanel();
-    blueHistogram = new JPanel();
-    greenHistogram = new JPanel();
-    intensityHistogram = new JPanel();
     // setting the JLabel containing the histogram
-    JScrollPane redHistogramScrollPane = new JScrollPane(redHistogram);
-//    imageHousePanel.add(redHistogram);
-    JScrollPane greenHistogramScrollPane = new JScrollPane(greenHistogram);
-//    imageHousePanel.add(greenHistogram);
-    JScrollPane blueHistogramScrollPane = new JScrollPane(blueHistogram);
-//    imageHousePanel.add(blueHistogram);
-    JScrollPane intensityHistogramScrollPane = new JScrollPane(intensityHistogram);
-//    imageHousePanel.add(intensityHistogram);
-
     ImageIcon icon1 = new ImageIcon();
     histogramPanel = new JLabel(icon1);
 
     JScrollPane histogramScrollPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
-        return new Dimension(300, 300);
+        return new Dimension(900, 200);
       }
     };
 
     histogramScrollPane.setViewportView(histogramPanel);
     imageHousePanel.add(histogramScrollPane);
-//    imageHousePanel.add(histogramPanel);
 
     // setting the main scroll pane for the images panel
     imageHousePanel.add(imageHouseScrollPane);
-//    imageHousePanel.add(redHistogramScrollPane);
-//    imageHousePanel.add(blueHistogramScrollPane);
-//    imageHousePanel.add(greenHistogramScrollPane);
-//    imageHousePanel.add(intensityHistogramScrollPane);
-
-//    imageHousePanel.add(histogramScrollPane);
 
     // adding a border around imagePanel
     imageHousePanel.setBorder(BorderFactory.createTitledBorder("Image and histograms"));
     add(imageHousePanel);
 
-
-
-
-    // setting the supposed image
-
-    // setting the supposed image histogram
-
     pack();
     setVisible(true);
-
-
   }
 
 
   @Override
   public void refresh(Image bruh) {
     ImageIcon image = new ImageIcon(bruh);
-//    for (int i = 0; i < 4; i++) {
-//      for (int j = 0; j < 4; j++) {
-//        System.out.println(new Color(bruh.getRGB(i,j)).getRed());
-//      }
-//    }
     this.imagePicture.setIcon(image); // putting the image in the JLabel
 
     // also need to refresh the histogram
@@ -290,8 +235,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
         features.load(f.getPath());
       }
     });
-    this.brighten.addActionListener(evt -> features.brightenOrDarken(1));
-    this.darken.addActionListener(evt -> features.brightenOrDarken( -1));
+    this.brighten.addActionListener(evt -> features.brightenOrDarken(10));
+    this.darken.addActionListener(evt -> features.brightenOrDarken( -10));
     this.flipVertical.addActionListener(evt -> features.flipVertical());
     this.flipHorizontal.addActionListener(evt -> features.flipHorizontal());
     this.visualizeRed.addActionListener(evt -> features.visualizeRed());
@@ -336,11 +281,11 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
       }
     }
 
-    BufferedImage imageRed = new BufferedImage(256, 300, BufferedImage.TYPE_INT_ARGB);
-    BufferedImage imageGreen = new BufferedImage(256, 300, BufferedImage.TYPE_INT_ARGB);
-    BufferedImage imageBlue = new BufferedImage(256, 300, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage imageRed = new BufferedImage(256, 200, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage imageGreen = new BufferedImage(256, 200, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage imageBlue = new BufferedImage(256, 200, BufferedImage.TYPE_INT_ARGB);
     BufferedImage imageIntensity = new BufferedImage(256,
-            300, BufferedImage.TYPE_INT_ARGB);
+            200, BufferedImage.TYPE_INT_ARGB);
 
     int maxValue = Math.max(Arrays.stream(redCounts).max().getAsInt(),
             Math.max(Arrays.stream(greenCounts).max().getAsInt(),
@@ -355,24 +300,24 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     int range = maxValue - minValue;
 
     for (int i = 0; i < 256; i++) {
-      for (int j = 0; j < (int) ((redCounts[i] - minValue) / ((double) range) * 300); j++) {
-        imageRed.setRGB(i, 299 - j, new Color(100, 0, 0, 75).getRGB());
+      for (int j = 0; j < (int) ((redCounts[i] - minValue) / ((double) range) * 200); j++) {
+        imageRed.setRGB(i, 199 - j, new Color(100, 0, 0, 75).getRGB());
       }
 
-      for (int j = 0; j < (int) ((greenCounts[i] - minValue) / ((double) range) * 300); j++) {
-        imageGreen.setRGB(i, 299 - j, new Color(0, 100, 0, 75).getRGB());
+      for (int j = 0; j < (int) ((greenCounts[i] - minValue) / ((double) range) * 200); j++) {
+        imageGreen.setRGB(i, 199 - j, new Color(0, 100, 0, 75).getRGB());
       }
 
-      for (int j = 0; j < (int) ((blueCounts[i] - minValue) / ((double) range) * 300); j++) {
-        imageBlue.setRGB(i, 299 - j, new Color(0, 0, 100, 75).getRGB());
+      for (int j = 0; j < (int) ((blueCounts[i] - minValue) / ((double) range) * 200); j++) {
+        imageBlue.setRGB(i, 199 - j, new Color(0, 0, 100, 75).getRGB());
       }
 
-      for (int j = 0; j < (int) ((intensityCounts[i] - minValue) / ((double) range) * 300); j++) {
-        imageIntensity.setRGB(i, 299 - j, new Color(100, 100, 50, 75).getRGB());
+      for (int j = 0; j < (int) ((intensityCounts[i] - minValue) / ((double) range) * 200); j++) {
+        imageIntensity.setRGB(i, 199 - j, new Color(100, 100, 100, 20).getRGB());
       }
     }
 
-    BufferedImage histogram = new BufferedImage(256, 300, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage histogram = new BufferedImage(256, 200, BufferedImage.TYPE_INT_ARGB);
 
     Graphics g = histogram.getGraphics();
     g.drawImage(imageRed, 0, 0, null);
@@ -384,10 +329,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     histogramPanel.setIcon(icon);
   }
 
-
   @Override
   public void renderMessage(String message) throws IOException {
-    JOptionPane.showMessageDialog(this,
-            "An image must be loaded in order to perform an operation.");
+    JOptionPane.showMessageDialog(this, message);
   }
 }

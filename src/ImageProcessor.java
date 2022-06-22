@@ -97,7 +97,7 @@ public class ImageProcessor {
     } else if (args.length == 0) { // run the GUI version of the program
       isInvalid = false;
       // make the controller be the GUI version
-      GUIViewImpl guiView = new GUIViewImpl("dummy");
+      GUIViewImpl guiView = new GUIViewImpl("Image Processor");
       Features features = new FeaturesImpl();
       controller = new ImageProcessorControllerGUI(guiView, model, features);
       features.setController((ImageProcessorGUIController) controller);
