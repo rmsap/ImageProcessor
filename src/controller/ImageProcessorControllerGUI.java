@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import Utils.UtilsImpl;
 import imageformat.BMPImageFormat;
 import imageformat.ImageFormat;
 import imageformat.JPGImageFormat;
@@ -170,15 +171,37 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
   public void save(String filePath) {
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
-    this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
+    try{
+      this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
+    }
+    catch (IllegalArgumentException i) {
+      try{
+        this.view.renderMessage("An image must be loaded before saving.");
+      }
+      catch(IOException f) {
+        // gg dunno what else to do
+      }
+    }
+
   }
 
   @Override
   public void doOperation(Operation op) {
-    this.model.doOperation(op, "image", "image");
-    Image image = this.produceBufferedImage();
-    this.view.refresh(image);
-    this.view.visualizeHistogram(image);
+    try{
+      this.model.doOperation(op, "image", "image");
+      Image image = this.produceBufferedImage();
+      this.view.refresh(image);
+      this.view.visualizeHistogram(image);
+    }
+    catch(IllegalArgumentException b) {
+      try{
+        this.view.renderMessage("An image must be loaded to perform an operation.");
+      }
+      catch(IOException f) {
+        // if an exception is caught then gg
+        System.out.print("lmao");
+      }
+    }
   }
 
   /**
@@ -186,6 +209,10 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
    * @return a BufferedImage representing the image in the model.
    */
   private Image produceBufferedImage() {
+
+    return new UtilsImpl().createBufferedImage(this.model.getImage("image"));
+
+    /*
     int[][] image = this.model.getImage("image");
 
     // first convert to buffered image
@@ -215,5 +242,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
       }
     }
     return newImage;
+    
+     */
   }
 }

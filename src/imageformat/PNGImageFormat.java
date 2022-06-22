@@ -30,7 +30,7 @@ public class PNGImageFormat extends AbstractModernImageFormat {
     try {
       // first convert to buffered image
       // then save bufferedImage as a jpg file
-      BufferedImage created = this.createBufferedImage(image);
+      BufferedImage created = (BufferedImage) this.createBufferedImage(image);
       File output = new File(path);
       ImageIO.write(created, "png", output);
     } catch (IOException e) {
