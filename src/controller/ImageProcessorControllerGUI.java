@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import Utils.UtilsImpl;
 import imageformat.BMPImageFormat;
 import imageformat.ImageFormat;
 import imageformat.JPGImageFormat;
@@ -208,6 +209,10 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
    * @return a BufferedImage representing the image in the model.
    */
   private Image produceBufferedImage() {
+
+    return new UtilsImpl().createBufferedImage(this.model.getImage("image"));
+
+    /*
     int[][] image = this.model.getImage("image");
 
     // first convert to buffered image
@@ -237,5 +242,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
       }
     }
     return newImage;
+    
+     */
   }
 }

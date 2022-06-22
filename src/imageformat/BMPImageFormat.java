@@ -27,7 +27,7 @@ public class BMPImageFormat extends AbstractModernImageFormat {
     try {
       // first convert to buffered image
       // then save bufferedImage as a bmp file
-      BufferedImage created = this.createBufferedImage(image);
+      BufferedImage created = (BufferedImage) this.createBufferedImage(image);
       File output = new File(path);
       ImageIO.write(created, "BMP", output);
     } catch (IOException e) {

@@ -2,12 +2,14 @@ package imageformat;
 
 
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import Utils.UtilsImpl;
 
 /**
  * This class represents an abstract image format that supports modern image formats.
@@ -59,7 +61,9 @@ public abstract class AbstractModernImageFormat implements ImageFormat {
   }
 
 
-  protected BufferedImage createBufferedImage(int[][] image) {
+  protected Image createBufferedImage(int[][] image) {
+    return new UtilsImpl().createBufferedImage(image);
+    /*
     // first convert to buffered image
     int width = image[0][0];
     int height = image[0][1];
@@ -87,5 +91,7 @@ public abstract class AbstractModernImageFormat implements ImageFormat {
       }
     }
     return newImage;
+
+     */
   }
 }
