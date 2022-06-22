@@ -185,7 +185,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     JScrollPane imagePictureScrollPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
-        return new Dimension(200, 200);
+        return new Dimension(900, 300);
       }
     };
 
@@ -193,58 +193,29 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     imageHousePanel.add(imagePictureScrollPane);
 
 
-    redHistogram = new JPanel();
-    blueHistogram = new JPanel();
-    greenHistogram = new JPanel();
-    intensityHistogram = new JPanel();
     // setting the JLabel containing the histogram
-    JScrollPane redHistogramScrollPane = new JScrollPane(redHistogram);
-//    imageHousePanel.add(redHistogram);
-    JScrollPane greenHistogramScrollPane = new JScrollPane(greenHistogram);
-//    imageHousePanel.add(greenHistogram);
-    JScrollPane blueHistogramScrollPane = new JScrollPane(blueHistogram);
-//    imageHousePanel.add(blueHistogram);
-    JScrollPane intensityHistogramScrollPane = new JScrollPane(intensityHistogram);
-//    imageHousePanel.add(intensityHistogram);
-
     ImageIcon icon1 = new ImageIcon();
     histogramPanel = new JLabel(icon1);
 
     JScrollPane histogramScrollPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
-        return new Dimension(300, 300);
+        return new Dimension(900, 300);
       }
     };
 
     histogramScrollPane.setViewportView(histogramPanel);
     imageHousePanel.add(histogramScrollPane);
-//    imageHousePanel.add(histogramPanel);
 
     // setting the main scroll pane for the images panel
     imageHousePanel.add(imageHouseScrollPane);
-//    imageHousePanel.add(redHistogramScrollPane);
-//    imageHousePanel.add(blueHistogramScrollPane);
-//    imageHousePanel.add(greenHistogramScrollPane);
-//    imageHousePanel.add(intensityHistogramScrollPane);
-
-//    imageHousePanel.add(histogramScrollPane);
 
     // adding a border around imagePanel
     imageHousePanel.setBorder(BorderFactory.createTitledBorder("Image and histograms"));
     add(imageHousePanel);
 
-
-
-
-    // setting the supposed image
-
-    // setting the supposed image histogram
-
     pack();
     setVisible(true);
-
-
   }
 
 
@@ -290,8 +261,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
         features.load(f.getPath());
       }
     });
-    this.brighten.addActionListener(evt -> features.brightenOrDarken(1));
-    this.darken.addActionListener(evt -> features.brightenOrDarken( -1));
+    this.brighten.addActionListener(evt -> features.brightenOrDarken(10));
+    this.darken.addActionListener(evt -> features.brightenOrDarken( -10));
     this.flipVertical.addActionListener(evt -> features.flipVertical());
     this.flipHorizontal.addActionListener(evt -> features.flipHorizontal());
     this.visualizeRed.addActionListener(evt -> features.visualizeRed());
@@ -384,10 +355,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     histogramPanel.setIcon(icon);
   }
 
-
   @Override
   public void renderMessage(String message) throws IOException {
-    JOptionPane.showMessageDialog(this,
-            "An image must be loaded in order to perform an operation.");
+    JOptionPane.showMessageDialog(this, message);
   }
 }
