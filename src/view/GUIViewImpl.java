@@ -256,6 +256,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
   @Override
   public void visualizeHistogram(Image image) {
+    // Instantiate arrays containing counts of each pixel value
     int[] redCounts = new int[256];
     int[] greenCounts = new int[256];
     int[] blueCounts = new int[256];
@@ -289,8 +290,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     int maxValue = Math.max(Arrays.stream(redCounts).max().getAsInt(),
             Math.max(Arrays.stream(greenCounts).max().getAsInt(),
-            Math.max(Arrays.stream(blueCounts).max().getAsInt(),
-                    Arrays.stream(intensityCounts).max().getAsInt())));
+                    Math.max(Arrays.stream(blueCounts).max().getAsInt(),
+                            Arrays.stream(intensityCounts).max().getAsInt())));
 
     int minValue = Math.min(Arrays.stream(redCounts).min().getAsInt(),
             Math.min(Arrays.stream(greenCounts).min().getAsInt(),

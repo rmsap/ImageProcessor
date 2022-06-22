@@ -88,5 +88,9 @@ public interface Features {
    */
   void save(String filePath);
 
+  /**
+   * Set the Controller of this Features to the given controller.
+   * @param controller the controller to set this Feature's controller to
+   */
   void setController(ImageProcessorGUIController controller);
 }
