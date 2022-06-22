@@ -208,6 +208,10 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     // setting the main scroll pane for the images panel
     imageHousePanel.add(imageHouseScrollPane);
+    imageHousePanel.add(redHistogramScrollPane);
+    imageHousePanel.add(blueHistogramScrollPane);
+    imageHousePanel.add(greenHistogramScrollPane);
+    imageHousePanel.add(intensityHistogramScrollPane);
 
     // adding a border around imagePanel
     imageHousePanel.setBorder(BorderFactory.createTitledBorder("Using Password fields"));
