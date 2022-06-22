@@ -204,8 +204,10 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.imagePicture.setIcon(image); // putting the image in the JLabel
 
     // also need to refresh the histogram
+    Image histogram = this.createHistogram(bruh);
+    ImageIcon icon = new ImageIcon(histogram);
+    histogramPanel.setIcon(icon);
 
-    // Set up arrays to count each occurrence of each color channel/intensity
   }
 
   @Override
@@ -255,7 +257,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   }
 
   @Override
-  public void visualizeHistogram(Image image) {
+  public Image createHistogram(Image image) {
     // Instantiate arrays containing counts of each pixel value
     int[] redCounts = new int[256];
     int[] greenCounts = new int[256];
@@ -326,8 +328,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     g.drawImage(imageBlue, 0, 0, null);
     g.drawImage(imageGreen, 0, 0, null);
 
-    ImageIcon icon = new ImageIcon(histogram);
-    histogramPanel.setIcon(icon);
+    return histogram;
   }
 
   @Override
