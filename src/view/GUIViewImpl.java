@@ -33,32 +33,11 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private JButton visualizeIntensity;
   private JButton darken;
   private JButton brighten;
-
-
   private JScrollPane imageHouseScrollPane;
-
-//  private JScrollPane actualImageVerticalScrollPane;
-//  private JScrollPane actualImageHorizontalScrollPane;
-//
-//  private JScrollPane histogramVerticalScrollPane;
-//  private JScrollPane histogramHorizontalScrollPane;
-
   private JPanel imageHousePanel;
-
   private JPanel operationPanel;
-
-
   private JLabel imagePicture;
-  private JPanel redHistogram;
-  private JPanel greenHistogram;
-  private JPanel blueHistogram;
-  private JPanel intensityHistogram;
-
   private JLabel histogramPanel;
-
-
-  private JFrame errorMessage;
-
 
   public GUIViewImpl(String caption) throws IllegalArgumentException {
 
