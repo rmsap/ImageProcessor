@@ -228,7 +228,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
 
   @Override
-  public void refresh(BufferedImage bruh) {
+  public void refresh(Image bruh) {
     ImageIcon image = new ImageIcon(bruh);
 //    for (int i = 0; i < 4; i++) {
 //      for (int j = 0; j < 4; j++) {
@@ -251,13 +251,17 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     Arrays.fill(blueCounts, 0);
     Arrays.fill(intensityCounts, 0);
 
-    for (int i = 0; i < bruh.getWidth(); i++) {
-      for (int j = 0; j < bruh.getHeight(); j++) {
-        Color color = new Color(bruh.getRGB(i, j));
-        redCounts[color.getRed()]++;
-        greenCounts[color.getGreen()]++;
-        blueCounts[color.getBlue()]++;
-        redCounts[(color.getRed() + color.getGreen() + color.getBlue()) / 3]++;
+    if (bruh instanceof BufferedImage) {
+      BufferedImage buffered = (BufferedImage) bruh;
+
+      for (int i = 0; i < buffered.getWidth(); i++) {
+        for (int j = 0; j < buffered.getHeight(); j++) {
+          Color color = new Color(buffered.getRGB(i, j));
+          redCounts[color.getRed()]++;
+          greenCounts[color.getGreen()]++;
+          blueCounts[color.getBlue()]++;
+          redCounts[(color.getRed() + color.getGreen() + color.getBlue()) / 3]++;
+        }
       }
     }
     this.redHistogram = new Histogram(redCounts);

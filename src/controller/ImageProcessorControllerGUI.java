@@ -176,31 +176,35 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
    * Produce a BufferedImage from the image in the model.
    * @return a BufferedImage representing the image in the model.
    */
-  private BufferedImage produceBufferedImage() {
-    int[][] imageArr = this.model.getImage("image");
-    BufferedImage image = new BufferedImage(imageArr[0][0], imageArr[0][1],
-            BufferedImage.TYPE_INT_ARGB);
+  private Image produceBufferedImage() {
+    int[][] image = this.model.getImage("image");
 
-    boolean hasOpacity = imageArr[1].length > 3;
-
-    int curPixel = 1;
-    for (int i = 0; i < imageArr[0][0]; i++) {
-      for (int j = 0; j < imageArr[0][1]; j++) {
-        Color color;
-
-        if (hasOpacity) {
-          color = new Color(imageArr[curPixel][0], imageArr[curPixel][1],
-                  imageArr[curPixel][2], imageArr[curPixel][3]);
-        } else {
-          color = new Color(imageArr[curPixel][0], imageArr[curPixel][1],
-                  imageArr[curPixel][2]);
+    // first convert to buffered image
+    int width = image[0][0];
+    int height = image[0][1];
+    // for bmp have to change to rgb instead of argb or it will not save to a bmp file
+    BufferedImage newImage = new BufferedImage(image[0][0], image[0][1],
+            BufferedImage.TYPE_INT_RGB);
+    int pixelCount = 1; // starts at index 1 since 0 just contains metaData
+    for (int r = 0; r < height; r++) {
+      for (int c = 0; c < width; c++) {
+        Color temp = null;
+        // convert 3 values into a unified RGB value
+        if (image[pixelCount].length == 4) { // if it's rgba
+          temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2],
+                  image[pixelCount][3]);
+        } else if (image[pixelCount].length == 3) { // if it's only rgb
+          temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2]);
         }
 
-        image.setRGB(i, j, color.getRGB());
-        curPixel++;
+        int tempRGBColor = temp.getRGB();
+        int tempAlphaValue = temp.getAlpha();
+        // set each pixel in the buffered image to the rgb value
+        newImage.setRGB(c, r, tempRGBColor);
+        //          newImage.setRGB(c, r, tempAlphaValue);
+        pixelCount++;
       }
     }
-
-    return image;
+    return newImage;
   }
 }
