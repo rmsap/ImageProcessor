@@ -162,7 +162,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     //brighten button
     this.brighten = new JButton("brighten");
     this.brighten.setActionCommand("brighten button");
-    this.operationPanel.add(darken);
+    this.operationPanel.add(brighten);
 
     this.add(operationPanel);
 

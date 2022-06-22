@@ -2,8 +2,12 @@ package controller;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import imageformat.BMPImageFormat;
 import imageformat.ImageFormat;
@@ -154,6 +158,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     try {
       this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
       this.view.refresh(this.produceBufferedImage());
+
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }
