@@ -64,8 +64,6 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
       this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
       Image image = this.produceBufferedImage("image");
       this.view.refresh(image);
-      this.view.visualizeHistogram(image);
-
     } catch (IllegalArgumentException e) {
       try {
         this.view.renderMessage("Invalid image.");
@@ -107,7 +105,6 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
       this.model.doOperation(op, "image", "image");
       Image image = this.produceBufferedImage("image");
       this.view.refresh(image);
-      this.view.visualizeHistogram(image);
     }
     catch(IllegalArgumentException b) {
       try{
