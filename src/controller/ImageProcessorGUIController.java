@@ -18,5 +18,9 @@ public interface ImageProcessorGUIController extends ImageProcessorController {
    */
   void save(String filePath);
 
+  /**
+   * Execute the given Operation on the model.
+   * @param op the operation to execute
+   */
   void doOperation(Operation op);
 }

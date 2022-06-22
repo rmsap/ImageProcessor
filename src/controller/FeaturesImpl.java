@@ -7,7 +7,6 @@ import operations.Filter;
 import operations.Filter.Filters;
 import operations.FlipHorizontal;
 import operations.FlipVertical;
-import operations.Operation;
 import operations.VisualizeComponent;
 import operations.VisualizeComponent.Component;
 

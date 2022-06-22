@@ -1,13 +1,9 @@
 package controller;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 import Utils.UtilsImpl;
 import imageformat.BMPImageFormat;
@@ -21,7 +17,6 @@ import view.GUIViewImpl;
 
 /**
  * The class represents a controller implementation that works with the view.
- * Should the GUI controller implement the Features Interface?
  */
 
 public class ImageProcessorControllerGUI implements ImageProcessorGUIController {
@@ -56,114 +51,28 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     this.formatDirectory.put("bmp", new BMPImageFormat());
   }
 
-
-
-  // the controller should have some object that implements the Features interface
-
   @Override
   public void execute() throws IllegalStateException {
     this.view.addFeatures(features);
   }
 
-//  @Override
-//  public void brightenOrDarken(int input) {
-//    this.model.doOperation(new BrightenOrDarken(input), "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void greyscale() {
-//    this.model.doOperation(new ColorTransformation(ColorTransformation.Transformation.Greyscale),
-//            "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void sepia() {
-//    this.model.doOperation(new ColorTransformation(ColorTransformation.Transformation.Sepia),
-//            "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void sharpen() {
-//    this.model.doOperation(new Filter(Filter.Filters.Sharpen), "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void blur() {
-//    this.model.doOperation(new Filter(Filter.Filters.Blur), "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void flipHorizontal() {
-//    this.model.doOperation(new FlipHorizontal(), "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void flipVertical() {
-//    this.model.doOperation(new FlipVertical(), "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void visualizeRed() {
-//    this.model.doOperation(new VisualizeComponent(VisualizeComponent.Component.Red),
-//            "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void visualizeGreen() {
-//    this.model.doOperation(new VisualizeComponent(VisualizeComponent.Component.Green),
-//            "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void visualizeBlue() {
-//    this.model.doOperation(new VisualizeComponent(VisualizeComponent.Component.Blue),
-//            "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void visualizeIntensity() {
-//    this.model.doOperation(new VisualizeComponent(VisualizeComponent.Component.Intensity),
-//            "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void visualizeValue() {
-//    this.model.doOperation(new VisualizeComponent(VisualizeComponent.Component.Value),
-//            "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-//
-//  @Override
-//  public void visualizeLuma() {
-//    this.model.doOperation(new VisualizeComponent(VisualizeComponent.Component.Luma),
-//            "image", "image");
-//    this.view.refresh(this.produceBufferedImage());
-//  }
-
   @Override
   public void load(String filePath) {
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
-    // Not sure if this needs to be in a try catch so just leaving it for now
     try {
       this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
-      Image image = this.produceBufferedImage();
+      Image image = this.produceBufferedImage("image");
       this.view.refresh(image);
       this.view.visualizeHistogram(image);
 
     } catch (IllegalArgumentException e) {
-      System.out.println(e.getMessage());
+      try {
+        this.view.renderMessage("Invalid image.");
+      }
+      catch (IOException io) {
+        throw new IllegalArgumentException("Unable to render messages on view.");
+      }
     }
   }
 
@@ -175,21 +84,20 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
       this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
     }
     catch (IllegalArgumentException i) {
-      try{
+      try {
         this.view.renderMessage("An image must be loaded before saving.");
       }
       catch(IOException f) {
-        // gg dunno what else to do
+        throw new IllegalArgumentException("Unable to render message on view.");
       }
     }
-
   }
 
   @Override
   public void doOperation(Operation op) {
     try{
       this.model.doOperation(op, "image", "image");
-      Image image = this.produceBufferedImage();
+      Image image = this.produceBufferedImage("image");
       this.view.refresh(image);
       this.view.visualizeHistogram(image);
     }
@@ -198,51 +106,17 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
         this.view.renderMessage("An image must be loaded to perform an operation.");
       }
       catch(IOException f) {
-        // if an exception is caught then gg
-        System.out.print("lmao");
+        throw new IllegalArgumentException("Unable to write to view.");
       }
     }
   }
 
   /**
    * Produce a BufferedImage from the image in the model.
+   * @param imageName the name of the image to produce a buffered image of
    * @return a BufferedImage representing the image in the model.
    */
-  private Image produceBufferedImage() {
-
-    return new UtilsImpl().createBufferedImage(this.model.getImage("image"));
-
-    /*
-    int[][] image = this.model.getImage("image");
-
-    // first convert to buffered image
-    int width = image[0][0];
-    int height = image[0][1];
-    // for bmp have to change to rgb instead of argb or it will not save to a bmp file
-    BufferedImage newImage = new BufferedImage(image[0][0], image[0][1],
-            BufferedImage.TYPE_INT_RGB);
-    int pixelCount = 1; // starts at index 1 since 0 just contains metaData
-    for (int r = 0; r < height; r++) {
-      for (int c = 0; c < width; c++) {
-        Color temp = null;
-        // convert 3 values into a unified RGB value
-        if (image[pixelCount].length == 4) { // if it's rgba
-          temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2],
-                  image[pixelCount][3]);
-        } else if (image[pixelCount].length == 3) { // if it's only rgb
-          temp = new Color(image[pixelCount][0], image[pixelCount][1], image[pixelCount][2]);
-        }
-
-        int tempRGBColor = temp.getRGB();
-        int tempAlphaValue = temp.getAlpha();
-        // set each pixel in the buffered image to the rgb value
-        newImage.setRGB(c, r, tempRGBColor);
-        //          newImage.setRGB(c, r, tempAlphaValue);
-        pixelCount++;
-      }
-    }
-    return newImage;
-    
-     */
+  private Image produceBufferedImage(String imageName) {
+    return new UtilsImpl().createBufferedImage(this.model.getImage(imageName));
   }
 }
