@@ -11,7 +11,9 @@ import operations.VisualizeComponent;
 import operations.VisualizeComponent.Component;
 
 /**
- * The class represents a Features object that implements the methods of the interface.
+ * The class represents an implementation of the  Features interface. When called from the view,
+ * each of this class's methods will tell the controller to mutate the model in some way or
+ * save/load an image.
  */
 public class FeaturesImpl implements Features {
   private ImageProcessorGUIController controller;

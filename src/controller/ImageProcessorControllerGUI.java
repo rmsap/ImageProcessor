@@ -2,30 +2,18 @@ package controller;
 
 import java.awt.Image;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import Utils.UtilsImpl;
-import imageformat.BMPImageFormat;
-import imageformat.ImageFormat;
-import imageformat.JPGImageFormat;
-import imageformat.PNGImageFormat;
-import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import operations.Operation;
 import view.ImageProcessorGUIView;
+import view.ImageProcessorView;
 
 /**
- * The class represents a controller implementation that works with the view.
+ * This class represents a controller that works with a GUI-based view.
  */
-
-public class ImageProcessorControllerGUI implements ImageProcessorGUIController {
-  private final ImageProcessorModel model;
-  private final ImageProcessorGUIView view;
-
-  // INVARIANT: All keys contained in formatDirectory are valid file extensions
-  private final Map<String, ImageFormat> formatDirectory;
-
+public class ImageProcessorControllerGUI extends AbstractImageProcessorController
+        implements ImageProcessorGUIController {
   private final Features features;
 
   /**
@@ -39,27 +27,29 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
 
    * @param view  the view that this controller will control
 
-   * @throws IllegalArgumentException if any of the parameters are null
+   * @throws IllegalArgumentException if any of the parameters are null or if the view is not a GUI
+   *                                  view
    */
-  public ImageProcessorControllerGUI(ImageProcessorModel model, ImageProcessorGUIView view,
+  public ImageProcessorControllerGUI(ImageProcessorModel model, ImageProcessorView view,
                                      Features features) throws IllegalArgumentException {
-    if (model == null || view == null || features == null) {
+    super(model, view);
+
+    if (!(view instanceof ImageProcessorGUIView)) {
+      throw new IllegalArgumentException("View must be a GUI view.");
+    }
+
+    if (features == null) {
       throw new IllegalArgumentException("None of the parameters can be null.");
     }
-    this.model = model;
-    this.view = view;
     this.features = features;
     this.features.setController(this);
-    this.formatDirectory = new HashMap<String, ImageFormat>();
-    this.formatDirectory.put("ppm", new PPMImageFormat());
-    this.formatDirectory.put("png", new PNGImageFormat());
-    this.formatDirectory.put("jpg", new JPGImageFormat());
-    this.formatDirectory.put("bmp", new BMPImageFormat());
   }
 
   @Override
-  public void execute() throws IllegalStateException {
-    this.view.addFeatures(features);
+  public void execute() {
+    // Note that we can cast without using instanceof because the controller could not have been
+    // constructed if the view wasn't an ImageProcessorGUIView.
+    ((ImageProcessorGUIView) this.view).addFeatures(features);
   }
 
   @Override
@@ -70,7 +60,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
       try {
         this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
         Image image = this.produceBufferedImage("image");
-        this.view.refresh(image);
+        ((ImageProcessorGUIView) this.view).refresh(image);
       } catch (IllegalArgumentException e) {
         try {
           this.view.renderMessage("Invalid image.");
@@ -122,7 +112,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     try {
       this.model.doOperation(op, "image", "image");
       Image image = this.produceBufferedImage("image");
-      this.view.refresh(image);
+      ((ImageProcessorGUIView) this.view).refresh(image);
     } catch (IllegalArgumentException b) {
       try {
         this.view.renderMessage("An image must be loaded to perform an operation.");

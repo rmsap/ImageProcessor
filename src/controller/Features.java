@@ -1,11 +1,8 @@
 package controller;
 
 /**
- * Represents an interface of features (basically ActionListeners, etc).
+ * Represents an interface of features that the view can trigger at specific events.
  * Contains application-specific events.
- * Hides Swing-specific events.
- * The controller should use composition for the Features Interface.
- * Each method is essentially a request.
  */
 public interface Features {
 
@@ -72,25 +69,26 @@ public interface Features {
 
 
   /**
-   * Represents the action listener that calls on the operation that visualizes luma.
+   * Represents the action listener that calls (directly or indirectly) on the
+   * operation that visualizes luma.
    */
   void visualizeLuma();
 
   /**
-   * Represents the action listener that calls on the model's load method.
+   * Represents the action listener that calls (directly or indirectly) on the model's load method.
    * @param filePath representing the path of the file that is to be loaded.
    */
   void load(String filePath);
 
   /**
-   * Represents the action listener that calls on the model's save method.
+   * Represents the action listener that calls (directly or indirectly) on the model's save method.
    * @param filePath representing the path of the file that is to be saved.
    */
   void save(String filePath);
 
   /**
    * Set the Controller of this Features to the given controller.
-   * @param controller the controller to set this Feature's controller to
+   * @param controller the controller to set this Features's controller to
    */
   void setController(ImageProcessorGUIController controller);
 }
