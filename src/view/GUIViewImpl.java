@@ -17,38 +17,34 @@ import controller.Features;
  * The class represents an implementation of a GUI view from the GUI interface.
  */
 public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
-  private JButton load;
-  private JButton save;
-  private JButton flipHorizontal;
-  private JButton flipVertical;
-  private JButton sepia;
-  private JButton greyscale;
-  private JButton blur;
-  private JButton sharpen;
-  private JButton visualizeBlue;
-  private JButton visualizeGreen;
-  private JButton visualizeRed;
-  private JButton visualizeValue;
-  private JButton visualizeLuma;
-  private JButton visualizeIntensity;
-  private JButton darken;
-  private JButton brighten;
-  private JScrollPane imageHouseScrollPane;
-  private JPanel imageHousePanel;
-  private JPanel operationPanel;
-  private JLabel imagePicture;
-  private JLabel histogramPanel;
+  private final JButton load;
+  private final JButton save;
+  private final JButton flipHorizontal;
+  private final JButton flipVertical;
+  private final JButton sepia;
+  private final JButton greyscale;
+  private final JButton blur;
+  private final JButton sharpen;
+  private final JButton visualizeBlue;
+  private final JButton visualizeGreen;
+  private final JButton visualizeRed;
+  private final JButton visualizeValue;
+  private final JButton visualizeLuma;
+  private final JButton visualizeIntensity;
+  private final JButton darken;
+  private final JButton brighten;
+  private final JScrollPane imageHouseScrollPane;
+  private final JPanel imageHousePanel;
+  private final JPanel operationPanel;
+  private final JLabel imagePicture;
+  private final JLabel histogramPanel;
 
   public GUIViewImpl(String caption) throws IllegalArgumentException {
-
     super(caption);
 
     setSize(1000, 1000);
     setLocation(100, 0);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    // this.setResizable(false);
-    // this.setMinimumSize(new Dimension(300,300));
-
 
     this.setLayout(new FlowLayout());
 
@@ -56,20 +52,16 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     operationPanel = new JPanel();
     operationPanel.setLayout(new GridLayout(8, 2));
     operationPanel.setSize(100, 100);
-//    this.add(operationPanel);
-
 
     //load button
     this.load = new JButton("load");
     this.load.setActionCommand("load button");
     this.operationPanel.add(load);
 
-
     //save button
     this.save = new JButton("save");
     this.save.setActionCommand("save button");
     this.operationPanel.add(save);
-
 
     //flip-horizontal button
     this.flipHorizontal = new JButton("flip horizontal");
@@ -143,21 +135,18 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     this.add(operationPanel);
 
-
     // making a panel that contains the actual image and the histogram
     imageHousePanel = new JPanel();
     // histogram is to vertically below the image
     imageHousePanel.setLayout(new BoxLayout(imageHousePanel, BoxLayout.PAGE_AXIS));
     // scrollbar around this main panel
     imageHouseScrollPane = new JScrollPane();
-//    add(imageHouseScrollPane);
-
 
     // setting JLabel containing the actual image
-    // adding a scrollbar for the actual image (vertical and horizontal when needed)
     ImageIcon icon = new ImageIcon();
     imagePicture = new JLabel(icon);
 
+    // adding a scrollbar for the actual image (vertical and horizontal when needed)
     JScrollPane imagePictureScrollPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
