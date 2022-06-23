@@ -3,7 +3,8 @@ package controller;
 import operations.Operation;
 
 /**
- * Represents the interface for the GUI version of a controller for Image Processor.
+ * This interface represents the methods necessary for a controller for a GUI-based view of the
+ * image processor.
  */
 public interface ImageProcessorGUIController extends ImageProcessorController {
   /**

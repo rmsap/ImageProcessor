@@ -1,16 +1,16 @@
 package Utils;
 
-import java.awt.*;
+import java.awt.Image;
 
 
 /**
- * Represents the Utils interface that has methods that can be applied to by other classes.
+ * This interface represents useful methods that do not fit into any one class.
  */
 public interface Utils {
   /**
-   * Creates a BufferedImage given a 2d array of pixels.
+   * Creates an Image given a 2d array of pixels.
    * @param image representing the 2d array of pixels that hold rgb values.
-   * @return a BufferedImage that has the corresponding pixels values from the given 2d array
+   * @return an Image that has the corresponding pixels values from the given 2d array
    */
   Image createBufferedImage(int[][] image);
 }
