@@ -33,12 +33,12 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
    * model and view.
    *
    * @param model the model that this controller will control
-<<<<<<< HEAD
+
    * @param view the view that this controller will control
    * @param features the features that this controller supports
-=======
+
    * @param view  the view that this controller will control
->>>>>>> 0570e0518eb1e61899b5527b5b9989e20bae7db5
+
    * @throws IllegalArgumentException if any of the parameters are null
    */
   public ImageProcessorControllerGUI(ImageProcessorModel model, ImageProcessorGUIView view,
@@ -66,18 +66,29 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
   public void load(String filePath) {
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
-    try {
-      this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
-      Image image = this.produceBufferedImage("image");
-      this.view.refresh(image);
-    } catch (IllegalArgumentException e) {
+    if(this.formatDirectory.get(fileFormat) != null) {
       try {
-        this.view.renderMessage("Invalid image.");
-      } catch (IOException io) {
+        this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
+        Image image = this.produceBufferedImage("image");
+        this.view.refresh(image);
+      } catch (IllegalArgumentException e) {
+        try {
+          this.view.renderMessage("Invalid image.");
+        } catch (IOException io) {
+          // This IOException can never be thrown -- it is inherited from the interface and so needs
+          // to be caught, but rendering a message on the GUI will never throw an IOException.
+        }
+      }
+    }
+    else {
+      try {
+        this.view.renderMessage("The file loaded must be .ppm, .png, .bmp, or .jpg");
+      } catch (IOException f) {
         // This IOException can never be thrown -- it is inherited from the interface and so needs
         // to be caught, but rendering a message on the GUI will never throw an IOException.
       }
     }
+
   }
 
   @Override
