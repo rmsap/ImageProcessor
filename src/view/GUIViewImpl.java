@@ -319,7 +319,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
       }
     }
 
-    BufferedImage histogram = new BufferedImage(350, 250, BufferedImage.TYPE_INT_ARGB);
+    Image histogram = new BufferedImage(350, 250, BufferedImage.TYPE_INT_ARGB);
 
     Graphics g = histogram.getGraphics();
     g.drawImage(imageRed, 80, 10, null);
