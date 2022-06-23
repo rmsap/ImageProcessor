@@ -331,7 +331,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   }
 
   @Override
-  public void renderMessage(String message) throws IOException {
+  public void renderMessage(String message) {
     JOptionPane.showMessageDialog(this, message);
   }
 }

@@ -1,6 +1,6 @@
 package controller;
 
-import java.awt.*;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,6 @@ import imageformat.PNGImageFormat;
 import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import operations.Operation;
-import view.GUIViewImpl;
 import view.ImageProcessorGUIView;
 
 /**
@@ -75,7 +74,8 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
       try {
         this.view.renderMessage("Invalid image.");
       } catch (IOException io) {
-        throw new IllegalArgumentException("Unable to render messages on view.");
+        // This IOException can never be thrown -- it is inherited from the interface and so needs
+        // to be caught, but rendering a message on the GUI will never throw an IOException.
       }
     }
   }
@@ -84,19 +84,24 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
   public void save(String filePath) {
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
-    try {
-      this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
-    } catch (IllegalArgumentException i) {
+    if (this.formatDirectory.get(fileFormat) != null) {
       try {
-        this.view.renderMessage("An image must be loaded before saving.");
-      } catch (IOException f) {
-        throw new IllegalArgumentException("Unable to render message on view.");
+        this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
+      } catch (IllegalArgumentException i) {
+        try {
+          this.view.renderMessage("An image must be loaded before saving.");
+        } catch (IOException f) {
+          // This IOException can never be thrown -- it is inherited from the interface and so needs
+          // to be caught, but rendering a message on the GUI will never throw an IOException.
+        }
       }
-    } catch (NullPointerException d) {
+    }
+    else {
       try {
         this.view.renderMessage("Image must be saved as either .jpg, .ppm, .png, or .bmp");
       } catch (IOException f) {
-        throw new IllegalArgumentException("Unable to render message on view.");
+        // This IOException can never be thrown -- it is inherited from the interface and so needs
+        // to be caught, but rendering a message on the GUI will never throw an IOException.
       }
     }
   }
@@ -111,7 +116,8 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
       try {
         this.view.renderMessage("An image must be loaded to perform an operation.");
       } catch (IOException f) {
-        throw new IllegalArgumentException("Unable to write to view.");
+        // This IOException can never be thrown -- it is inherited from the interface and so needs
+        // to be caught, but rendering a message on the GUI will never throw an IOException.
       }
     }
   }
