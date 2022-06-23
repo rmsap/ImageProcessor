@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 
 import Utils.UtilsImpl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * The class has the test for the utility method of UtilsImpl.
@@ -24,7 +25,7 @@ public class UtilsImplTest {
     BufferedImage bruh = (BufferedImage) new UtilsImpl().createBufferedImage(expected);
     int imageHeight = 4;
     int imageWidth = 4;
-    int [][] imagePixels = new int[17][3];
+    int[][] imagePixels = new int[17][3];
     int pixelCount = 1; // used to denote which indice of the array we are on
     for (int r = 0; r < imageHeight; r++) {
       for (int c = 0; c < imageWidth; c++) {
@@ -37,8 +38,8 @@ public class UtilsImplTest {
         pixelCount++;
       }
     }
-    for(int i = 1; i < expected.length; i++) {
-      for(int j = 0; j < expected[0].length; j++){
+    for (int i = 1; i < expected.length; i++) {
+      for (int j = 0; j < expected[0].length; j++) {
         assertEquals(expected[i][j], imagePixels[i][j]);
       }
     }
