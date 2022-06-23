@@ -936,17 +936,17 @@ public class FeaturesTest {
   private class GUIViewMock implements ImageProcessorGUIView {
     @Override
     public void refresh(Image bruh) {
-      return ;
+      return;
     }
 
     @Override
     public void addFeatures(Features features) {
-      return ;
+      return;
     }
 
     @Override
     public void renderMessage(String message) throws IOException {
-      return ;
+      return;
     }
   }
 }
