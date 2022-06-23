@@ -21,12 +21,8 @@ public class ImageProcessorControllerGUI extends AbstractImageProcessorControlle
    * model and view.
    *
    * @param model the model that this controller will control
-
    * @param view the view that this controller will control
    * @param features the features that this controller supports
-
-   * @param view  the view that this controller will control
-
    * @throws IllegalArgumentException if any of the parameters are null or if the view is not a GUI
    *                                  view
    */
