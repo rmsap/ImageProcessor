@@ -161,7 +161,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     JScrollPane imagePictureScrollPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
-        return new Dimension(900, 400);
+        return new Dimension(900, 350);
       }
     };
 
@@ -176,7 +176,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     JScrollPane histogramScrollPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
-        return new Dimension(900, 200);
+        return new Dimension(900, 250);
       }
     };
 
@@ -316,13 +316,18 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
       }
     }
 
-    BufferedImage histogram = new BufferedImage(256, 200, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage histogram = new BufferedImage(350, 250, BufferedImage.TYPE_INT_ARGB);
 
     Graphics g = histogram.getGraphics();
-    g.drawImage(imageRed, 0, 0, null);
-    g.drawImage(imageGreen, 0, 0, null);
-    g.drawImage(imageBlue, 0, 0, null);
-    g.drawImage(imageGreen, 0, 0, null);
+    g.drawImage(imageRed, 80, 10, null);
+    g.drawImage(imageGreen, 80, 10, null);
+    g.drawImage(imageBlue, 80, 10, null);
+    g.drawImage(imageIntensity, 80, 10, null);
+
+    g.setFont(new Font("SansSerif", Font.BOLD, 12 ));
+    g.setColor(Color.black);
+    g.drawString("Pixel Value", 175, 225);
+    g.drawString("Frequency", 0, 125);
 
     return histogram;
   }

@@ -945,11 +945,6 @@ public class FeaturesTest {
     }
 
     @Override
-    public Image createHistogram(Image image) {
-      return null;
-    }
-
-    @Override
     public void renderMessage(String message) throws IOException {
       return ;
     }
