@@ -6,11 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import imageformat.BMPImageFormat;
 import imageformat.ImageFormat;
-import imageformat.JPGImageFormat;
-import imageformat.PNGImageFormat;
-import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import operations.BrightenOrDarken;
 import operations.Filter;
@@ -28,17 +24,11 @@ import view.ImageProcessorView;
  * Represents an implementation of an ImageProcessorController.
  * The controller enables a user to utilize the various operations of Image Processor.
  */
-public class ImageProcessorControllerImpl implements ImageProcessorController {
-  private final ImageProcessorModel model;
-  private final ImageProcessorView view;
+public class ImageProcessorControllerImpl extends AbstractImageProcessorController {
   private final Readable input;
 
   // INVARIANT: All keys contained in operationDirectory are valid user inputs
   private final Map<String, Operation> operationDirectory;
-
-  // INVARIANT: All keys contained in formatDirectory are valid file extensions
-  private final Map<String, ImageFormat> formatDirectory;
-
 
   /**
    * Default constructor for the controller of Image Processor.
@@ -50,11 +40,12 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
    */
   public ImageProcessorControllerImpl(ImageProcessorModel model, ImageProcessorView view,
                                       Readable input) throws IllegalArgumentException {
-    if (model == null || view == null || input == null) {
+    super(model, view);
+
+    if (input == null) {
       throw new IllegalArgumentException("model, view, and readable object cannot be null");
     }
-    this.model = model;
-    this.view = view;
+
     this.input = input;
 
     // Instantiate the operation directory and load all user commands and operations into it
@@ -73,13 +64,6 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
     operationDirectory.put("change-brightness", new BrightenOrDarken(0));
     operationDirectory.put("blur", new Filter(Filters.Blur));
     operationDirectory.put("sharpen", new Filter(Filters.Sharpen));
-
-    // Instantiate the format directory and load all supported image formats into it
-    formatDirectory = new HashMap<String, ImageFormat>();
-    formatDirectory.put("ppm", new PPMImageFormat());
-    formatDirectory.put("jpg", new JPGImageFormat());
-    formatDirectory.put("png", new PNGImageFormat());
-    formatDirectory.put("bmp", new BMPImageFormat());
   }
 
 
