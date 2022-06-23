@@ -32,13 +32,10 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
    * Constructs a new ImageProcessorControllerGUI that supports the given features for the given
    * model and view.
    *
-   * @param model the model that this controller will control
-
-   * @param view the view that this controller will control
+   * @param model    the model that this controller will control
+   * @param view     the view that this controller will control
    * @param features the features that this controller supports
-
-   * @param view  the view that this controller will control
-
+   * @param view     the view that this controller will control
    * @throws IllegalArgumentException if any of the parameters are null
    */
   public ImageProcessorControllerGUI(ImageProcessorModel model, ImageProcessorGUIView view,
@@ -66,7 +63,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
   public void load(String filePath) {
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
-    if(this.formatDirectory.get(fileFormat) != null) {
+    if (this.formatDirectory.get(fileFormat) != null) {
       try {
         this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
         Image image = this.produceBufferedImage("image");
@@ -79,8 +76,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
           // to be caught, but rendering a message on the GUI will never throw an IOException.
         }
       }
-    }
-    else {
+    } else {
       try {
         this.view.renderMessage("The file loaded must be .ppm, .png, .bmp, or .jpg");
       } catch (IOException f) {
@@ -106,8 +102,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
           // to be caught, but rendering a message on the GUI will never throw an IOException.
         }
       }
-    }
-    else {
+    } else {
       try {
         this.view.renderMessage("Image must be saved as either .jpg, .ppm, .png, or .bmp");
       } catch (IOException f) {
