@@ -233,24 +233,6 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
       }
 
     }
-    /*
-    try {
-      this.model.loadImage(fileName, this.formatDirectory.get(fileFormat).read(dest));
-    } catch (IllegalArgumentException e) {
-      try {
-        this.view.renderMessage("File doesn't exist or type is not supported, "
-                + "re-enter a valid command\n");
-      } catch (IOException io) {
-        throw new IllegalStateException("Failed to write to Appendable.");
-      }
-    }
-    try {
-      this.view.renderMessage("Image has been loaded\n");
-    } catch (IOException e) { // file isn't found
-      throw new IllegalStateException("Failed to write to Appendable.");
-    }
-
-     */
   }
 
   /**

@@ -204,17 +204,10 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     Image histogram = this.createHistogram(bruh);
     ImageIcon icon = new ImageIcon(histogram);
     histogramPanel.setIcon(icon);
-
   }
 
   @Override
   public void addFeatures(Features features) {
-    // follow this format
-    /*
-    echoButton.addActionListener(evt -> features.echoOutput(input.getText()));
-    toggleButton.addActionListener(evt -> features.toggleColor());
-    exitButton.addActionListener(evt -> features.exitProgram());
-     */
     this.save.addActionListener(evt -> {
       final JFileChooser fchooser = new JFileChooser(".");
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -226,6 +219,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
         features.save(f.getPath());
       }
     });
+
     this.load.addActionListener(evt -> {
       final JFileChooser fchooser = new JFileChooser(".");
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -237,6 +231,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
         features.load(f.getPath());
       }
     });
+
     this.brighten.addActionListener(evt -> features.brightenOrDarken(10));
     this.darken.addActionListener(evt -> features.brightenOrDarken(-10));
     this.flipVertical.addActionListener(evt -> features.flipVertical());
@@ -251,12 +246,14 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.sepia.addActionListener(evt -> features.sepia());
     this.blur.addActionListener(evt -> features.blur());
     this.sharpen.addActionListener(evt -> features.sharpen());
-
-
   }
 
-  @Override
-  public Image createHistogram(Image image) {
+  /**
+   * Visualizes the image histogram of the image.
+   * @param image the image that we are creating a histogram of
+   * @return an image representing a histogram of the color distribution of the given image
+   */
+  private Image createHistogram(Image image) {
     // Instantiate arrays containing counts of each pixel value
     int[] redCounts = new int[256];
     int[] greenCounts = new int[256];
@@ -331,7 +328,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   }
 
   @Override
-  public void renderMessage(String message) throws IOException {
+  public void renderMessage(String message) {
     JOptionPane.showMessageDialog(this, message);
   }
 }
