@@ -36,9 +36,8 @@ To run the program through the jar file and take in a script file, enter the com
 To run the program through the jar file with our sample script file, enter the command in the corresponding order (you must be in the res folder in order for the following command to work): java -jar ImageProcessor.jar -file sampleCommand.txt
 
 
-
 GUI Instructions
-- Load an Image by selecting the "load" button, which will bring up the file chooser. You must slect either a jpg, png, ppm, or bmp file. You must load in an image before pressing any operation button or otherwise a popup message saying to do so will appear.
+- Load an Image by selecting the "load" button, which will bring up the file chooser. You must select either a jpg, png, ppm, or bmp file. You must load in an image before pressing any operation button or otherwise a popup message saying to do so will appear.
 - To flip an image horizontally, press the "flip horizontal" button. The picture shown on the screen will flip horizontally and the histogram will update accordingly.
 - To flip an image vertically, press the "flip vertical" button. The picture shown on the screen will flip vertically and the histogram will update accordingly.
 - To blur an image, press the "blur" button. The picture shown will blur and the histogram will update accordingly.

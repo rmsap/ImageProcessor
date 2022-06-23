@@ -9,13 +9,6 @@ import imageformat.JPGImageFormat;
 import imageformat.PNGImageFormat;
 import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
-import operations.BrightenOrDarken;
-import operations.ColorTransformation;
-import operations.Filter;
-import operations.FlipHorizontal;
-import operations.FlipVertical;
-import operations.Operation;
-import operations.VisualizeComponent;
 import view.ImageProcessorView;
 
 /**
