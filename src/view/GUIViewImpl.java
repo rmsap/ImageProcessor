@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
+
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -43,8 +43,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     super(caption);
 
-    setSize(1000,1000);
-    setLocation(100,0);
+    setSize(1000, 1000);
+    setLocation(100, 0);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // this.setResizable(false);
     // this.setMinimumSize(new Dimension(300,300));
@@ -54,8 +54,8 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     // adding the panel that houses all operations
     operationPanel = new JPanel();
-    operationPanel.setLayout(new GridLayout(8,2));
-    operationPanel.setSize(100,100);
+    operationPanel.setLayout(new GridLayout(8, 2));
+    operationPanel.setSize(100, 100);
 //    this.add(operationPanel);
 
 
@@ -65,13 +65,10 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.operationPanel.add(load);
 
 
-
-
     //save button
     this.save = new JButton("save");
     this.save.setActionCommand("save button");
     this.operationPanel.add(save);
-
 
 
     //flip-horizontal button
@@ -241,7 +238,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
       }
     });
     this.brighten.addActionListener(evt -> features.brightenOrDarken(10));
-    this.darken.addActionListener(evt -> features.brightenOrDarken( -10));
+    this.darken.addActionListener(evt -> features.brightenOrDarken(-10));
     this.flipVertical.addActionListener(evt -> features.flipVertical());
     this.flipHorizontal.addActionListener(evt -> features.flipHorizontal());
     this.visualizeRed.addActionListener(evt -> features.visualizeRed());
@@ -254,7 +251,6 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.sepia.addActionListener(evt -> features.sepia());
     this.blur.addActionListener(evt -> features.blur());
     this.sharpen.addActionListener(evt -> features.sharpen());
-
 
 
   }

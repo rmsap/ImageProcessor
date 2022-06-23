@@ -32,9 +32,14 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
   /**
    * Constructs a new ImageProcessorControllerGUI that supports the given features for the given
    * model and view.
+   *
    * @param model the model that this controller will control
+<<<<<<< HEAD
    * @param view the view that this controller will control
    * @param features the features that this controller supports
+=======
+   * @param view  the view that this controller will control
+>>>>>>> 0570e0518eb1e61899b5527b5b9989e20bae7db5
    * @throws IllegalArgumentException if any of the parameters are null
    */
   public ImageProcessorControllerGUI(ImageProcessorModel model, ImageProcessorGUIView view,
@@ -69,8 +74,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
     } catch (IllegalArgumentException e) {
       try {
         this.view.renderMessage("Invalid image.");
-      }
-      catch (IOException io) {
+      } catch (IOException io) {
         throw new IllegalArgumentException("Unable to render messages on view.");
       }
     }
@@ -82,20 +86,16 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
 
     try {
       this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
-    }
-    catch (IllegalArgumentException i) {
+    } catch (IllegalArgumentException i) {
       try {
         this.view.renderMessage("An image must be loaded before saving.");
-      }
-      catch(IOException f) {
+      } catch (IOException f) {
         throw new IllegalArgumentException("Unable to render message on view.");
       }
-    }
-    catch(NullPointerException d) {
+    } catch (NullPointerException d) {
       try {
         this.view.renderMessage("Image must be saved as either .jpg, .ppm, .png, or .bmp");
-      }
-      catch(IOException f) {
+      } catch (IOException f) {
         throw new IllegalArgumentException("Unable to render message on view.");
       }
     }
@@ -103,16 +103,14 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
 
   @Override
   public void doOperation(Operation op) {
-    try{
+    try {
       this.model.doOperation(op, "image", "image");
       Image image = this.produceBufferedImage("image");
       this.view.refresh(image);
-    }
-    catch(IllegalArgumentException b) {
-      try{
+    } catch (IllegalArgumentException b) {
+      try {
         this.view.renderMessage("An image must be loaded to perform an operation.");
-      }
-      catch(IOException f) {
+      } catch (IOException f) {
         throw new IllegalArgumentException("Unable to write to view.");
       }
     }
@@ -120,6 +118,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
 
   /**
    * Produce a BufferedImage from the image in the model.
+   *
    * @param imageName the name of the image to produce a buffered image of
    * @return a BufferedImage representing the image in the model.
    */
