@@ -14,6 +14,7 @@ import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import operations.Operation;
 import view.GUIViewImpl;
+import view.ImageProcessorGUIView;
 
 /**
  * The class represents a controller implementation that works with the view.
@@ -21,7 +22,7 @@ import view.GUIViewImpl;
 
 public class ImageProcessorControllerGUI implements ImageProcessorGUIController {
   private final ImageProcessorModel model;
-  private final GUIViewImpl view;
+  private final ImageProcessorGUIView view;
 
   // INVARIANT: All keys contained in formatDirectory are valid file extensions
   private final Map<String, ImageFormat> formatDirectory;
@@ -33,9 +34,10 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
    * model and view.
    * @param model the model that this controller will control
    * @param view the view that this controller will control
+   * @param features the features that this controller supports
    * @throws IllegalArgumentException if any of the parameters are null
    */
-  public ImageProcessorControllerGUI(GUIViewImpl view, ImageProcessorModel model,
+  public ImageProcessorControllerGUI(ImageProcessorModel model, ImageProcessorGUIView view,
                                      Features features) throws IllegalArgumentException {
     if (model == null || view == null || features == null) {
       throw new IllegalArgumentException("None of the parameters can be null.");
@@ -78,7 +80,7 @@ public class ImageProcessorControllerGUI implements ImageProcessorGUIController 
   public void save(String filePath) {
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
-    try{
+    try {
       this.formatDirectory.get(fileFormat).save(filePath, this.model.getImage("image"));
     }
     catch (IllegalArgumentException i) {

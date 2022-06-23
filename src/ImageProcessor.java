@@ -99,7 +99,7 @@ public class ImageProcessor {
       // make the controller be the GUI version
       GUIViewImpl guiView = new GUIViewImpl("Image Processor");
       Features features = new FeaturesImpl();
-      controller = new ImageProcessorControllerGUI(guiView, model, features);
+      controller = new ImageProcessorControllerGUI(model, guiView, features);
       features.setController((ImageProcessorGUIController) controller);
 
     }
