@@ -29,79 +29,36 @@ public class ImageProcessor {
     // must be able to take in a text file of command arguments
     // if a valid script is provided, it should run it and then exit
     // a valid text will have q denoting when to quit
-
     ImageProcessorModel model = new ImageProcessorModelImpl();
-    ImageProcessorView view = new ImageProcessorTextView(model, System.out);
-    ImageProcessorController controller = new ImageProcessorControllerImpl(model,
-            view, new InputStreamReader(System.in));
+    ImageProcessorView view;
+    ImageProcessorController controller;
     boolean isInvalid = true;
 
-    /*
-    ImageProcessorModel model = new ImageProcessorModelImpl();
-    ImageProcessorView view = new ImageProcessorTextView(model, System.out);
-    ImageProcessorController controller = new ImageProcessorControllerImpl(model,
-            view, new InputStreamReader(System.in));
-
-     */
-
-
-    /*
-    if (args.length > 0) {
-      // should only run from command line if there is a "q" so the readable doesn't
-      // run out of inputs
-      boolean hasQ = true;
-
-      if (hasQ) { // we know it's a valid text file
+    if (args.length >= 1 && args[0].equals("-file")) {
+      if (args[1].endsWith(".txt")) { // ends in .txt
         try {
-          File file = new File(args[0]);
+          File file = new File(args[1]);
           FileReader reader = new FileReader(file);
+          view = new ImageProcessorTextView(model, System.out);
           controller = new ImageProcessorControllerImpl(model, view, reader);
-        } catch (FileNotFoundException bruh) {
-          controller = new ImageProcessorControllerImpl(model, view,
-                  new InputStreamReader(System.in));
+          isInvalid = false;
+        } catch (FileNotFoundException bruh) { // if the file doesn't exist
+          // does nothing since the boolean is already assigned to true
         }
       }
-
     }
-
-     */
-    if (args.length == 2) { // -file nameOfFile.txt
-      if (args[0].equals("-file")) {
-        if (args[1].substring(args[1].length() - 4).equals(".txt")) { // ends in .txt
-          try {
-            File file = new File(args[1]);
-            FileReader reader = new FileReader(file);
-            controller = new ImageProcessorControllerImpl(model, view, reader);
-            isInvalid = false;
-          } catch (FileNotFoundException bruh) { // if the file doesn't exist
-            // does nothing since the boolean is already assigned to true
-
-            /*
-            controller = new ImageProcessorControllerImpl(model, view,
-                    new InputStreamReader(System.in));
-
-             */
-            // should exit if it's invalid and quit
-          }
-        }
-      }
-
-    } else if (args.length == 1) { // checking if it's -text
-      if (args[0].equals("-text")) {
-        isInvalid = false;
-        // don't need to do anything else since it's already initialized to the desire thing
-        // in the beginning
-//        controller.execute();
-      }
-
-    } else if (args.length == 0) { // run the GUI version of the program
+    if (args.length >= 1 && args[0].equals("-text")) {
+      isInvalid = false;
+      view = new ImageProcessorTextView(model, System.out);
+      controller = new ImageProcessorControllerImpl(model, view,
+              new InputStreamReader(System.in));
+    } else { // run the GUI version of the program
       isInvalid = false;
       // make the controller be the GUI version
-      GUIViewImpl guiView = new GUIViewImpl("Image Processor");
+      view = new GUIViewImpl("Image Processor");
       Features features = new FeaturesImpl();
-      controller = new ImageProcessorControllerGUI(model, guiView, features);
+      controller = new ImageProcessorControllerGUI(model, view, features);
       features.setController((ImageProcessorGUIController) controller);
-
     }
 
 
@@ -111,6 +68,5 @@ public class ImageProcessor {
     else if (isInvalid) { // message and quit
       System.out.print("something invalid occurred");
     }
-
   }
 }
