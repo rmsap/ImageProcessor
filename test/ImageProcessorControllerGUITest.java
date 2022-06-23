@@ -4,11 +4,13 @@ import java.io.File;
 
 import controller.Features;
 import controller.FeaturesImpl;
+import controller.ImageProcessorController;
 import controller.ImageProcessorControllerGUI;
 import controller.ImageProcessorGUIController;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
+import view.GUIViewImpl;
 import view.ImageProcessorGUIView;
 
 import static org.junit.Assert.*;
@@ -92,5 +94,42 @@ public class ImageProcessorControllerGUITest {
     }
 
 
+  }
+
+
+  @Test
+  public void invalidConstruction() {
+    try{
+      ImageProcessorController bruh = new ImageProcessorControllerGUI(null,
+              null, null);
+      fail("exception was supposed to be caught");
+    }
+    catch(IllegalArgumentException e) {
+      // exception successfully caught
+    }
+    try{
+      ImageProcessorController bruh = new ImageProcessorControllerGUI(new ImageProcessorModelImpl(),
+              null, new FeaturesImpl());
+      fail("exception was supposed to be caught");
+    }
+    catch(IllegalArgumentException e) {
+      // exception successfully caught
+    }
+    try{
+      ImageProcessorController bruh = new ImageProcessorControllerGUI(new ImageProcessorModelImpl(),
+              null,  new FeaturesImpl());
+      fail("exception was supposed to be caught");
+    }
+    catch(IllegalArgumentException e) {
+      // exception successfully caught
+    }
+    try{
+      ImageProcessorController bruh = new ImageProcessorControllerGUI(new ImageProcessorModelImpl(),
+              new GUIViewMock(), null);
+      fail("exception was supposed to be caught");
+    }
+    catch(IllegalArgumentException e) {
+      // exception successfully caught
+    }
   }
 }
