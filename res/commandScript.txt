@@ -1,1 +1,1 @@
-load res/koala.ppm koala flip-vertical koala koala-vertical save res/koala-vertical.ppm koala-vertical visualize-red koala-vertical koala-red change-brightness 32 koala koala-bright save res/koalaVertFlipRed.ppm koala-red save res/koalaBright.ppm koala-bright q
+load Koala.ppm koala flip-vertical koala koala-vertical save koala-vertical.ppm koala-vertical visualize-red koala-vertical koala-red change-brightness 32 koala koala-bright save koalaVertFlipRed.ppm koala-red save koalaBright.ppm koala-bright q
