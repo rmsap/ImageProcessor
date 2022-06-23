@@ -1,6 +1,12 @@
 package view;
 
-import java.awt.*;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Arrays;
