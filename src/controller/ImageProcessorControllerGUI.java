@@ -23,16 +23,11 @@ public class ImageProcessorControllerGUI extends AbstractImageProcessorControlle
    * @param model    the model that this controller will control
    * @param view     the view that this controller will control
    * @param features the features that this controller supports
-<<<<<<< HEAD
+   * @param view     the view that this controller will control
    * @param view     the view that this controller will control
    * @throws IllegalArgumentException if any of the parameters are null
-=======
-
-   * @param view  the view that this controller will control
-
    * @throws IllegalArgumentException if any of the parameters are null or if the view is not a GUI
    *                                  view
->>>>>>> f43e733c9a75d42dd9c40cb6299ba1cf0509b285
    */
   public ImageProcessorControllerGUI(ImageProcessorModel model, ImageProcessorView view,
                                      Features features) throws IllegalArgumentException {
