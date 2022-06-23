@@ -20,11 +20,25 @@ public class ImageProcessorControllerGUI extends AbstractImageProcessorControlle
    * Constructs a new ImageProcessorControllerGUI that supports the given features for the given
    * model and view.
    *
+<<<<<<< HEAD
    * @param model the model that this controller will control
    * @param view the view that this controller will control
    * @param features the features that this controller supports
+=======
+   * @param model    the model that this controller will control
+   * @param view     the view that this controller will control
+   * @param features the features that this controller supports
+<<<<<<< HEAD
+   * @param view     the view that this controller will control
+   * @throws IllegalArgumentException if any of the parameters are null
+=======
+
+   * @param view  the view that this controller will control
+
+>>>>>>> f1320af9d76fc5fcc870988bd5a71509c0d52e53
    * @throws IllegalArgumentException if any of the parameters are null or if the view is not a GUI
    *                                  view
+>>>>>>> f43e733c9a75d42dd9c40cb6299ba1cf0509b285
    */
   public ImageProcessorControllerGUI(ImageProcessorModel model, ImageProcessorView view,
                                      Features features) throws IllegalArgumentException {
@@ -52,7 +66,7 @@ public class ImageProcessorControllerGUI extends AbstractImageProcessorControlle
   public void load(String filePath) {
     String fileFormat = filePath.substring(filePath.lastIndexOf('.') + 1);
 
-    if(this.formatDirectory.get(fileFormat) != null) {
+    if (this.formatDirectory.get(fileFormat) != null) {
       try {
         this.model.loadImage("image", this.formatDirectory.get(fileFormat).read(filePath));
         Image image = this.produceBufferedImage("image");
@@ -65,8 +79,7 @@ public class ImageProcessorControllerGUI extends AbstractImageProcessorControlle
           // to be caught, but rendering a message on the GUI will never throw an IOException.
         }
       }
-    }
-    else {
+    } else {
       try {
         this.view.renderMessage("The file loaded must be .ppm, .png, .bmp, or .jpg");
       } catch (IOException f) {
@@ -92,8 +105,7 @@ public class ImageProcessorControllerGUI extends AbstractImageProcessorControlle
           // to be caught, but rendering a message on the GUI will never throw an IOException.
         }
       }
-    }
-    else {
+    } else {
       try {
         this.view.renderMessage("Image must be saved as either .jpg, .ppm, .png, or .bmp");
       } catch (IOException f) {
