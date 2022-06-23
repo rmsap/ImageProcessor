@@ -53,7 +53,12 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private final JLabel imagePicture;
   private final JLabel histogramPanel;
 
-  public GUIViewImpl(String caption) throws IllegalArgumentException {
+  /**
+   * Constructs a new GUIViewImpl with the given caption as the name of the frame. It instantiates
+   * all needed buttons, panels, and labels and displays them.
+   * @param caption the name of the frame
+   */
+  public GUIViewImpl(String caption) {
     super(caption);
 
     setSize(1000, 1000);
