@@ -52,6 +52,7 @@ GUI Instructions
 - To visualize the luma of an image's pixels, press the "visualize luma" button. The picture and histogram will update accordingly to reflect the change.
 - To darken an image, press the "darken" button. The image will darken and the histogram will update accordingly.
 - To brighten an image, press the "brighten" button. The image will brighten and the histogram will update accordingly.
+- To downscale an image, press the downscale button. You will then be prompted to enter a percentage to downsize the image width to. After entering this, you will be prompted to enter a percentage to enter the image height to. These percentages represent the percentage of the size of the original image that the image will be downsized to. So, if you enter 80% on the width prompt, then the image will be downsized to 80% of its original height. Note that the percentages entered must be integers less than 100%.
 - To save an image, press the "save button", which will bring up a file chooser. You must save the image as either a jpg, png, ppm, or bmp file. You must load an image into the program to save an image otherwise a popup message saying to do so will appear.
 - To exit the program, select the close button on the window in the top right corner.
 
