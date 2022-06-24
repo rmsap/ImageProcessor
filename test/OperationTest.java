@@ -5,6 +5,7 @@ import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
+import operations.Downscale;
 import operations.Filter;
 import operations.Filter.Filters;
 import operations.FlipHorizontal;
@@ -766,5 +767,107 @@ public class OperationTest {
     assertEquals(255, fourByFourSharp[16][0]);
     assertEquals(255, fourByFourSharp[16][1]);
     assertEquals(255, fourByFourSharp[16][2]);
+  }
+
+  @Test
+  public void testDownscale() {
+    int[][] originalKoalaColors = model.getImage("koala");
+    model.doOperation(new Downscale(80, 80), "koala", "koala-80");
+
+    try {
+      model.getImage("koala-80");
+    } catch (IllegalArgumentException e) {
+      fail("Copied image was not added to the directory of the model properly.");
+    }
+
+    int[][] koalaEighty = model.getImage("koala-80");
+
+    // Test that the width and height were changed properly
+    assertEquals((int) (0.8 * originalKoalaColors[0][0]), koalaEighty[0][0]);
+    assertEquals((int) (0.8 * originalKoalaColors[0][1]), koalaEighty[0][1]);
+    assertEquals(originalKoalaColors[0][2], koalaEighty[0][2]);
+
+    // Now test that each pixel was given its new value properly
+    int newWidth = (int) (originalKoalaColors[0][0] * 0.8);
+    int newHeight = (int) (originalKoalaColors[0][1] * 0.8);
+
+    for (int i = 1; i < newWidth * newHeight + 1; i++) {
+      int row = i / newWidth + 1;
+      int col = i % newWidth;
+
+      if (col == 0) {
+        col = newWidth;
+      }
+
+      double xProportion = ((double) col) / newWidth;
+      double yProportion = ((double) row) / newHeight;
+
+      double pixelInImageX = xProportion * originalKoalaColors[0][0];
+      double pixelInImageY = yProportion * originalKoalaColors[0][1];
+
+      int pixelAX = (int) Math.floor(pixelInImageX);
+      int pixelAY = (int) Math.floor(pixelInImageY);
+      int pixelA = pixelAX + originalKoalaColors[0][0] * pixelAY;
+      if (pixelA >= originalKoalaColors.length) {
+        pixelA = originalKoalaColors.length - 1;
+      }
+
+      int pixelBX = (int) Math.ceil(pixelInImageX);
+      int pixelBY = (int) Math.floor(pixelInImageY);
+      int pixelB = pixelBX + originalKoalaColors[0][0] * pixelBY;
+      if (pixelB >= originalKoalaColors.length) {
+        pixelB = originalKoalaColors.length - 1;
+      }
+
+      int pixelCX = (int) Math.floor(pixelInImageX);
+      int pixelCY = (int) Math.ceil(pixelInImageY);
+      int pixelC = pixelCX + originalKoalaColors[0][0] * pixelCY;
+      if (pixelC >= originalKoalaColors.length) {
+        pixelC = originalKoalaColors.length - 1;
+      }
+
+      int pixelDX = (int) Math.ceil(pixelInImageX);
+      int pixelDY = (int) Math.ceil(pixelInImageY);
+      int pixelD = pixelDX + originalKoalaColors[0][0] * pixelDY;
+      if (pixelD >= originalKoalaColors.length) {
+        pixelD = originalKoalaColors.length - 1;
+      }
+
+      for (int j = 0; j < 3; j++) {
+        int ceilingX;
+        int ceilingY;
+
+        if (pixelInImageX % 1 == 0) {
+          ceilingX = (int) pixelInImageX + 1;
+        }
+        else {
+          ceilingX = (int) Math.ceil(pixelInImageX);
+        }
+
+        if (pixelInImageY % 1 == 0) {
+          ceilingY = (int) pixelInImageY + 1;
+        }
+        else {
+          ceilingY = (int) Math.ceil(pixelInImageY);
+        }
+
+        double m = originalKoalaColors[pixelB][j]
+                * (pixelInImageX - Math.floor(pixelInImageX))
+                + originalKoalaColors[pixelA][j]
+                * (ceilingX - pixelInImageX);
+
+        double n = originalKoalaColors[pixelD][j]
+                * (pixelInImageX - Math.floor(pixelInImageX))
+                + originalKoalaColors[pixelC][j]
+                * (ceilingX - pixelInImageX);
+
+        int pixelColor = (int) (n
+                * (pixelInImageY - Math.floor(pixelInImageY))
+                + m
+                * (ceilingY - pixelInImageY));
+
+        assertEquals(pixelColor, koalaEighty[i][j]);
+      }
+    }
   }
 }
