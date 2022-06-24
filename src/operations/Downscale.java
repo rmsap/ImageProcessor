@@ -2,6 +2,9 @@ package operations;
 
 import model.ImageProcessorModel;
 
+/**
+ * This class represents an Operation that downscales (decreases the size of) an image.
+ */
 public class Downscale implements Operation {
   private final int widthPercent;
   private final int heightPercent;
@@ -21,7 +24,7 @@ public class Downscale implements Operation {
     int[][] image = model.getImage(name);
 
     int newWidth = (int) (image[0][0] * (this.widthPercent / 100.0));
-    int newHeight = (int) (image[0][1] * (this.widthPercent / 100.0));
+    int newHeight = (int) (image[0][1] * (this.heightPercent / 100.0));
 
     int[][] downscaledImage = new int[newWidth * newHeight + 1][image[1].length];
     downscaledImage[0][0] = newWidth;
