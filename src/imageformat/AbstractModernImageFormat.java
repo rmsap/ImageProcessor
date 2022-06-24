@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import Utils.UtilsImpl;
+import utils.UtilsImpl;
 
 /**
  * This class represents an abstract image format that supports modern image formats.

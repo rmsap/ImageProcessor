@@ -265,7 +265,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.darken.addActionListener(evt -> {
       String scale = JOptionPane.showInputDialog("Please enter the quantity that you want to "
               + "darken this image by (note that the maximum value a pixel can "
-              + "have is 255).");
+              + "have is 255, so darkening by 255 will mean the image is as dark as possible).");
       try {
         int scaleInt = Integer.parseInt(scale);
         features.brightenOrDarken(-1 * scaleInt);

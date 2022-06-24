@@ -3,7 +3,7 @@ import org.junit.Test;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import Utils.UtilsImpl;
+import utils.UtilsImpl;
 
 import static org.junit.Assert.assertEquals;
 

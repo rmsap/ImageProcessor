@@ -3,7 +3,7 @@ package controller;
 import java.awt.Image;
 import java.io.IOException;
 
-import Utils.UtilsImpl;
+import utils.UtilsImpl;
 import model.ImageProcessorModel;
 import operations.Operation;
 import view.ImageProcessorGUIView;
