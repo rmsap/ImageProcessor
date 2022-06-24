@@ -48,9 +48,13 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private final JButton darken;
   private final JButton brighten;
   private final JButton downscale;
+
+  /*
   private final JScrollPane imageHouseScrollPane;
   private final JPanel imageHousePanel;
   private final JPanel operationPanel;
+
+   */
   private final JLabel imagePicture;
   private final JLabel histogramPanel;
 
@@ -67,6 +71,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     this.setLayout(new FlowLayout());
+    JPanel operationPanel;
 
     // adding the panel that houses all operations
     operationPanel = new JPanel();
@@ -76,92 +81,95 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     //load button
     this.load = new JButton("load");
     this.load.setActionCommand("load button");
-    this.operationPanel.add(load);
+    operationPanel.add(load);
 
     //save button
     this.save = new JButton("save");
     this.save.setActionCommand("save button");
-    this.operationPanel.add(save);
+    operationPanel.add(save);
 
     //flip-horizontal button
     this.flipHorizontal = new JButton("flip horizontal");
     this.flipHorizontal.setActionCommand("flip-horizontal button");
-    this.operationPanel.add(flipHorizontal);
+    operationPanel.add(flipHorizontal);
 
     //flip-vertical button
     this.flipVertical = new JButton("flip vertical");
     this.flipVertical.setActionCommand("flip-vertical button");
-    this.operationPanel.add(flipVertical);
+    operationPanel.add(flipVertical);
 
     //sepia button
     this.sepia = new JButton("sepia");
     this.sepia.setActionCommand("sepia button");
-    this.operationPanel.add(sepia);
+    operationPanel.add(sepia);
 
     //greyscale
     this.greyscale = new JButton("greyscale");
     this.greyscale.setActionCommand("greyscale button");
-    this.operationPanel.add(greyscale);
+    operationPanel.add(greyscale);
 
     //blur button
     this.blur = new JButton("blur");
     this.blur.setActionCommand("blur button");
-    this.operationPanel.add(blur);
+    operationPanel.add(blur);
 
     //sharpen button
     this.sharpen = new JButton("sharpen");
     this.sharpen.setActionCommand("sharpen button");
-    this.operationPanel.add(sharpen);
+    operationPanel.add(sharpen);
 
     //visualizeBlue button
     this.visualizeBlue = new JButton("visualize blue");
     this.visualizeBlue.setActionCommand("visualize-blue button");
-    this.operationPanel.add(visualizeBlue);
+    operationPanel.add(visualizeBlue);
 
     //visualizeGreen button
     this.visualizeGreen = new JButton("visualize green");
     this.visualizeGreen.setActionCommand("visualize-green button");
-    this.operationPanel.add(visualizeGreen);
+    operationPanel.add(visualizeGreen);
 
     //visualizeRed button
     this.visualizeRed = new JButton("visualize red");
     this.visualizeRed.setActionCommand("visualize-red button");
-    this.operationPanel.add(visualizeRed);
+    operationPanel.add(visualizeRed);
 
     //visualizeValue button
     this.visualizeValue = new JButton("visualize value");
     this.visualizeValue.setActionCommand("visualize-value button");
-    this.operationPanel.add(visualizeValue);
+    operationPanel.add(visualizeValue);
 
     //visualizeLuma button
     this.visualizeLuma = new JButton("visualize luma");
     this.visualizeLuma.setActionCommand("visualize-luma button");
-    this.operationPanel.add(visualizeLuma);
+    operationPanel.add(visualizeLuma);
 
     //visualizeIntensity button
     this.visualizeIntensity = new JButton("visualize intensity");
     this.visualizeIntensity.setActionCommand("visualize intensity");
-    this.operationPanel.add(visualizeIntensity);
+    operationPanel.add(visualizeIntensity);
 
     //darken button
     this.darken = new JButton("darken");
     this.darken.setActionCommand("darken button");
-    this.operationPanel.add(darken);
+    operationPanel.add(darken);
 
     //brighten button
     this.brighten = new JButton("brighten");
     this.brighten.setActionCommand("brighten button");
-    this.operationPanel.add(brighten);
+    operationPanel.add(brighten);
 
     //downscale button
     this.downscale = new JButton("downscale");
     this.downscale.setActionCommand("downscale button");
-    this.operationPanel.add(downscale);
+    operationPanel.add(downscale);
 
     this.add(operationPanel);
 
+    JPanel imageHousePanel;
+
     // making a panel that contains the actual image and the histogram
     imageHousePanel = new JPanel();
+    JScrollPane imageHouseScrollPane;
     // histogram is to vertically below the image
     imageHousePanel.setLayout(new BoxLayout(imageHousePanel, BoxLayout.PAGE_AXIS));
     // scrollbar around this main panel

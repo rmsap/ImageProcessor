@@ -62,10 +62,9 @@ public class ImageProcessor {
     }
 
 
-    if(!isInvalid) { // will run the controller if nothing invalid occurred
+    if (!isInvalid) { // will run the controller if nothing invalid occurred
       controller.execute();
-    }
-    else if (isInvalid) { // message and quit
+    } else if (isInvalid) { // message and quit
       System.out.print("something invalid occurred");
     }
   }
