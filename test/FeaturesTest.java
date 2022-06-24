@@ -1,9 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
+
 import java.io.File;
-import java.io.IOException;
+
 
 import controller.Features;
 import controller.FeaturesImpl;
@@ -588,7 +588,8 @@ public class FeaturesTest {
     int[][] originalKoalaColors = model.getImage("koala");
 
     // The doOperation method in the control will only work if there is an image named "image"
-    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so that it
+    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so
+    // that it
     // will be manipulated when the feature calls on the controller.
     this.model.doOperation(new BrightenOrDarken(0), "koala", "image");
     this.features.visualizeRed();
@@ -623,7 +624,8 @@ public class FeaturesTest {
     int[][] originalKoalaColors = model.getImage("koala");
 
     // The doOperation method in the control will only work if there is an image named "image"
-    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so that it
+    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala
+    // so that it
     // will be manipulated when the feature calls on the controller.
     this.model.doOperation(new BrightenOrDarken(0), "koala", "image");
     this.features.visualizeGreen();
@@ -658,7 +660,8 @@ public class FeaturesTest {
     int[][] originalKoalaColors = model.getImage("koala");
 
     // The doOperation method in the control will only work if there is an image named "image"
-    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so that it
+    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so
+    // that it
     // will be manipulated when the feature calls on the controller.
     this.model.doOperation(new BrightenOrDarken(0), "koala", "image");
     this.features.visualizeBlue();
@@ -693,7 +696,8 @@ public class FeaturesTest {
     int[][] originalKoalaColors = model.getImage("koala");
 
     // The doOperation method in the control will only work if there is an image named "image"
-    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so that it
+    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala
+    // so that it
     // will be manipulated when the feature calls on the controller.
     this.model.doOperation(new BrightenOrDarken(0), "koala", "image");
     this.features.visualizeValue();
@@ -727,7 +731,8 @@ public class FeaturesTest {
     int[][] originalKoalaColors = model.getImage("koala");
 
     // The doOperation method in the control will only work if there is an image named "image"
-    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so that it
+    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala
+    // so that it
     // will be manipulated when the feature calls on the controller.
     this.model.doOperation(new BrightenOrDarken(0), "koala", "image");
     this.features.visualizeIntensity();
@@ -761,7 +766,8 @@ public class FeaturesTest {
     int[][] originalKoalaColors = model.getImage("koala");
 
     // The doOperation method in the control will only work if there is an image named "image"
-    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so that it
+    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala
+    // so that it
     // will be manipulated when the feature calls on the controller.
     this.model.doOperation(new BrightenOrDarken(0), "koala", "image");
     this.features.visualizeLuma();
@@ -899,7 +905,8 @@ public class FeaturesTest {
     int[][] originalKoalaColors = model.getImage("koala");
 
     // The doOperation method in the control will only work if there is an image named "image"
-    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala so that it
+    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala
+    // so that it
     // will be manipulated when the feature calls on the controller.
     this.model.doOperation(new BrightenOrDarken(0), "koala", "image");
     this.features.visualizeLuma();

@@ -31,6 +31,9 @@ The Warner.jpg and neil.png were created and owned by the programmers of this ap
 The sampleBMP.bmp image came from https://filesamples.com/formats/bmp and it is a free file sample authorized for private use.
 The p2.jpg was created and owned by the programmers of this application. They both authorize its use in this program. All variations of these images were created bt this program and thus are owned by its developers, and they authorize their use as well.
 
+Changes to implement Downsize Operation:
+The only changes to the program to implement Downsize were creating an additional button in the GUI-based view and adding a method for it to the Features interface. No previously written code needed to be changed. Additionally, a Downsize class that implements the Operation class was created in order to actually code the logic for Downsize.
+
 Changes between Assignments 4 and 5:
 Greyscale class was renamed to VisualizeComponent. This was done because the "greyscale" command that was added is different from what this pre-existing code did, and the class having the same name as a different command would be confusing. So, it was renamed to avoid this confusion.
 The "sepia", "greyscale", "sharpen", and "blur" operations were added to the operationDirectory Map in the controller. This had to be done because it is the best way to add new operations while having to modify as little code as possible (since the controller needs to know what input to look for). Tests were also added to the OperationTest class to test that these operations work properly.
@@ -45,3 +48,7 @@ A new abstract class for controllers, AbstractImageProcessorController, was crea
 A new view interface ImageProcessorGUIView was created in order to support a GUI-based view that operated properly.
 A new view, GUIViewImpl, that implements the new ImageProcessorGUIView interface was created. The class is a concrete implementation of the GUI that is used and supported in the program.
 In AbstractModernImageFormat, the helper method createBufferedImage(int [][] image) was abstracted to a utility interface and implementation called Utils (interface) and UtilsImpl (interface implementation). This design decision was made because the code from the helper method was also used in the ImageProcessorControllerGUI helper method produceBufferedImage(String). We didn't want the controller to have to call on an ImageFormat in order to use the method. Now, both the GUI controller and the protected helper method of AbstractModernImageFormat call on the Util's createBufferedImage(int[][]) method to do the same thing as before.
+
+
+In the res folder, ProgramWithImage.png contains the screenshot of the program that has a loaded image in it.
+In the res folder, p2.jpg is the image that is loaded in the program that is shown in the screenshot.

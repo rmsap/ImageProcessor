@@ -10,7 +10,6 @@ import controller.ImageProcessorGUIController;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
-import view.GUIViewImpl;
 import view.ImageProcessorGUIView;
 
 import static org.junit.Assert.*;
@@ -30,21 +29,20 @@ public class ImageProcessorControllerGUITest {
     ImageProcessorGUIController controller = new ImageProcessorControllerGUI(model,
             view, feat);
     feat.setController(controller);
-    try{
+    try {
       model.getImage("image");
       fail("an exception was supposed to be caught");
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // exception successfully caught
     }
     controller.load("res/4x4ppmOriginal.ppm");
-    int [][] expected = {
+    int[][] expected = {
             {4, 4, 255},
             {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0},
             {100, 0, 0}, {100, 0, 0}, {0, 0, 0}, {0, 0, 0},
             {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255},
             {0, 100, 0}, {0, 100, 0}, {255, 255, 255}, {255, 255, 255}};
-    for(int r = 0; r < 17; r++) {
+    for (int r = 0; r < 17; r++) {
       for (int c = 0; c < 3; c++) {
         assertEquals(expected[r][c], model.getImage("image")[r][c]);
       }
@@ -81,14 +79,14 @@ public class ImageProcessorControllerGUITest {
     feat.setController(controller);
     controller.load("res/4x4ppmOriginal.ppm");
     controller.doOperation(new BrightenOrDarken(-500));
-    int [][] expected = {
+    int[][] expected = {
             {4, 4, 255},
             {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
             {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
             {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
             {0, 00, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-    for(int i = 0; i < expected.length; i++) {
-      for(int j = 0; j < expected[0].length; j++) {
+    for (int i = 0; i < expected.length; i++) {
+      for (int j = 0; j < expected[0].length; j++) {
         assertEquals(expected[i][j], model.getImage("image")[i][j]);
       }
     }
@@ -99,36 +97,32 @@ public class ImageProcessorControllerGUITest {
 
   @Test
   public void invalidConstruction() {
-    try{
+    try {
       ImageProcessorController bruh = new ImageProcessorControllerGUI(null,
               null, null);
       fail("exception was supposed to be caught");
-    }
-    catch(IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // exception successfully caught
     }
-    try{
+    try {
       ImageProcessorController bruh = new ImageProcessorControllerGUI(new ImageProcessorModelImpl(),
               null, new FeaturesImpl());
       fail("exception was supposed to be caught");
-    }
-    catch(IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // exception successfully caught
     }
-    try{
+    try {
       ImageProcessorController bruh = new ImageProcessorControllerGUI(new ImageProcessorModelImpl(),
-              null,  new FeaturesImpl());
+              null, new FeaturesImpl());
       fail("exception was supposed to be caught");
-    }
-    catch(IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // exception successfully caught
     }
-    try{
+    try {
       ImageProcessorController bruh = new ImageProcessorControllerGUI(new ImageProcessorModelImpl(),
               new GUIViewMock(), null);
       fail("exception was supposed to be caught");
-    }
-    catch(IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       // exception successfully caught
     }
   }
