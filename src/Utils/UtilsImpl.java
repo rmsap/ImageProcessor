@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 /**
- * Represents an implementation if the Utils interface that is concrete.
+ * Represents an implementation of the Utils interface that is concrete.
  * The concrete class allows other class to call on it's utility method.
  */
 public class UtilsImpl implements Utils {
