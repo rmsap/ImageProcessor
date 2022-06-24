@@ -13,7 +13,6 @@ import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
-import operations.Downscale;
 import view.ImageProcessorGUIView;
 
 import static org.junit.Assert.assertEquals;
