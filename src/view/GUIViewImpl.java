@@ -47,6 +47,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private final JButton visualizeIntensity;
   private final JButton darken;
   private final JButton brighten;
+  private final JButton downscale;
   private final JScrollPane imageHouseScrollPane;
   private final JPanel imageHousePanel;
   private final JPanel operationPanel;
@@ -69,7 +70,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
 
     // adding the panel that houses all operations
     operationPanel = new JPanel();
-    operationPanel.setLayout(new GridLayout(8, 2));
+    operationPanel.setLayout(new GridLayout(9, 2));
     operationPanel.setSize(100, 100);
 
     //load button
@@ -151,6 +152,11 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.brighten = new JButton("brighten");
     this.brighten.setActionCommand("brighten button");
     this.operationPanel.add(brighten);
+
+    //downscale button
+    this.downscale = new JButton("downscale");
+    this.downscale.setActionCommand("downscale button");
+    this.operationPanel.add(downscale);
 
     this.add(operationPanel);
 
@@ -254,6 +260,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.sepia.addActionListener(evt -> features.sepia());
     this.blur.addActionListener(evt -> features.blur());
     this.sharpen.addActionListener(evt -> features.sharpen());
+    this.downscale.addActionListener(evt -> features.downscale());
   }
 
   /**

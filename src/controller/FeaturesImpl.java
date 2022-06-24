@@ -3,6 +3,7 @@ package controller;
 import operations.BrightenOrDarken;
 import operations.ColorTransformation;
 import operations.ColorTransformation.Transformation;
+import operations.Downscale;
 import operations.Filter;
 import operations.Filter.Filters;
 import operations.FlipHorizontal;
@@ -81,6 +82,11 @@ public class FeaturesImpl implements Features {
   @Override
   public void visualizeLuma() {
     this.controller.doOperation(new VisualizeComponent(Component.Luma));
+  }
+
+  @Override
+  public void downscale() {
+    this.controller.doOperation(new Downscale(400, 500));
   }
 
   @Override

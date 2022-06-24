@@ -66,7 +66,7 @@ public class Filter implements Operation {
             int lastPixelInRow;
 
             if (i % numPixelsPerRow != 0) {
-              lastPixelInRow = i + (numPixelsPerRow - (i % numPixelsPerRow)); // math bad
+              lastPixelInRow = i + (numPixelsPerRow - (i % numPixelsPerRow));
             } else {
               lastPixelInRow = i;
             }

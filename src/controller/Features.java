@@ -75,6 +75,12 @@ public interface Features {
   void visualizeLuma();
 
   /**
+   * Represents the action listener that calls (directly or indirectly) on the operation that
+   * downscales an image.
+   */
+  void downscale();
+
+  /**
    * Represents the action listener that calls (directly or indirectly) on the model's load method.
    * @param filePath representing the path of the file that is to be loaded.
    */
