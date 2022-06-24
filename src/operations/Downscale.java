@@ -23,14 +23,17 @@ public class Downscale implements Operation {
   public int[][] execute(ImageProcessorModel model, String name) {
     int[][] image = model.getImage(name);
 
+    // Determine what the width and height of the downscaled image will be
     int newWidth = (int) (image[0][0] * (this.widthPercent / 100.0));
     int newHeight = (int) (image[0][1] * (this.heightPercent / 100.0));
 
+    // Set up an array to contain the downscaled image
     int[][] downscaledImage = new int[newWidth * newHeight + 1][image[1].length];
     downscaledImage[0][0] = newWidth;
     downscaledImage[0][1] = newHeight;
     downscaledImage[0][2] = image[0][2];
 
+    // Construct the downscaled image from the colors of the original image
     for (int i = 1; i < downscaledImage.length; i++) {
       int row = i / downscaledImage[0][0] + 1;
       int col = i % downscaledImage[0][0];
@@ -74,6 +77,7 @@ public class Downscale implements Operation {
         pixelD = image.length - 1;
       }
 
+      // Set each color channel of the ith pixel in the downscaled image
       for (int j = 0; j < downscaledImage[i].length; j++) {
         int ceilingX;
         int ceilingY;
