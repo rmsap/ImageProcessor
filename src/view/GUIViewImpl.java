@@ -249,8 +249,31 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
       }
     });
 
-    this.brighten.addActionListener(evt -> features.brightenOrDarken(10));
-    this.darken.addActionListener(evt -> features.brightenOrDarken(-10));
+    this.brighten.addActionListener(evt -> {
+      String scale = JOptionPane.showInputDialog("Please enter the quantity that you want to  "
+              + "brighten this image by (note that the maximum value a pixel can "
+              + "have is 255).");
+      try {
+        int scaleInt = Integer.parseInt(scale);
+        features.brightenOrDarken(scaleInt);
+      }
+      catch (NumberFormatException e) {
+        this.renderMessage("Please enter a valid integer to brighten the image by.");
+      }
+    });
+
+    this.darken.addActionListener(evt -> {
+      String scale = JOptionPane.showInputDialog("Please enter the quantity that you want to "
+              + "darken this image by (note that the maximum value a pixel can "
+              + "have is 255).");
+      try {
+        int scaleInt = Integer.parseInt(scale);
+        features.brightenOrDarken(-1 * scaleInt);
+      }
+      catch (NumberFormatException e) {
+        this.renderMessage("Please enter a valid integer to darken the image by.");
+      }
+    });
     this.flipVertical.addActionListener(evt -> features.flipVertical());
     this.flipHorizontal.addActionListener(evt -> features.flipHorizontal());
     this.visualizeRed.addActionListener(evt -> features.visualizeRed());
@@ -263,6 +286,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.sepia.addActionListener(evt -> features.sepia());
     this.blur.addActionListener(evt -> features.blur());
     this.sharpen.addActionListener(evt -> features.sharpen());
+
     this.downscale.addActionListener(evt -> {
       String width = JOptionPane.showInputDialog("Please enter the percentage that you "
               + "wish to decrease the image width to.");
