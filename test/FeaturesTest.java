@@ -27,7 +27,6 @@ public class FeaturesTest {
   private Features features;
   private ImageProcessorGUIController controller;
   private ImageProcessorModel model;
-  private ImageProcessorGUIView view;
 
   @Before
   public void init() {
@@ -35,7 +34,7 @@ public class FeaturesTest {
     this.model.loadImage("koala", new PPMImageFormat().read("res/Koala.ppm"));
     this.model.loadImage("4x4", new PPMImageFormat().read("res/4x4ppmOriginal.ppm"));
     this.model.loadImage("4x3", new PPMImageFormat().read("res/4x3ppmOriginal.ppm"));
-    this.view = new GUIViewMock();
+    ImageProcessorGUIView view = new GUIViewMock();
     this.features = new FeaturesImpl();
     this.controller = new ImageProcessorControllerGUI(model, view, features);
     this.features.setController(this.controller);

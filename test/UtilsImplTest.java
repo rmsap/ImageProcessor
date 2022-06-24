@@ -45,7 +45,6 @@ public class UtilsImplTest {
     }
 
 
-
     int[][] wario = {
             {3, 3, 255},
             {100, 0, 0}, {0, 100, 0}, {0, 0, 100},
@@ -54,10 +53,10 @@ public class UtilsImplTest {
     BufferedImage dog = (BufferedImage) new UtilsImpl().createBufferedImage(wario);
     int wHeight = 3;
     int wWidth = 3;
-    int mario [] [] = new int [10][3];
+    int [][] mario = new int[10][3];
     int luigiCount = 1;
-    for(int y = 0; y < wHeight; y++) {
-      for(int z = 0; z < wWidth; z++) {
+    for (int y = 0; y < wHeight; y++) {
+      for (int z = 0; z < wWidth; z++) {
         int pixelData = dog.getRGB(z, y); // X and then Y so width then height
         Color colorTemp = new Color(pixelData, true);
         mario[luigiCount][0] = colorTemp.getRed();
@@ -66,8 +65,8 @@ public class UtilsImplTest {
         luigiCount++;
       }
     }
-    for(int v = 1; v < wario.length; v++) {
-      for(int b = 0; b < wario[0].length; b++) {
+    for (int v = 1; v < wario.length; v++) {
+      for (int b = 0; b < wario[0].length; b++) {
         assertEquals(wario[v][b], mario[v][b]);
       }
     }

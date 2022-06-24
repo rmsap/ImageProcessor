@@ -50,7 +50,6 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private final JButton downscale;
   private final JLabel imagePicture;
   private final JLabel histogramPanel;
-  private final JLabel downsizeInput;
 
   /**
    * Constructs a new GUIViewImpl with the given caption as the name of the frame. It instantiates
@@ -157,7 +156,9 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.downscale.setActionCommand("downscale button");
     operationPanel.add(downscale);
 
-    this.downsizeInput = new JLabel("Default");
+    JLabel downsizeInput;
+
+    downsizeInput = new JLabel("Default");
     this.add(operationPanel);
 
     JPanel imageHousePanel;
