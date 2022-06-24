@@ -48,13 +48,6 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private final JButton darken;
   private final JButton brighten;
   private final JButton downscale;
-
-  /*
-  private final JScrollPane imageHouseScrollPane;
-  private final JPanel imageHousePanel;
-  private final JPanel operationPanel;
-
-   */
   private final JLabel imagePicture;
   private final JLabel histogramPanel;
   private final JLabel downsizeInput;
