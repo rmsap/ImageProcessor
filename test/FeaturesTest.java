@@ -13,6 +13,7 @@ import imageformat.PPMImageFormat;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 import operations.BrightenOrDarken;
+import operations.Downscale;
 import view.ImageProcessorGUIView;
 
 import static org.junit.Assert.assertEquals;
@@ -797,6 +798,114 @@ public class FeaturesTest {
   }
 
   @Test
+  public void testDownscale() {
+    int[][] originalKoalaColors = model.getImage("koala");
+
+    // The doOperation method in the control will only work if there is an image named "image"
+    // so we will brighten the koala image by 0 (in effect doing nothing) and name it koala
+    // so that it
+    // will be manipulated when the feature calls on the controller.
+    this.model.doOperation(new BrightenOrDarken(0), "koala", "image");
+    this.features.downscale(80, 80);
+
+    try {
+      model.getImage("image");
+    } catch (IllegalArgumentException e) {
+      fail("Copied image was not added to the directory of the model properly.");
+    }
+
+    int[][] koalaEighty = model.getImage("image");
+
+    // Test that the width and height were changed properly
+    assertEquals((int) (0.8 * originalKoalaColors[0][0]), koalaEighty[0][0]);
+    assertEquals((int) (0.8 * originalKoalaColors[0][1]), koalaEighty[0][1]);
+    assertEquals(originalKoalaColors[0][2], koalaEighty[0][2]);
+
+    // Now test that each pixel was given its new value properly
+    int newWidth = (int) (originalKoalaColors[0][0] * 0.8);
+    int newHeight = (int) (originalKoalaColors[0][1] * 0.8);
+
+    for (int i = 1; i < newWidth * newHeight + 1; i++) {
+      int row = i / newWidth + 1;
+      int col = i % newWidth;
+
+      if (col == 0) {
+        col = newWidth;
+      }
+
+      double xProportion = ((double) col) / newWidth;
+      double yProportion = ((double) row) / newHeight;
+
+      double pixelInImageX = xProportion * originalKoalaColors[0][0];
+      double pixelInImageY = yProportion * originalKoalaColors[0][1];
+
+      int pixelAX = (int) Math.floor(pixelInImageX);
+      int pixelAY = (int) Math.floor(pixelInImageY);
+      int pixelA = pixelAX + originalKoalaColors[0][0] * pixelAY;
+      if (pixelA >= originalKoalaColors.length) {
+        pixelA = originalKoalaColors.length - 1;
+      }
+
+      int pixelBX = (int) Math.ceil(pixelInImageX);
+      int pixelBY = (int) Math.floor(pixelInImageY);
+      int pixelB = pixelBX + originalKoalaColors[0][0] * pixelBY;
+      if (pixelB >= originalKoalaColors.length) {
+        pixelB = originalKoalaColors.length - 1;
+      }
+
+      int pixelCX = (int) Math.floor(pixelInImageX);
+      int pixelCY = (int) Math.ceil(pixelInImageY);
+      int pixelC = pixelCX + originalKoalaColors[0][0] * pixelCY;
+      if (pixelC >= originalKoalaColors.length) {
+        pixelC = originalKoalaColors.length - 1;
+      }
+
+      int pixelDX = (int) Math.ceil(pixelInImageX);
+      int pixelDY = (int) Math.ceil(pixelInImageY);
+      int pixelD = pixelDX + originalKoalaColors[0][0] * pixelDY;
+      if (pixelD >= originalKoalaColors.length) {
+        pixelD = originalKoalaColors.length - 1;
+      }
+
+      for (int j = 0; j < 3; j++) {
+        int ceilingX;
+        int ceilingY;
+
+        if (pixelInImageX % 1 == 0) {
+          ceilingX = (int) pixelInImageX + 1;
+        }
+        else {
+          ceilingX = (int) Math.ceil(pixelInImageX);
+        }
+
+        if (pixelInImageY % 1 == 0) {
+          ceilingY = (int) pixelInImageY + 1;
+        }
+        else {
+          ceilingY = (int) Math.ceil(pixelInImageY);
+        }
+
+        double m = originalKoalaColors[pixelB][j]
+                * (pixelInImageX - Math.floor(pixelInImageX))
+                + originalKoalaColors[pixelA][j]
+                * (ceilingX - pixelInImageX);
+
+        double n = originalKoalaColors[pixelD][j]
+                * (pixelInImageX - Math.floor(pixelInImageX))
+                + originalKoalaColors[pixelC][j]
+                * (ceilingX - pixelInImageX);
+
+        int pixelColor = (int) (n
+                * (pixelInImageY - Math.floor(pixelInImageY))
+                + m
+                * (ceilingY - pixelInImageY));
+
+        assertEquals(pixelColor, koalaEighty[i][j]);
+      }
+    }
+  }
+
+  @Test
   public void testLoad() {
     // Test loading ppm
     features.load("res/4x4ppmOriginal.ppm");
@@ -934,6 +1043,4 @@ public class FeaturesTest {
       assertEquals(koalaLuma[i][2], (int) luma);
     }
   }
-
-
 }
