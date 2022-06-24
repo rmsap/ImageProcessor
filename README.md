@@ -31,6 +31,9 @@ The Warner.jpg and neil.png were created and owned by the programmers of this ap
 The sampleBMP.bmp image came from https://filesamples.com/formats/bmp and it is a free file sample authorized for private use.
 The p2.jpg was created and owned by the programmers of this application. They both authorize its use in this program. All variations of these images were created bt this program and thus are owned by its developers, and they authorize their use as well.
 
+Changes to implement Downsize Operation:
+The only changes to the program to implement Downsize were creating an additional button in the GUI-based view and adding a method for it to the Features interface. No previously written code needed to be changed. Additionally, a Downsize class that implements the Operation class was created in order to actually code the logic for Downsize.
+
 Changes between Assignments 4 and 5:
 Greyscale class was renamed to VisualizeComponent. This was done because the "greyscale" command that was added is different from what this pre-existing code did, and the class having the same name as a different command would be confusing. So, it was renamed to avoid this confusion.
 The "sepia", "greyscale", "sharpen", and "blur" operations were added to the operationDirectory Map in the controller. This had to be done because it is the best way to add new operations while having to modify as little code as possible (since the controller needs to know what input to look for). Tests were also added to the OperationTest class to test that these operations work properly.
