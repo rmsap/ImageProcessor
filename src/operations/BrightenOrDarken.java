@@ -9,7 +9,7 @@ import operations.Operation;
  * Passing in a positive integer will brighten the image.
  */
 public class BrightenOrDarken implements Operation {
-  int scale;
+  private int scale;
 
   /**
    * Construct a new BrightenOrDarken Operation with the given scale.

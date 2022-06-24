@@ -45,3 +45,7 @@ A new abstract class for controllers, AbstractImageProcessorController, was crea
 A new view interface ImageProcessorGUIView was created in order to support a GUI-based view that operated properly.
 A new view, GUIViewImpl, that implements the new ImageProcessorGUIView interface was created. The class is a concrete implementation of the GUI that is used and supported in the program.
 In AbstractModernImageFormat, the helper method createBufferedImage(int [][] image) was abstracted to a utility interface and implementation called Utils (interface) and UtilsImpl (interface implementation). This design decision was made because the code from the helper method was also used in the ImageProcessorControllerGUI helper method produceBufferedImage(String). We didn't want the controller to have to call on an ImageFormat in order to use the method. Now, both the GUI controller and the protected helper method of AbstractModernImageFormat call on the Util's createBufferedImage(int[][]) method to do the same thing as before.
+
+
+In the res folder, ProgramWithImage.png contains the screenshot of the program that has a loaded image in it.
+In the res folder, p2.jpg is the image that is loaded in the program that is shown in the screenshot.
