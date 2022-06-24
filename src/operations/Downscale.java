@@ -3,7 +3,11 @@ package operations;
 import model.ImageProcessorModel;
 
 /**
+<<<<<<< HEAD
+ * The class represents the downscale operation that is performed on an image.
+=======
  * This class represents an Operation that downscales (decreases the size of) an image.
+>>>>>>> c325f0fcc603b7a51283f8a96d8f02e67d73fc2a
  */
 public class Downscale implements Operation {
   private final int widthPercent;
