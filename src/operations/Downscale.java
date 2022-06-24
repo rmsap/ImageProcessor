@@ -3,24 +3,26 @@ package operations;
 import model.ImageProcessorModel;
 
 public class Downscale implements Operation {
-  // INVARIANT: newWidth and newHeight are both respectively less than the width and height
-  // of the original image, respectively.
-  private final int newWidth;
-  private final int newHeight;
+  private final int widthPercent;
+  private final int heightPercent;
 
   /**
    * Construct a new DownScale Operation that downscales an image to the given width and height.
-   * @param newWidth
-   * @param newHeight
+   * @param widthPercent the percent to decrease the width of the image to
+   * @param heightPercent the percent to decrease the height of the image to
    */
-  public Downscale(int newWidth, int newHeight) {
-    this.newWidth = newWidth;
-    this.newHeight = newHeight;
+  public Downscale(int widthPercent, int heightPercent) {
+    this.widthPercent = widthPercent;
+    this.heightPercent = heightPercent;
   }
 
   @Override
   public int[][] execute(ImageProcessorModel model, String name) {
     int[][] image = model.getImage(name);
+
+    int newWidth = (int) (image[0][0] * (this.widthPercent / 100.0));
+    int newHeight = (int) (image[0][1] * (this.widthPercent / 100.0));
+
     int[][] downscaledImage = new int[newWidth * newHeight + 1][image[1].length];
     downscaledImage[0][0] = newWidth;
     downscaledImage[0][1] = newHeight;

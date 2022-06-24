@@ -78,7 +78,7 @@ public interface Features {
    * Represents the action listener that calls (directly or indirectly) on the operation that
    * downscales an image.
    */
-  void downscale();
+  void downscale(int widthPercent, int heightPercent);
 
   /**
    * Represents the action listener that calls (directly or indirectly) on the model's load method.

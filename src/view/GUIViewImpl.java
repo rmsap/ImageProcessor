@@ -53,6 +53,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
   private final JPanel operationPanel;
   private final JLabel imagePicture;
   private final JLabel histogramPanel;
+  private final JLabel downsizeInput;
 
   /**
    * Constructs a new GUIViewImpl with the given caption as the name of the frame. It instantiates
@@ -158,6 +159,7 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.downscale.setActionCommand("downscale button");
     this.operationPanel.add(downscale);
 
+    this.downsizeInput = new JLabel("Default");
     this.add(operationPanel);
 
     // making a panel that contains the actual image and the histogram
@@ -260,7 +262,26 @@ public class GUIViewImpl extends JFrame implements ImageProcessorGUIView {
     this.sepia.addActionListener(evt -> features.sepia());
     this.blur.addActionListener(evt -> features.blur());
     this.sharpen.addActionListener(evt -> features.sharpen());
-    this.downscale.addActionListener(evt -> features.downscale());
+    this.downscale.addActionListener(evt -> {
+      String width = JOptionPane.showInputDialog("Please enter the percentage that you "
+              + "wish to decrease the image width to.");
+      String height = JOptionPane.showInputDialog("Please enter the percentage that you "
+              + "wish to decrease the image height to.");
+      try {
+        int widthInt = Integer.parseInt(width);
+        int heightInt = Integer.parseInt(height);
+        if (widthInt < 100 && heightInt < 100) {
+          features.downscale(widthInt, heightInt);
+        }
+        else {
+          this.renderMessage("Please downscale the image to a percent less than 100.");
+        }
+      }
+      catch (NumberFormatException e) {
+        this.renderMessage("Please enter valid integers for the percentage to reduce the width and "
+                + "height to.");
+      }
+    });
   }
 
   /**

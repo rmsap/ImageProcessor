@@ -85,8 +85,8 @@ public class FeaturesImpl implements Features {
   }
 
   @Override
-  public void downscale() {
-    this.controller.doOperation(new Downscale(400, 500));
+  public void downscale(int widthPercent, int heightPercent) {
+    this.controller.doOperation(new Downscale(widthPercent, heightPercent));
   }
 
   @Override
