@@ -31,7 +31,7 @@ public class ImageProcessor {
     // a valid text will have q denoting when to quit
     ImageProcessorModel model = new ImageProcessorModelImpl();
     ImageProcessorView view;
-    ImageProcessorController controller;
+    ImageProcessorController controller = null;
     boolean isInvalid = true;
 
     if (args.length >= 1 && args[0].equals("-file")) {
@@ -52,7 +52,8 @@ public class ImageProcessor {
       view = new ImageProcessorTextView(model, System.out);
       controller = new ImageProcessorControllerImpl(model, view,
               new InputStreamReader(System.in));
-    } else { // run the GUI version of the program
+    }
+    if (args.length == 0) { // run the GUI version of the program
       isInvalid = false;
       // make the controller be the GUI version
       view = new GUIViewImpl("Image Processor");
